@@ -1,0 +1,21 @@
+{
+	"name": "angular-diff-match-patch",
+	"authors": ["Adam Weiss <cseadam@gmail.com>"],
+	"license": "MIT",
+	"version": "0.0.1",
+	"description": "An Angular module to use when dealing with google-diff-match-patch.",
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"tests"
+	],
+	"main": "angular-diff-match-patch.js",
+	"private": "true",
+	"dependencies": {
+		"angular": "^1.2.x",
+		"angular-mocks": "^1.2.x",
+		"google-diff-match-patch": "svn+http://google-diff-match-patch.googlecode.com/svn/"
+	}
+}

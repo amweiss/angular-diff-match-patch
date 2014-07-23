@@ -1,0 +1,19 @@
+{
+	"name": "angular-diff-match-patch",
+	"author": "Adam Weiss <cseadam@gmail.com>",
+	"license": "MIT",
+	"version": "0.0.1",
+	"description": "An Angular module to use when dealing with google-diff-match-patch.",
+	"private": true,
+	"repository": {
+		"url": "https://stash.corp.synacor.com/scm/~aweiss/angular-diff-match-patch.git"
+	},
+	"devDependencies": {
+		"karma": "^0.10",
+		"karma-phantomjs-launcher": "^0.1.4",
+		"karma-jasmine": "^0.1.0"
+	},
+	"scripts": {
+		"test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS"
+	}
+}
