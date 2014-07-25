@@ -37,7 +37,7 @@ NgDmpNamespace.helpers = {
 };
 
 angular.module('diffmatchpatch', [])
-	.filter('diff', function() {
+	.filter('linediff', function() {
 		return function(left, right) {
 			if (left && right) {
 				var dmp = new diff_match_patch();
