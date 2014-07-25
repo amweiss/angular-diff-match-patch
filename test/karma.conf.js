@@ -2,7 +2,7 @@
 // See http://karma-runner.github.io/0.10/config/configuration-file.html
 module.exports = function(config) {
 	config.set({
-		basePath: '',
+		basePath: '..',
 
 		frameworks: ['jasmine'],
 
@@ -18,15 +18,7 @@ module.exports = function(config) {
 
 			// tests
 			'test/*.js'//,
-
-			// templates
-			//'tpl/*.html'
 		],
-
-		// generate js files from html templates
-		preprocessors: {
-			'tpl/*.html': 'ng-html2js'
-		},
 
 		autoWatch: true,
 		browsers: ['PhantomJS']
