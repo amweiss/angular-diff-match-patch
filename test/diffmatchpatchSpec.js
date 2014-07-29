@@ -3,14 +3,14 @@ describe('diff-match-patch', function() {
 	beforeEach(module('diff-match-patch'));
 
 	describe('filter', function() {
-		describe('linediff', function() {
+		describe('lineDiff', function() {
 			it('exists', inject(function($filter) {
-				expect($filter('linediff')).not.toBeNull();
+				expect($filter('lineDiff')).not.toBeNull();
 			}));
 
 			var lineDiffFilter;
 			beforeEach(inject(function($filter) {
-				lineDiffFilter = $filter('linediff');
+				lineDiffFilter = $filter('lineDiff');
 			}));
 
 			it('no sides returns empty string', function() {
