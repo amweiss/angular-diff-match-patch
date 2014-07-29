@@ -44,7 +44,6 @@ angular.module('diff-match-patch', [])
 				var a = dmp.diff_linesToChars_(left, right);
 				var diffs = dmp.diff_main(a.chars1, a.chars2, false);
 				dmp.diff_charsToLines_(diffs, a.lineArray);
-				dmp.diff_cleanupSemantic(diffs);
 				return NgDmpNamespace.helpers.createHtmlFromDiffs(diffs);
 			} else if (left) {
 				return NgDmpNamespace.helpers.createHtmlLines(left, DIFF_BASE);

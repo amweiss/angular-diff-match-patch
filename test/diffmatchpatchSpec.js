@@ -24,6 +24,14 @@ describe('diff-match-patch', function() {
 				expect(result).toMatch(/\<span class="base"\>.*hello world.*\<\/span\>/);
 			});
 
+			it('single lines return total diff', function() {
+				var left = 'hello world';
+				var right = 'hello';
+				var result = lineDiffFilter(left, right);
+
+				expect(result).toMatch(/<span class="del">.*hello world.*\<\/span\>[.\s\S]*\<span class="ins"\>.*hello.*\<\/span\>/);
+			});
+
 			it('two sides returns diff HTML', function() {
 				var left = ['hello', 'world'].join('\n');
 				var right = ['hello', 'friends!'].join('\n');
