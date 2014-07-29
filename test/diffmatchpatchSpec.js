@@ -1,6 +1,6 @@
-describe('diffmatchpatch', function() {
+describe('diff-match-patch', function() {
 
-	beforeEach(module('diffmatchpatch'));
+	beforeEach(module('diff-match-patch'));
 
 	describe('filter', function() {
 		describe('linediff', function() {
