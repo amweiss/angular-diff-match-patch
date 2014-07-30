@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" id="ng-app" ng-app="diffDemo">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>angular-diff-match-patch</title>
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="demo.css">
+	<!--[if lte IE 7]>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
+	<![endif]-->
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+	<script src="bower_components/google-diff-match-patch/javascript/diff_match_patch.js"></script>
+	<script src="angular-diff-match-patch.js"></script>
+	<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+	<script>
+		var app = angular.module('diffDemo', ['ui.bootstrap', 'ngSanitize' ,'diff-match-patch']);
+		app.controller('diffCtrl', function($scope) {
+			$scope.left = ["I am the very model of a modern Major-General,",
+						   "I've information vegetable, animal, and mineral,",
+						   "I know the kings of England, and I quote the fights historical,",
+						   "From Marathon to Waterloo, in order categorical."].join('\n');
+
+			$scope.right = ["I am the very model of a cartoon individual",
+						    "My animation's comical, unusual, and whimsical",
+						    "I'm quite adept at funny gags, comedic theory I have read",
+						    "From wicked puns and stupid jokes to anvils that drop on your head."].join('\n');
+		});
+
+	</script>
+	<style>
+		div.col-md-6 p textarea.inputBox {
+			height: 120px;
+		}
+	</style>
+</head>
+<body ng-controller="diffCtrl">
+<div class="container-fluid">
+	<div class="row text-center">
+		<h1>angular-diff-match-patch</h1>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-6">
+					<h3>Left side</h1>
+					<p><textarea class="inputBox form-control" ng-model="left"></textarea></p>
+				</div>
+				<div class="col-md-6">
+					<h3>Right side</h1>
+					<p><textarea class="inputBox form-control" ng-model="right"></textarea></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-body"><pre class="textdiff" ng-bind-html="left | diff:right"></pre></div>
+				<div class="panel-footer">diff</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-body"><pre class="textdiff" ng-bind-html="left | processingDiff:right"></pre></div>
+				<div class="panel-footer">processingDiff</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-body"><pre class="textdiff" ng-bind-html="left | semanticDiff:right"></pre></div>
+				<div class="panel-footer">semanticDiff</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-body"><pre class="textdiff" ng-bind-html="left | lineDiff:right"></pre></div>
+				<div class="panel-footer">lineDiff</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>

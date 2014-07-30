@@ -4,104 +4,168 @@ describe('namespace helpers', function() {
 			expect(NgDmpNamespace).toBeDefined();
 		});
 
-		it('helpers exist', function() {
-			expect(NgDmpNamespace.helpers).toBeDefined();
+		describe('helpers', function() {
+			it('object exists', function() {
+				expect(NgDmpNamespace.helpers).toBeDefined();
+			});
+
+			it('diffClass exists', function() {
+				expect(NgDmpNamespace.helpers.diffClass).toBeDefined();
+			});
+
+			it('diffSymbol exists', function() {
+				expect(NgDmpNamespace.helpers.diffSymbol).toBeDefined();
+			});
+
+			it('diffTag exists', function() {
+				expect(NgDmpNamespace.helpers.diffTag).toBeDefined();
+			});
+
+			it('displayType exists', function() {
+				expect(NgDmpNamespace.helpers.displayType).toBeDefined();
+			});
 		});
 
 		it('constants exist', function() {
-			expect(DIFF_BASE).toBeDefined();
 			expect(DIFF_EQUAL).toBeDefined();
-			expect(DIFF_DELETE).toBeDefined();
 			expect(DIFF_INSERT).toBeDefined();
+			expect(DIFF_DELETE).toBeDefined();
+		});
+	});
+
+	describe('getHtmlPrefix', function() {
+		describe('LINEDIFF', function() {
+			beforeEach(function() {
+				display = NgDmpNamespace.helpers.displayType.LINEDIFF;
+			});
+
+			it('DIFF_EQUAL', function() {
+				var op = DIFF_EQUAL;
+				var tagClass = NgDmpNamespace.helpers.diffClass(op);
+				var diffSymbol = NgDmpNamespace.helpers.diffSymbol(op);
+				var result = NgDmpNamespace.helpers.getHtmlPrefix(op, display);
+				var regex = '<div class="'+tagClass+'">.*'+diffSymbol;
+				expect(result).toMatch(new RegExp(regex));
+			});
+
+			it('DIFF_INSERT', function() {
+				var op = DIFF_INSERT;
+				var tagClass = NgDmpNamespace.helpers.diffClass(op);
+				var diffSymbol = NgDmpNamespace.helpers.diffSymbol(op);
+				var result = NgDmpNamespace.helpers.getHtmlPrefix(op, display);
+				var regex = '<div class="'+tagClass+'">.*'+'\\'+diffSymbol;
+				expect(result).toMatch(new RegExp(regex));
+			});
+
+			it('DIFF_DELETE', function() {
+				var op = DIFF_DELETE;
+				var tagClass = NgDmpNamespace.helpers.diffClass(op);
+				var diffSymbol = NgDmpNamespace.helpers.diffSymbol(op);
+				var result = NgDmpNamespace.helpers.getHtmlPrefix(op, display);
+				var regex = '<div class="'+tagClass+'">.*'+diffSymbol;
+				expect(result).toMatch(new RegExp(regex));
+			});
+		});
+	});
+
+	describe('getHtmlSuffix', function() {
+		describe('LINEDIFF', function() {
+			beforeEach(function() {
+				display = NgDmpNamespace.helpers.displayType.LINEDIFF;
+				regex = '<\/div>';
+			});
+
+			it('DIFF_EQUAL', function() {
+				var op = DIFF_EQUAL;
+				var result = NgDmpNamespace.helpers.getHtmlSuffix(op, display);
+				expect(result).toMatch(new RegExp(regex));
+			});
+
+			it('DIFF_INSERT', function() {
+				var op = DIFF_INSERT;
+				var result = NgDmpNamespace.helpers.getHtmlSuffix(op, display);
+				expect(result).toMatch(new RegExp(regex));
+			});
+
+			it('DIFF_DELETE', function() {
+				var op = DIFF_DELETE;
+				var result = NgDmpNamespace.helpers.getHtmlSuffix(op, display);
+				expect(result).toMatch(new RegExp(regex));
+			});
 		});
 	});
 
 	describe('createHtmlLines works', function() {
 		describe('for one line', function() {
-			it('DIFF_BASE operation', function() {
-				var text = 'hello world';
-				var op = DIFF_BASE;
-				var result = NgDmpNamespace.helpers.createHtmlLines(text, op);
-
-				expect(result).toMatch(/\<span class="base"\>.*\<\/span\>/);
+			beforeEach(function() {
+				text = 'hello world';
 			});
 
 			it('DIFF_EQUAL operation', function() {
-				var text = 'hello world';
 				var op = DIFF_EQUAL;
 				var result = NgDmpNamespace.helpers.createHtmlLines(text, op);
-
-				expect(result).toMatch(/\<span class="matching"\>.*\<\/span\>/);
+				var tagClass = NgDmpNamespace.helpers.diffClass(op);
+				var regex = '<div class="'+tagClass+'">.*</div>';
+				expect(result).toMatch(new RegExp(regex));
 			});
 
 			it('DIFF_DELETE operation', function() {
-				var text = 'hello world';
 				var op = DIFF_DELETE;
 				var result = NgDmpNamespace.helpers.createHtmlLines(text, op);
-
-				expect(result).toMatch(/\<span class="del"\>.*\<\/span\>/);
+				var tagClass = NgDmpNamespace.helpers.diffClass(op);
+				var regex = '<div class="'+tagClass+'">.*</div>';
+				expect(result).toMatch(new RegExp(regex));
 			});
 
 			it('DIFF_INSERT operation', function() {
-				var text = 'hello world';
 				var op = DIFF_INSERT;
 				var result = NgDmpNamespace.helpers.createHtmlLines(text, op);
-
-				expect(result).toMatch(/\<span class="ins"\>.*\<\/span\>/);
+				var tagClass = NgDmpNamespace.helpers.diffClass(op);
+				var regex = '<div class="'+tagClass+'">.*</div>';
+				expect(result).toMatch(new RegExp(regex));
 			});
 		});
 
 		describe('for multiple lines', function() {
-			it('DIFF_BASE operation', function() {
-				var text = ['hello world', 'round two'].join('\n');
-				var op = DIFF_BASE;
-				var result = NgDmpNamespace.helpers.createHtmlLines(text, op);
-
-				var split = result.split('\n');
-				expect(split.length).toBe(2);
-				expect(split[0]).toMatch(/\<span class="base"\>.*\<\/span\>/);
-				expect(split[1]).toMatch(/\<span class="base"\>.*\<\/span\>/);
-			});
-
 			it('DIFF_EQUAL operation', function() {
 				var text = ['hello world', 'round two'].join('\n');
 				var op = DIFF_EQUAL;
 				var result = NgDmpNamespace.helpers.createHtmlLines(text, op);
-
-				var split = result.split('\n');
-				expect(split.length).toBe(2);
-				expect(split[0]).toMatch(/\<span class="matching"\>.*\<\/span\>/);
-				expect(split[1]).toMatch(/\<span class="matching"\>.*\<\/span\>/);
+				var tagClass = NgDmpNamespace.helpers.diffClass(op);
+				var regex = '<div class="'+tagClass+'">.*?</div>';
+				expect(result.match(new RegExp(regex, "g")).length).toBe(2);
 			});
 
 			it('DIFF_DELETE operation', function() {
 				var text = ['hello world', 'round two'].join('\n');
 				var op = DIFF_DELETE;
 				var result = NgDmpNamespace.helpers.createHtmlLines(text, op);
-
-				var split = result.split('\n');
-				expect(split.length).toBe(2);
-				expect(split[0]).toMatch(/\<span class="del"\>.*\<\/span\>/);
-				expect(split[1]).toMatch(/\<span class="del"\>.*\<\/span\>/);
+				var tagClass = NgDmpNamespace.helpers.diffClass(op);
+				var regex = '<div class="'+tagClass+'">.*?</div>';
+				expect(result.match(new RegExp(regex, "g")).length).toBe(2);
 			});
 
 			it('DIFF_INSERT operation', function() {
 				var text = ['hello world', 'round two'].join('\n');
 				var op = DIFF_INSERT;
 				var result = NgDmpNamespace.helpers.createHtmlLines(text, op);
-
-				var split = result.split('\n');
-				expect(split.length).toBe(2);
-				expect(split[0]).toMatch(/\<span class="ins"\>.*\<\/span\>/);
-				expect(split[1]).toMatch(/\<span class="ins"\>.*\<\/span\>/);
+				var tagClass = NgDmpNamespace.helpers.diffClass(op);
+				var regex = '<div class="'+tagClass+'">.*?</div>';
+				expect(result.match(new RegExp(regex, "g")).length).toBe(2);
 			});
 		});
 	});
 
 	describe('createHtmlFromDiffs works', function() {
-		var data = [[DIFF_BASE, 'x'], [DIFF_EQUAL, 'a'], [DIFF_DELETE, 'b'], [DIFF_INSERT, 'c']];
-		var result = NgDmpNamespace.helpers.createHtmlFromDiffs(data);
-
-		expect(result).toMatch(/\<span class="base"\>.*\<\/span\>\<span class="matching"\>.*\<\/span\>\<span class="del"\>.*\<\/span\>\<span class="ins"\>.*\<\/span\>/);
+		it('INSDEL', function() {
+			var data = [[DIFF_EQUAL, 'a'], [DIFF_DELETE, 'b'], [DIFF_INSERT, 'c']];
+			var display = NgDmpNamespace.helpers.displayType.INSDEL;
+			var result = NgDmpNamespace.helpers.createHtmlFromDiffs(data, display);
+			var equalTag = NgDmpNamespace.helpers.diffTag(DIFF_EQUAL);
+			var deleteTag = NgDmpNamespace.helpers.diffTag(DIFF_DELETE);
+			var insertTag = NgDmpNamespace.helpers.diffTag(DIFF_INSERT);
+			var regex = '<'+equalTag+'>a</'+equalTag+'><'+deleteTag+'>b</'+deleteTag+'><'+insertTag+'>c</'+insertTag+'>'
+			expect(result).toMatch(new RegExp(regex));
+		});
 	});
 });

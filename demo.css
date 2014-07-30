@@ -1,27 +1,23 @@
-.base
-{
-	color: black;
+pre.textdiff {
+	word-break: normal;
+	word-wrap: normal;
 }
 
-.matching
-{
+.match, .textdiff span {
 	color: gray;
 }
 
-.ins
-{
+.ins, ins {
 	color: black;
 	background: #bbffbb;
 }
 
-.del
-{
+.del, del {
 	color: black;
 	background: #ffbbbb;
 }
 
-.noselect
-{
+.noselect {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
