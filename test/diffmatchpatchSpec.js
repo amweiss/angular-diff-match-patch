@@ -2,6 +2,12 @@ describe('diff-match-patch', function() {
 
 	beforeEach(module('diff-match-patch'));
 
+	var oneLineBasicLeft = 'hello world';
+	var oneLineBasicRight = 'hello';
+
+	var diffRegex = '<span.*?>hello</span><del.*?> world</del>';
+	var lineDiffRegex = '<div class="del.*?">.*?hello world</div><div class="ins.*?">.*?hello</div>';
+
 	describe('filter', function() {
 		describe('diff', function() {
 			it('exists', inject(function($filter) {
@@ -17,17 +23,13 @@ describe('diff-match-patch', function() {
 			});
 
 			it('one side returns empty string', function() {
-				var left = 'hello world';
-				var result = diffFilter(left);
+				var result = diffFilter(oneLineBasicLeft);
 				expect(result).toBe('');
 			});
 
 			it('single lines return total diff', function() {
-				var left = 'hello world';
-				var right = 'hello';
-				var result = diffFilter(left, right);
-				var regex = '<span>hello</span><del> world</del>'
-				expect(result).toMatch(new RegExp(regex));
+				var result = diffFilter(oneLineBasicLeft, oneLineBasicRight);
+				expect(result).toMatch(new RegExp(diffRegex));
 			});
 
 			it('two lines returns diff HTML', function() {
@@ -53,17 +55,13 @@ describe('diff-match-patch', function() {
 			});
 
 			it('one side returns empty string', function() {
-				var left = 'hello world';
-				var result = diffFilter(left);
+				var result = diffFilter(oneLineBasicLeft);
 				expect(result).toBe('');
 			});
 
 			it('single lines return total diff', function() {
-				var left = 'hello world';
-				var right = 'hello';
-				var result = diffFilter(left, right);
-				var regex = '<span>hello</span><del> world</del>'
-				expect(result).toMatch(new RegExp(regex));
+				var result = diffFilter(oneLineBasicLeft, oneLineBasicRight);
+				expect(result).toMatch(new RegExp(diffRegex));
 			});
 
 			it('two lines returns diff HTML', function() {
@@ -89,18 +87,13 @@ describe('diff-match-patch', function() {
 			});
 
 			it('one side returns empty string', function() {
-				var left = 'hello world';
-				var result = diffFilter(left);
-
+				var result = diffFilter(oneLineBasicLeft);
 				expect(result).toBe('');
 			});
 
 			it('single lines return total diff', function() {
-				var left = 'hello world';
-				var right = 'hello';
-				var result = diffFilter(left, right);
-				var regex = '<span>hello</span><del> world</del>'
-				expect(result).toMatch(new RegExp(regex));
+				var result = diffFilter(oneLineBasicLeft, oneLineBasicRight);
+				expect(result).toMatch(new RegExp(diffRegex));
 			});
 
 			it('two lines returns diff HTML', function() {
@@ -126,17 +119,13 @@ describe('diff-match-patch', function() {
 			});
 
 			it('one side returns empty string', function() {
-				var left = 'hello world';
-				var result = diffFilter(left);
+				var result = diffFilter(oneLineBasicLeft);
 				expect(result).toBe('');
 			});
 
 			it('single lines return total diff', function() {
-				var left = 'hello world';
-				var right = 'hello';
-				var result = diffFilter(left, right);
-				var regex = '<div class="del">.*?hello world</div><div class="ins">.*?hello</div>'
-				expect(result).toMatch(new RegExp(regex));
+				var result = diffFilter(oneLineBasicLeft, oneLineBasicRight);
+				expect(result).toMatch(new RegExp(lineDiffRegex));
 			});
 
 			it('two lines returns diff HTML', function() {
@@ -146,6 +135,49 @@ describe('diff-match-patch', function() {
 				var regex = '<div class="match">.*?hello</div><div class="del">.*?world</div><div class="ins">.*?friends!</div>';
 				expect(result).toMatch(new RegExp(regex));
 			});
+		});
+	});
+
+	//cop out on directive testing since it's shared code and covered by the filter tests currently.
+	describe('directive', function() {
+		var $scope;
+		var $compile;
+
+		beforeEach(inject(function(_$rootScope_, _$compile_) {
+			$scope = _$rootScope_.$new();
+			$compile = _$compile_;
+		}));
+
+		it('diff', function() {
+			$scope.left = oneLineBasicLeft;
+			$scope.right = oneLineBasicRight;
+			var element = $compile('<div diff left-obj="left" right-obj="right"></div>')($scope);
+			$scope.$digest();
+			expect(element.html()).toMatch(new RegExp(diffRegex));
+		});
+
+		it('processingDiff', function() {
+			$scope.left = oneLineBasicLeft;
+			$scope.right = oneLineBasicRight;
+			var element = $compile('<div processing-diff left-obj="left" right-obj="right"></div>')($scope);
+			$scope.$digest();
+			expect(element.html()).toMatch(new RegExp(diffRegex));
+		});
+
+		it('semanticDiff', function() {
+			$scope.left = oneLineBasicLeft;
+			$scope.right = oneLineBasicRight;
+			var element = $compile('<div semantic-diff left-obj="left" right-obj="right"></div>')($scope);
+			$scope.$digest();
+			expect(element.html()).toMatch(new RegExp(diffRegex));
+		});
+
+		it('lineDiff', function() {
+			$scope.left = oneLineBasicLeft;
+			$scope.right = oneLineBasicRight;
+			var element = $compile('<div line-diff left-obj="left" right-obj="right"></div>')($scope);
+			$scope.$digest();
+			expect(element.html()).toMatch(new RegExp(lineDiffRegex));
 		});
 	});
 });

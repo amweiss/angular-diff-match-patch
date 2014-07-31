@@ -6,6 +6,12 @@ module.exports = function(config) {
 
 		frameworks: ['jasmine'],
 
+		preprocessors: {
+			'angular-diff-match-patch.js': ['coverage']
+		},
+
+		reporters: ['progress', 'coverage'],
+
 		// list of files / patterns to load in the browser
 		files: [
 			// libraries
@@ -21,6 +27,11 @@ module.exports = function(config) {
 		],
 
 		autoWatch: true,
-		browsers: ['PhantomJS']
+		browsers: ['PhantomJS'],
+
+		coverageReporter: {
+			type: 'html',
+			dir: 'coverage/'
+		}
 	});
 };
