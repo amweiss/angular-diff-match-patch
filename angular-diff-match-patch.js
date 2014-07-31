@@ -126,26 +126,26 @@ NgDmpNamespace.helpers = {
 };
 
 angular.module('diff-match-patch', [])
-	.filter('diff', function() {
+	.filter('diff', ['$sce', function($sce) {
 		return function(left, right) {
-			return NgDmpNamespace.helpers.createDiffHtml(left, right);
+			return $sce.trustAsHtml(NgDmpNamespace.helpers.createDiffHtml(left, right));
 		}
-	})
-	.filter('processingDiff', function() {
+	}])
+	.filter('processingDiff', ['$sce', function($sce) {
 		return function(left, right) {
-			return NgDmpNamespace.helpers.createProcessingDiffHtml(left, right);
+			return $sce.trustAsHtml(NgDmpNamespace.helpers.createProcessingDiffHtml(left, right));
 		};
-	})
-	.filter('semanticDiff', function() {
+	}])
+	.filter('semanticDiff', ['$sce', function($sce) {
 		return function(left, right) {
-			return NgDmpNamespace.helpers.createSemanticDiffHtml(left, right);
+			return $sce.trustAsHtml(NgDmpNamespace.helpers.createSemanticDiffHtml(left, right));
 		};
-	})
-	.filter('lineDiff', function() {
+	}])
+	.filter('lineDiff', ['$sce', function($sce) {
 		return function(left, right) {
-			return NgDmpNamespace.helpers.createLineDiffHtml(left, right);
+			return $sce.trustAsHtml(NgDmpNamespace.helpers.createLineDiffHtml(left, right));
 		};
-	})
+	}])
 	.directive('diff', ['$compile', function factory($compile) {
 		var ddo = {
 				scope: {
