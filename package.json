@@ -21,6 +21,6 @@
 		"start": "http-server --domain 0.0.0.0 --port 8000",
 		"pretest": "npm install",
 		"test": "node node_modules/karma/bin/karma start test/karma.conf.js",
-		"test-single-run": "node node_modules/karma/bin/karma start test/karma.conf.js --single-run"
+		"test-single-run": "node node_modules/karma/bin/karma start test/karma.conf.js --single-run",
 	}
 }

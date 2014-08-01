@@ -1,152 +1,152 @@
-var NgDmpNamespace = NgDmpNamespace || {};
+angular.module('diff-match-patch', [])
+	.factory('dmp', function() {
 
-NgDmpNamespace.helpers = {
-	diffClass: function(op) {
-		switch(op) {
-			case DIFF_INSERT: return 'ins';
-			case DIFF_DELETE: return 'del';
-			case DIFF_EQUAL: return 'match';
-		}
-	},
+		var displayType = {
+			INSDEL: 0,
+			LINEDIFF: 1
+		};
 
-	diffSymbol: function(op) {
-		switch(op) {
-			case DIFF_EQUAL: return ' ';
-			case DIFF_INSERT: return '+';
-			case DIFF_DELETE: return '-';
-		}
-	},
+		function diffClass(op) {
+			switch(op) {
+				case DIFF_INSERT: return 'ins';
+				case DIFF_DELETE: return 'del';
+				case DIFF_EQUAL: return 'match';
+			}
+		};
 
-	diffTag: function(op) {
-		switch(op) {
-			case DIFF_EQUAL: return 'span';
-			case DIFF_INSERT: return 'ins';
-			case DIFF_DELETE: return 'del';
-		}
-	},
+		function diffSymbol(op) {
+			switch(op) {
+				case DIFF_EQUAL: return ' ';
+				case DIFF_INSERT: return '+';
+				case DIFF_DELETE: return '-';
+			}
+		};
 
-	displayType: {
-		INSDEL: 0,
-		LINEDIFF: 1
-	},
+		function diffTag(op) {
+			switch(op) {
+				case DIFF_EQUAL: return 'span';
+				case DIFF_INSERT: return 'ins';
+				case DIFF_DELETE: return 'del';
+			}
+		};
 
-	getHtmlPrefix: function(op, display) {
-		var retVal = '';
-		switch(display) {
-			case this.displayType.LINEDIFF:
-				retVal = '<div class="'+this.diffClass(op)+'"><span class="noselect">'+this.diffSymbol(op)+'</span>';
-				break;
-			case this.displayType.INSDEL:
-				retVal = '<'+this.diffTag(op)+'>';
-				break;
-		}
-		return retVal;
-	},
+		function getHtmlPrefix(op, display) {
+			var retVal = '';
+				switch(display) {
+					case displayType.LINEDIFF:
+						retVal = '<div class="'+diffClass(op)+'"><span class="noselect">'+diffSymbol(op)+'</span>';
+						break;
+					case displayType.INSDEL:
+						retVal = '<'+diffTag(op)+'>';
+						break;
+				}
+			return retVal;
+		};
 
-	getHtmlSuffix: function(op, display) {
-		var retVal = '';
-		switch(display) {
-			case this.displayType.LINEDIFF:
-				retVal = '</div>';
-				break;
-			case this.displayType.INSDEL:
-				retVal = '</'+this.diffTag(op)+'>';
-				break;
-		}
-		return retVal;
-	},
+		function getHtmlSuffix(op, display) {
+			var retVal = '';
+				switch(display) {
+					case displayType.LINEDIFF:
+						retVal = '</div>';
+						break;
+					case displayType.INSDEL:
+						retVal = '</'+diffTag(op)+'>';
+						break;
+				}
+			return retVal;
+		};
 
-	createHtmlLines: function(text, op) {
-		var lines = text.split('\n');
-		for (var y = 0; y < lines.length; y++) {
-			if (lines[y].length === 0) continue;
-			lines[y] = this.getHtmlPrefix(op, this.displayType.LINEDIFF) + lines[y] + this.getHtmlSuffix(op, this.displayType.LINEDIFF);
-		}
-		return lines.join('');
-	},
+		function createHtmlLines(text, op) {
+			var lines = text.split('\n');
+			for (var y = 0; y < lines.length; y++) {
+				if (lines[y].length === 0) continue;
+				lines[y] = getHtmlPrefix(op, displayType.LINEDIFF) + lines[y] + getHtmlSuffix(op, displayType.LINEDIFF);
+			}
+			return lines.join('');
+		};
 
-	createHtmlFromDiffs: function(diffs, display) {
-		var html = [];
-		for (var x = 0; x < diffs.length; x++) {
-			var op = diffs[x][0];
-			var text = diffs[x][1];
-			if (display === this.displayType.LINEDIFF) {
-				html[x] = this.createHtmlLines(text, op);
-			} else {
-				html[x] = this.getHtmlPrefix(op, display) + text + this.getHtmlSuffix(op, display);
+		function createHtmlFromDiffs(diffs, display) {
+			var html = [];
+			for (var x = 0; x < diffs.length; x++) {
+				var op = diffs[x][0];
+				var text = diffs[x][1];
+				if (display === displayType.LINEDIFF) {
+					html[x] = createHtmlLines(text, op);
+				} else {
+					html[x] = getHtmlPrefix(op, display) + text + getHtmlSuffix(op, display);
+				}
+			}
+			return html.join('');
+		};
+
+		return {
+			createDiffHtml: function(left, right) {
+				if (left && right) {
+					var dmp = new diff_match_patch();
+					var diffs = dmp.diff_main(left, right);
+					return createHtmlFromDiffs(diffs, displayType.INSDEL);
+				} else {
+					return '';
+				}
+			},
+
+			createProcessingDiffHtml: function(left, right) {
+				if (left && right) {
+					var dmp = new diff_match_patch();
+					var diffs = dmp.diff_main(left, right);
+					//dmp.Diff_EditCost = 4;
+					dmp.diff_cleanupEfficiency(diffs);
+					return createHtmlFromDiffs(diffs, displayType.INSDEL);
+				} else {
+					return '';
+				}
+			},
+
+			createSemanticDiffHtml: function(left, right) {
+				if (left && right) {
+					var dmp = new diff_match_patch();
+					var diffs = dmp.diff_main(left, right);
+					dmp.diff_cleanupSemantic(diffs);
+					return createHtmlFromDiffs(diffs, displayType.INSDEL);
+				} else {
+					return '';
+				}
+			},
+
+			createLineDiffHtml: function(left, right) {
+				if (left && right) {
+					var dmp = new diff_match_patch();
+					var a = dmp.diff_linesToChars_(left, right);
+					var diffs = dmp.diff_main(a.chars1, a.chars2, false);
+					dmp.diff_charsToLines_(diffs, a.lineArray);
+					return createHtmlFromDiffs(diffs, displayType.LINEDIFF);
+				} else {
+					return '';
+				}
 			}
 		}
-		return html.join('');
-	},
-
-	createDiffHtml: function(left, right) {
-		if (left && right) {
-			var dmp = new diff_match_patch();
-			var diffs = dmp.diff_main(left, right);
-			return this.createHtmlFromDiffs(diffs, this.displayType.INSDEL);
-		} else {
-			return '';
-		}
-	},
-
-	createProcessingDiffHtml: function(left, right) {
-		if (left && right) {
-			var dmp = new diff_match_patch();
-			var diffs = dmp.diff_main(left, right);
-			//dmp.Diff_EditCost = 4;
-			dmp.diff_cleanupEfficiency(diffs);
-			return this.createHtmlFromDiffs(diffs, this.displayType.INSDEL);
-		} else {
-			return '';
-		}
-	},
-
-	createSemanticDiffHtml: function(left, right) {
-		if (left && right) {
-			var dmp = new diff_match_patch();
-			var diffs = dmp.diff_main(left, right);
-			dmp.diff_cleanupSemantic(diffs);
-			return this.createHtmlFromDiffs(diffs, this.displayType.INSDEL);
-		} else {
-			return '';
-		}
-	},
-
-	createLineDiffHtml: function(left, right) {
-		if (left && right) {
-			var dmp = new diff_match_patch();
-			var a = dmp.diff_linesToChars_(left, right);
-			var diffs = dmp.diff_main(a.chars1, a.chars2, false);
-			dmp.diff_charsToLines_(diffs, a.lineArray);
-			return this.createHtmlFromDiffs(diffs, this.displayType.LINEDIFF);
-		} else {
-			return '';
-		}
-	}
-};
-
-angular.module('diff-match-patch', [])
-	.filter('diff', ['$sce', function($sce) {
+	})
+	.filter('diff', ['$sce', 'dmp', function($sce, dmp) {
 		return function(left, right) {
-			return $sce.trustAsHtml(NgDmpNamespace.helpers.createDiffHtml(left, right));
+			return $sce.trustAsHtml(dmp.createDiffHtml(left, right));
 		}
 	}])
-	.filter('processingDiff', ['$sce', function($sce) {
+	.filter('processingDiff', ['$sce', 'dmp', function($sce, dmp) {
 		return function(left, right) {
-			return $sce.trustAsHtml(NgDmpNamespace.helpers.createProcessingDiffHtml(left, right));
+			return $sce.trustAsHtml(dmp.createProcessingDiffHtml(left, right));
 		};
 	}])
-	.filter('semanticDiff', ['$sce', function($sce) {
+	.filter('semanticDiff', ['$sce', 'dmp', function($sce, dmp) {
 		return function(left, right) {
-			return $sce.trustAsHtml(NgDmpNamespace.helpers.createSemanticDiffHtml(left, right));
+			return $sce.trustAsHtml(dmp.createSemanticDiffHtml(left, right));
 		};
 	}])
-	.filter('lineDiff', ['$sce', function($sce) {
+	.filter('lineDiff', ['$sce', 'dmp', function($sce, dmp) {
 		return function(left, right) {
-			return $sce.trustAsHtml(NgDmpNamespace.helpers.createLineDiffHtml(left, right));
+			return $sce.trustAsHtml(dmp.createLineDiffHtml(left, right));
 		};
 	}])
-	.directive('diff', ['$compile', function factory($compile) {
+	.directive('diff', ['$compile', 'dmp', function factory($compile, dmp) {
 		var ddo = {
 				scope: {
 						left: '=leftObj',
@@ -154,14 +154,14 @@ angular.module('diff-match-patch', [])
 				},
 				link: function postLink(scope, iElement, iAttrs) {
 						scope.$watchGroup(['left', 'right'], function() {
-							iElement.html(NgDmpNamespace.helpers.createDiffHtml(scope.left, scope.right));
+							iElement.html(dmp.createDiffHtml(scope.left, scope.right));
 							$compile(iElement.contents())(scope);
 						});
 				}
 		};
 		return ddo;
 	}])
-	.directive('processingDiff', ['$compile', function factory($compile) {
+	.directive('processingDiff', ['$compile', 'dmp', function factory($compile, dmp) {
 		var ddo = {
 				scope: {
 						left: '=leftObj',
@@ -169,14 +169,14 @@ angular.module('diff-match-patch', [])
 				},
 				link: function postLink(scope, iElement, iAttrs) {
 						scope.$watchGroup(['left', 'right'], function() {
-							iElement.html(NgDmpNamespace.helpers.createProcessingDiffHtml(scope.left, scope.right));
+							iElement.html(dmp.createProcessingDiffHtml(scope.left, scope.right));
 							$compile(iElement.contents())(scope);
 						});
 				}
 		};
 		return ddo;
 	}])
-	.directive('semanticDiff', ['$compile', function factory($compile) {
+	.directive('semanticDiff', ['$compile', 'dmp', function factory($compile, dmp) {
 		var ddo = {
 				scope: {
 						left: '=leftObj',
@@ -184,14 +184,14 @@ angular.module('diff-match-patch', [])
 				},
 				link: function postLink(scope, iElement, iAttrs) {
 						scope.$watchGroup(['left', 'right'], function() {
-							iElement.html(NgDmpNamespace.helpers.createSemanticDiffHtml(scope.left, scope.right));
+							iElement.html(dmp.createSemanticDiffHtml(scope.left, scope.right));
 							$compile(iElement.contents())(scope);
 						});
 				}
 		};
 		return ddo;
 	}])
-	.directive('lineDiff', ['$compile', function factory($compile) {
+	.directive('lineDiff', ['$compile', 'dmp', function factory($compile, dmp) {
 		var ddo = {
 				scope: {
 						left: '=leftObj',
@@ -199,7 +199,7 @@ angular.module('diff-match-patch', [])
 				},
 				link: function postLink(scope, iElement, iAttrs) {
 						scope.$watchGroup(['left', 'right'], function() {
-							iElement.html(NgDmpNamespace.helpers.createLineDiffHtml(scope.left, scope.right));
+							iElement.html(dmp.createLineDiffHtml(scope.left, scope.right));
 							$compile(iElement.contents())(scope);
 						});
 				}
