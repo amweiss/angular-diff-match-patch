@@ -1,3 +1,4 @@
+/* global DIFF_INSERT, DIFF_DELETE, DIFF_EQUAL, diff_match_patch */
 angular.module('diff-match-patch', [])
 	.factory('dmp', function() {
 
@@ -12,7 +13,7 @@ angular.module('diff-match-patch', [])
 				case DIFF_DELETE: return 'del';
 				case DIFF_EQUAL: return 'match';
 			}
-		};
+		}
 
 		function diffSymbol(op) {
 			switch(op) {
@@ -20,7 +21,7 @@ angular.module('diff-match-patch', [])
 				case DIFF_INSERT: return '+';
 				case DIFF_DELETE: return '-';
 			}
-		};
+		}
 
 		function diffTag(op) {
 			switch(op) {
@@ -28,7 +29,7 @@ angular.module('diff-match-patch', [])
 				case DIFF_INSERT: return 'ins';
 				case DIFF_DELETE: return 'del';
 			}
-		};
+		}
 
 		function getHtmlPrefix(op, display) {
 			var retVal = '';
@@ -41,7 +42,7 @@ angular.module('diff-match-patch', [])
 						break;
 				}
 			return retVal;
-		};
+		}
 
 		function getHtmlSuffix(op, display) {
 			var retVal = '';
@@ -54,7 +55,7 @@ angular.module('diff-match-patch', [])
 						break;
 				}
 			return retVal;
-		};
+		}
 
 		function createHtmlLines(text, op) {
 			var lines = text.split('\n');
@@ -63,7 +64,7 @@ angular.module('diff-match-patch', [])
 				lines[y] = getHtmlPrefix(op, displayType.LINEDIFF) + lines[y] + getHtmlSuffix(op, displayType.LINEDIFF);
 			}
 			return lines.join('');
-		};
+		}
 
 		function createHtmlFromDiffs(diffs, display) {
 			var html = [];
@@ -77,7 +78,7 @@ angular.module('diff-match-patch', [])
 				}
 			}
 			return html.join('');
-		};
+		}
 
 		return {
 			createDiffHtml: function(left, right) {
@@ -124,12 +125,12 @@ angular.module('diff-match-patch', [])
 					return '';
 				}
 			}
-		}
+		};
 	})
 	.filter('diff', ['$sce', 'dmp', function($sce, dmp) {
 		return function(left, right) {
 			return $sce.trustAsHtml(dmp.createDiffHtml(left, right));
-		}
+		};
 	}])
 	.filter('processingDiff', ['$sce', 'dmp', function($sce, dmp) {
 		return function(left, right) {
@@ -152,7 +153,7 @@ angular.module('diff-match-patch', [])
 						left: '=leftObj',
 						right: '=rightObj'
 				},
-				link: function postLink(scope, iElement, iAttrs) {
+				link: function postLink(scope, iElement) {
 						scope.$watchGroup(['left', 'right'], function() {
 							iElement.html(dmp.createDiffHtml(scope.left, scope.right));
 							$compile(iElement.contents())(scope);
@@ -167,7 +168,7 @@ angular.module('diff-match-patch', [])
 						left: '=leftObj',
 						right: '=rightObj'
 				},
-				link: function postLink(scope, iElement, iAttrs) {
+				link: function postLink(scope, iElement) {
 						scope.$watchGroup(['left', 'right'], function() {
 							iElement.html(dmp.createProcessingDiffHtml(scope.left, scope.right));
 							$compile(iElement.contents())(scope);
@@ -182,7 +183,7 @@ angular.module('diff-match-patch', [])
 						left: '=leftObj',
 						right: '=rightObj'
 				},
-				link: function postLink(scope, iElement, iAttrs) {
+				link: function postLink(scope, iElement) {
 						scope.$watchGroup(['left', 'right'], function() {
 							iElement.html(dmp.createSemanticDiffHtml(scope.left, scope.right));
 							$compile(iElement.contents())(scope);
@@ -197,7 +198,7 @@ angular.module('diff-match-patch', [])
 						left: '=leftObj',
 						right: '=rightObj'
 				},
-				link: function postLink(scope, iElement, iAttrs) {
+				link: function postLink(scope, iElement) {
 						scope.$watchGroup(['left', 'right'], function() {
 							iElement.html(dmp.createLineDiffHtml(scope.left, scope.right));
 							$compile(iElement.contents())(scope);
