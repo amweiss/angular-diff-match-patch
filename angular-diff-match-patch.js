@@ -127,26 +127,6 @@ angular.module('diff-match-patch', [])
 			}
 		};
 	})
-	.filter('diff', ['$sce', 'dmp', function($sce, dmp) {
-		return function(left, right) {
-			return $sce.trustAsHtml(dmp.createDiffHtml(left, right));
-		};
-	}])
-	.filter('processingDiff', ['$sce', 'dmp', function($sce, dmp) {
-		return function(left, right) {
-			return $sce.trustAsHtml(dmp.createProcessingDiffHtml(left, right));
-		};
-	}])
-	.filter('semanticDiff', ['$sce', 'dmp', function($sce, dmp) {
-		return function(left, right) {
-			return $sce.trustAsHtml(dmp.createSemanticDiffHtml(left, right));
-		};
-	}])
-	.filter('lineDiff', ['$sce', 'dmp', function($sce, dmp) {
-		return function(left, right) {
-			return $sce.trustAsHtml(dmp.createLineDiffHtml(left, right));
-		};
-	}])
 	.directive('diff', ['$compile', 'dmp', function factory($compile, dmp) {
 		var ddo = {
 				scope: {
