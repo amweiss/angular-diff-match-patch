@@ -6,7 +6,7 @@
 	"description": "An Angular module to use when dealing with google-diff-match-patch.",
 	"private": true,
 	"repository": {
-		"url": "https://stash.corp.synacor.com/scm/~aweiss/angular-diff-match-patch.git"
+		"url": "https://github.com/amweiss/angular-diff-match-patch.git"
 	},
 	"devDependencies": {
 		"http-server": "^0.6.1",
