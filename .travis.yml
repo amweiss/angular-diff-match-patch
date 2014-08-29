@@ -1,9 +1,10 @@
 language: node_js
 node_js:
-    - '0.10'
+    - 0.10
+    - 0.11
 
-before_script:
-    - bower install
+before_install:
+    - npm install -g gulp
 
 script:
     - gulp karma --browsers=PhantomJS
