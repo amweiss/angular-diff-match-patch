@@ -16,6 +16,7 @@
 		"karma-phantomjs-launcher": "^0.1.4"
 	},
 	"scripts": {
+		"postinstall": "bower install",
 		"prestart": "npm install",
 		"start": "http-server",
 		"pretest": "npm install",
