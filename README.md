@@ -25,9 +25,12 @@ Development work requires npm from [Node.js](http://nodejs.org/)
 
 Begin with:
 `npm install -g bower`
+
 `npm install`
+
 `bower install`
 
 Then you can use:
 `npm start` To host the directory so you can see the demo
+
 `npm test` To run the Jasmine tests with change detection
