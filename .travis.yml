@@ -2,17 +2,9 @@ language: node_js
 node_js:
     - 0.10
 
-install:
-  - npm install spm coveralls
-
 before_script:
     - npm install -g bower
     - bower install -f
-    - node_modules/spm/bin/spm-install
 
 script:
     - npm run-script test-single-run
-    - node_modules/spm/bin/spm-test
-
-after_success:
-  - node_modules/spm/bin/spm-test --coveralls | node_modules/.bin/coveralls

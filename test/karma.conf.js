@@ -10,7 +10,7 @@ module.exports = function(config) {
 			'angular-diff-match-patch.js': ['coverage']
 		},
 
-		reporters: ['progress', 'coverage'],
+		reporters: ['progress', 'coverage', 'coveralls'],
 
 		// list of files / patterns to load in the browser
 		files: [
@@ -30,7 +30,7 @@ module.exports = function(config) {
 		browsers: ['PhantomJS'],
 
 		coverageReporter: {
-			type: 'html',
+			type: 'lcov',
 			dir: 'coverage/'
 		}
 	});
