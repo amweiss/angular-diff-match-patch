@@ -1,25 +1,25 @@
 {
-	"name": "angular-diff-match-patch",
-	"author": "Adam Weiss <cseadam@gmail.com>",
-	"license": "MIT",
-	"version": "0.1.0",
-	"description": "An Angular module to use when dealing with google-diff-match-patch.",
-	"private": true,
-	"repository": {
-		"url": "https://github.com/amweiss/angular-diff-match-patch.git"
-	},
-	"devDependencies": {
-		"http-server": "^0.6.1",
-		"karma": "^0.10",
-		"karma-coverage": "^0.2.5",
-		"karma-jasmine": "^0.1.0",
-		"karma-phantomjs-launcher": "^0.1.4"
-	},
-	"scripts": {
-		"prestart": "npm install",
-		"start": "http-server",
-		"pretest": "npm install",
-		"test": "node node_modules/karma/bin/karma start test/karma.conf.js",
-		"test-single-run": "node node_modules/karma/bin/karma start test/karma.conf.js --single-run"
-	}
+  "name": "angular-diff-match-patch",
+  "author": "Adam Weiss <cseadam@gmail.com>",
+  "license": "MIT",
+  "version": "0.1.0",
+  "description": "An Angular module to use when dealing with google-diff-match-patch.",
+  "private": true,
+  "repository": {
+    "url": "https://github.com/amweiss/angular-diff-match-patch.git"
+  },
+  "devDependencies": {
+    "http-server": "^0.6.1",
+    "karma": "^0.12",
+    "karma-coverage": "^0.2.6",
+    "karma-jasmine": "^0.1.5",
+    "karma-phantomjs-launcher": "^0.1.4"
+  },
+  "scripts": {
+    "prestart": "npm install",
+    "start": "http-server",
+    "pretest": "npm install",
+    "test": "node node_modules/karma/bin/karma start test/karma.conf.js",
+    "test-single-run": "node node_modules/karma/bin/karma start test/karma.conf.js --single-run"
+  }
 }
