@@ -1,6 +1,8 @@
 angular-diff-match-patch
 ========================
-[![Build Status](https://travis-ci.org/amweiss/angular-diff-match-patch.svg?branch=master)](https://travis-ci.org/amweiss/angular-diff-match-patch)
+[![Build Status](https://travis-ci.org/amweiss/angular-diff-match-patch.svg?branch=master)](https://travis-ci.org/amweiss/angular-diff-match-patch) [![Coverage Status](https://coveralls.io/repos/amweiss/angular-diff-match-patch/badge.png)](https://coveralls.io/r/amweiss/angular-diff-match-patch)
+
+[![Dependencies](https://david-dm.org/amweiss/angular-diff-match-patch.svg)](https://david-dm.org/amweiss/angular-diff-match-patch/#info=dependencies&view=table) [![DevDependencies](https://david-dm.org/amweiss/angular-diff-match-patch/dev-status.svg)](https://david-dm.org/amweiss/angular-diff-match-patch/#info=devDependencies&view=table) [![PeerDependencies](https://david-dm.org/amweiss/angular-diff-match-patch/peer-status.svg)](https://david-dm.org/amweiss/angular-diff-match-patch/#info=peerDependencies&view=table)
 
 This library is simply a wrapper around [google-diff-match-patch](https://code.google.com/p/google-diff-match-patch/).
 
@@ -8,7 +10,7 @@ This library is simply a wrapper around [google-diff-match-patch](https://code.g
 
 Setup
 -----
-
+ 
 Install from [Bower](http://bower.io/)
 
 `bower install angular-diff-match-patch`
