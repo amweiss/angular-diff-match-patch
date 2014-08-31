@@ -1,53 +1,86 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>angular-diff-match-patch by amweiss</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<!DOCTYPE html>
+<html lang="en" id="ng-app" ng-app="diffDemo">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>angular-diff-match-patch</title>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="demo.css">
+	<!--[if lte IE 7]>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
+	<![endif]-->
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/google-diff-match-patch/javascript/diff_match_patch.js"></script>
+	<script src="angular-diff-match-patch.js"></script>
+	<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+	<script>
+		var app = angular.module('diffDemo', ['ui.bootstrap','diff-match-patch']);
+		app.controller('diffCtrl', function($scope) {
+			$scope.left = ["I am the very model of a modern Major-General,",
+						   "I've information vegetable, animal, and mineral,",
+						   "I know the kings of England, and I quote the fights historical,",
+						   "From Marathon to Waterloo, in order categorical."].join('\n');
 
-  </head>
-  <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/amweiss/angular-diff-match-patch">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/amweiss/angular-diff-match-patch/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/amweiss/angular-diff-match-patch/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
-
-    <div class="wrapper">
-
-      <section>
-        <div id="title">
-          <h1>angular-diff-match-patch</h1>
-          <p>An AngularJS wrapper for https://code.google.com/p/google-diff-match-patch/</p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/amweiss">amweiss</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
-        </div>
-
-        <h1>
-<a name="angular-diff-match-patch" class="anchor" href="#angular-diff-match-patch"><span class="octicon octicon-link"></span></a>angular-diff-match-patch</h1>
-
-<p>This library is simply a wrapper around <a href="https://code.google.com/p/google-diff-match-patch/">google-diff-match-patch</a>.</p>
-
-<p>More to come, but see <a href="http://embed.plnkr.co/KzTzbm/preview">this demo</a> for reference!</p>
-      </section>
-
-    </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
-  </body>
-</html>
+			$scope.right = ["I am the very model of a cartoon individual,",
+						    "My animation's comical, unusual, and whimsical,",
+						    "I know the kings of England, and I quote the fights historical,",
+						    "From wicked puns and stupid jokes to anvils that drop on your head."].join('\n');
+		});
+	</script>
+	<style>
+		div.col-md-6 p textarea.inputBox {
+			height: 120px;
+		}
+	</style>
+</head>
+<body ng-controller="diffCtrl">
+<div class="container-fluid">
+	<div class="row text-center">
+		<h1>angular-diff-match-patch</h1>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-6">
+					<h3>Left side</h3>
+					<p><textarea class="inputBox form-control" ng-model="left"></textarea></p>
+				</div>
+				<div class="col-md-6">
+					<h3>Right side</h3>
+					<p><textarea class="inputBox form-control" ng-model="right"></textarea></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-body"><pre class="textdiff" diff left-obj="left" right-obj="right"></pre></div>
+				<div class="panel-footer">diff</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-body"><pre class="textdiff" processing-diff left-obj="left" right-obj="right"></pre></div>
+				<div class="panel-footer">processingDiff</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-body"><pre class="textdiff" semantic-diff left-obj="left" right-obj="right"></pre></div>
+				<div class="panel-footer">semanticDiff</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-body"><pre class="textdiff" line-diff left-obj="left" right-obj="right"></pre></div>
+				<div class="panel-footer">lineDiff</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
