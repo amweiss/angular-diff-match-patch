@@ -11,13 +11,80 @@
 	<!--[if lte IE 7]>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
 	<![endif]-->
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.0/angular.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.0/angular.js"></script>
 	<script src="//neil.fraser.name/software/diff_match_patch/svn/trunk/javascript/diff_match_patch.js"></script>
 	<script src="angular-diff-match-patch.js"></script>
 	<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
 	<script>
-		var app = angular.module('diffDemo', ['ui.bootstrap','diff-match-patch']);
-		app.controller('diffCtrl', function($scope) {
+
+		/**
+		 * Most of this plunkr module is from the Angular documentation (https://docs.angularjs.org/js/docs.js)
+		 */
+		var manifest =
+		{
+		  "name": "angular-diff-match-patch",
+		  "files": [
+		    "index.html",
+		    "angular-diff-match-patch.js",
+		    "demo.css"
+		  ]
+		};
+
+		var plunkr = angular.module('plunkr', []);
+		plunkr.factory('formPostData', ['$document', function($document) {
+			return function(url, fields) {
+			/**
+			 * Form previously posted to target="_blank", but pop-up blockers were causing this to not work.
+			 * If a user chose to bypass pop-up blocker one time and click the link, they would arrive at
+			 * a new default plnkr, not a plnkr with the desired template.
+			 */
+			var form = angular.element('<form style="display: none;" method="post" action="' + url + '"></form>');
+			angular.forEach(fields, function(value, name) {
+			  var input = angular.element('<input type="hidden" name="' +  name + '">');
+			  input.attr('value', value);
+			  form.append(input);
+			});
+			$document.find('body').append(form);
+			form[0].submit();
+			form.remove();
+			};
+		}])
+		.factory('openPlunkr', ['formPostData', '$http', '$q', function(formPostData, $http, $q) {
+		  return function() {
+	        var filePromises = [];
+
+	        angular.forEach(manifest.files, function(filename) {
+	          filePromises.push($http.get(filename, { transformResponse: [] })
+	            .then(function(response) {
+	              return {
+	                name: filename,
+	                content: response.data
+	              };
+	            }));
+	        });
+	        return $q.all(filePromises)
+	        .then(function(files) {
+		        var postData = {};
+
+		        angular.forEach(files, function(file) {
+		          postData['files[' + file.name + ']'] = file.content;
+		        });
+
+		        postData['tags[0]'] = "angularjs";
+		        postData['tags[1]'] = "example";
+		        postData.private = true;
+		        postData.description = 'angular-diff-match-patch';
+
+		        formPostData('http://plnkr.co/edit/?p=preview', postData);
+		    })
+		  };
+		}])
+
+		/**
+		 * Actual demo app
+		 */
+		var app = angular.module('diffDemo', ['plunkr','ui.bootstrap','diff-match-patch']);
+		app.controller('diffCtrl', ['openPlunkr', '$scope', function(openPlunkr, $scope) {
 			$scope.left = ["I am the very model of a modern Major-General,",
 						   "I've information vegetable, animal, and mineral,",
 						   "I know the kings of England, and I quote the fights historical,",
@@ -27,7 +94,9 @@
 						    "My animation's comical, unusual, and whimsical,",
 						    "I know the kings of England, and I quote the fights historical,",
 						    "From wicked puns and stupid jokes to anvils that drop on your head."].join('\n');
-		});
+
+			$scope.openPlunkr = openPlunkr;
+		}]);
 	</script>
 	<style>
 		div.col-md-6 p textarea.inputBox {
@@ -39,6 +108,7 @@
 <div class="container-fluid">
 	<div class="row text-center">
 		<h1>angular-diff-match-patch</h1>
+		<button type="button" class="btn btn-default" ng-click="openPlunkr()">Edit in Plunkr</button>
 	</div>
 	<div class="panel panel-default">
 		<div class="panel-body">
