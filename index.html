@@ -128,7 +128,7 @@
 				<material-card flex><textarea layout-fill class="inputBox" ng-model="left"></textarea></material-card>
 				<material-card flex><textarea layout-fill class="inputBox" ng-model="right"></textarea></material-card>
 			</div>
-			<div flex layout="horizontal">
+			<div flex layout="vertical" layout-md="horizontal">
 				<material-card flex>
 					<h2>diff</h2>
 					<pre class="textdiff" diff left-obj="left" right-obj="right"></pre>
@@ -138,7 +138,7 @@
 					<pre class="textdiff" processing-diff left-obj="left" right-obj="right"></pre>
 				</material-card>
 			</div>
-			<div flex layout="horizontal">
+			<div flex layout="vertical" layout-md="horizontal">
 				<material-card flex>
 					<h2>semanticDiff</h2>
 					<pre class="textdiff" semantic-diff left-obj="left" right-obj="right"></pre>
