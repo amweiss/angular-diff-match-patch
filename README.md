@@ -18,7 +18,7 @@ Install from [Bower](http://bower.io/)
 Usage
 -----
 
-See [this demo](http://amweiss.github.io/angular-diff-match-patch/) for reference, and click the button to view it in [plunkr](http://plnkr.co/)
+See [this demo](http://amweiss.github.io/angular-diff-match-patch/) for reference, and click the button to view it in [Plunker](http://plnkr.co/)
 
 Development
 -----
