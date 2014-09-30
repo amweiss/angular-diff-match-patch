@@ -9,7 +9,7 @@
     "url": "https://github.com/amweiss/angular-diff-match-patch.git"
   },
   "devDependencies": {
-    "http-server": "^0.6.1",
+    "http-server": "^0.7.1",
     "karma": "^0.12",
     "karma-coverage": "^0.2.6",
     "karma-coveralls": "^0.1.4",
