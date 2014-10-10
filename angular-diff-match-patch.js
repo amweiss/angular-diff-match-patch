@@ -134,10 +134,12 @@ angular.module('diff-match-patch', [])
 						right: '=rightObj'
 				},
 				link: function postLink(scope, iElement) {
-						scope.$watchGroup(['left', 'right'], function() {
+						var listener = function() {
 							iElement.html(dmp.createDiffHtml(scope.left, scope.right));
 							$compile(iElement.contents())(scope);
-						});
+						};
+						scope.$watch('left', listener);
+						scope.$watch('right', listener);
 				}
 		};
 		return ddo;
@@ -149,10 +151,12 @@ angular.module('diff-match-patch', [])
 						right: '=rightObj'
 				},
 				link: function postLink(scope, iElement) {
-						scope.$watchGroup(['left', 'right'], function() {
+						var listener = function() {
 							iElement.html(dmp.createProcessingDiffHtml(scope.left, scope.right));
 							$compile(iElement.contents())(scope);
-						});
+						};
+						scope.$watch('left', listener);
+						scope.$watch('right', listener);
 				}
 		};
 		return ddo;
@@ -164,10 +168,12 @@ angular.module('diff-match-patch', [])
 						right: '=rightObj'
 				},
 				link: function postLink(scope, iElement) {
-						scope.$watchGroup(['left', 'right'], function() {
+						var listener =  function() {
 							iElement.html(dmp.createSemanticDiffHtml(scope.left, scope.right));
 							$compile(iElement.contents())(scope);
-						});
+						};
+						scope.$watch('left', listener);
+						scope.$watch('right', listener);
 				}
 		};
 		return ddo;
@@ -179,10 +185,12 @@ angular.module('diff-match-patch', [])
 						right: '=rightObj'
 				},
 				link: function postLink(scope, iElement) {
-						scope.$watchGroup(['left', 'right'], function() {
-							iElement.html(dmp.createLineDiffHtml(scope.left, scope.right));
-							$compile(iElement.contents())(scope);
-						});
+					var listener =  function() {
+						iElement.html(dmp.createLineDiffHtml(scope.left, scope.right));
+						$compile(iElement.contents())(scope);
+					};
+					scope.$watch('left', listener);
+					scope.$watch('right', listener);
 				}
 		};
 		return ddo;
