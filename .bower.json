@@ -22,5 +22,15 @@
   },
   "devDependencies": {
     "angular-material": "~0.0.2"
-  }
+  },
+  "homepage": "https://github.com/musketyr/angular-diff-match-patch",
+  "_release": "0.1.4",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.1.4",
+    "commit": "3f70cf6da85cf72058fc6228b9d0dc2b92ae0347"
+  },
+  "_source": "https://github.com/musketyr/angular-diff-match-patch.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/musketyr/angular-diff-match-patch.git"
 }
