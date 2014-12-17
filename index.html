@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>angular-diff-match-patch</title>
-	<link rel="stylesheet" href="//amweiss.github.io/angular-diff-match-patch/bower_components/angular-material/angular-material.css">
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/0.6.1/angular-material.min.css">
 	<link rel="stylesheet" href="demo.css">
 	<style>
 		body {
@@ -20,16 +20,16 @@
 		}
 	</style>
 </head>
-<body layout="vertical" layout-fill ng-controller="diffCtrl">
+<body layout="column" layout-fill ng-controller="diffCtrl">
 
 	<!--[if lte IE 7]>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
 	<![endif]-->
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-animate.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-aria.js"></script>
-	<script src="//hammerjs.github.io/dist/hammer.js"></script>
-	<script src="//amweiss.github.io/angular-diff-match-patch/bower_components/angular-material/angular-material.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.7/angular.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.7/angular-animate.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.7/angular-aria.js"></script>
+	<script src="//cdn.jsdelivr.net/hammerjs/2.0.4/hammer.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angular_material/0.6.1/angular-material.min.js"></script>
 	<script src="//neil.fraser.name/software/diff_match_patch/svn/trunk/javascript/diff_match_patch.js"></script>
 	<script src="angular-diff-match-patch.js"></script>
 	<script>
@@ -116,40 +116,40 @@
 		}]);
 	</script>
 
-	<material-toolbar class="material-theme-green">
-      <h1 class="material-toolbar-tools" layout="horizontal">
+	<md-toolbar>
+      <h2 class="md-toolbar-tools" layout="row">
         <span>angular-diff-match-patch</span>
-        <material-button ng-click="openPlunkr()">Edit in Plunker</material-button>
-        <material-button href="https://github.com/amweiss/angular-diff-match-patch">Fork me on Github</material-button>
-      </h1>
-    </material-toolbar>
+        <md-button ng-click="openPlunkr()">Edit in Plunker</md-button>
+        <md-button href="https://github.com/amweiss/angular-diff-match-patch">Fork me on Github</md-button>
+      </h2>
+	</md-toolbar>
 
-	<material-content flex layout-padding>
-		<div flex layout="vertical">
-			<div flex layout="horizontal" layout-padding>
-				<material-card flex><textarea layout-fill class="inputBox" ng-model="left"></textarea></material-card>
-				<material-card flex><textarea layout-fill class="inputBox" ng-model="right"></textarea></material-card>
+	<md-content flex layout-padding>
+		<div flex layout="column">
+			<div flex layout="row" layout-padding>
+				<md-card flex><textarea layout-fill class="inputBox" ng-model="left"></textarea></md-card>
+				<md-card flex><textarea layout-fill class="inputBox" ng-model="right"></textarea></md-card>
 			</div>
-			<div flex layout="vertical" layout-md="horizontal">
-				<material-card flex>
+			<div flex layout="column" layout-gt-md="row">
+				<md-card flex>
 					<h2>diff</h2>
 					<pre class="textdiff" diff left-obj="left" right-obj="right"></pre>
-				</material-card>
-				<material-card flex>
+				</md-card>
+				<md-card flex>
 					<h2>processingDiff</h2>
 					<pre class="textdiff" processing-diff left-obj="left" right-obj="right"></pre>
-				</material-card>
+				</md-card>
 			</div>
-			<div flex layout="vertical" layout-md="horizontal">
-				<material-card flex>
+			<div flex layout="column" layout-gt-md="row">
+				<md-card flex>
 					<h2>semanticDiff</h2>
 					<pre class="textdiff" semantic-diff left-obj="left" right-obj="right"></pre>
-				</material-card>
-				<material-card flex>
+				</md-card>
+				<md-card flex>
 					<h2>lineDiff</h2>
 					<pre class="textdiff" line-diff left-obj="left" right-obj="right"></pre>
-				</material-card>
+				</md-card>
 			</div>
 		</div>
-	</material-content>
+	</md-content>
 </body>

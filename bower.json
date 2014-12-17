@@ -4,7 +4,7 @@
     "Adam Weiss <cseadam@gmail.com>"
   ],
   "license": "MIT",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "An Angular module to use when dealing with google-diff-match-patch.",
   "ignore": [
     "**/.*",
@@ -21,6 +21,6 @@
     "google-diff-match-patch": "svn+http://google-diff-match-patch.googlecode.com/svn/"
   },
   "devDependencies": {
-    "angular-material": "0.4.1"
+    "angular-material": "0.6.1"
   }
 }
