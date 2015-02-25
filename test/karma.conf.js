@@ -17,7 +17,7 @@ module.exports = function(config) {
 			// libraries
 			'bower_components/angular/angular.js',
 			'bower_components/angular-mocks/angular-mocks.js',
-			'bower_components/google-diff-match-patch/javascript/diff_match_patch_uncompressed.js',
+			'bower_components/google-diff-match-patch/diff_match_patch_uncompressed.js',
 
 			// our app
 			'angular-diff-match-patch.js',
