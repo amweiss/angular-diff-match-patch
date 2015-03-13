@@ -179,7 +179,7 @@ angular.module('diff-match-patch', [])
 						right: '=rightObj'
 				},
 				link: function postLink(scope, iElement) {
-						var listener =	function() {
+						var listener = function() {
 							iElement.html(dmp.createSemanticDiffHtml(scope.left, scope.right));
 							$compile(iElement.contents())(scope);
 						};
@@ -196,7 +196,7 @@ angular.module('diff-match-patch', [])
 						right: '=rightObj'
 				},
 				link: function postLink(scope, iElement) {
-					var listener =	function() {
+					var listener = function() {
 						iElement.html(dmp.createLineDiffHtml(scope.left, scope.right));
 						$compile(iElement.contents())(scope);
 					};
