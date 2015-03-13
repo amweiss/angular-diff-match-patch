@@ -91,9 +91,13 @@ angular.module('diff-match-patch', [])
 			return html.join('');
 		}
 
+		function assertArgumentsIsStrings(left, right) {
+			return angular.isString(left) && angular.isString(right);
+		}
+
 		return {
 			createDiffHtml: function(left, right) {
-				if (left && right) {
+				if (assertArgumentsIsStrings(left, right)) {
 					var dmp = new diff_match_patch();
 					var diffs = dmp.diff_main(left, right);
 					return createHtmlFromDiffs(diffs, displayType.INSDEL);
@@ -103,7 +107,7 @@ angular.module('diff-match-patch', [])
 			},
 
 			createProcessingDiffHtml: function(left, right) {
-				if (left && right) {
+				if (assertArgumentsIsStrings(left, right)) {
 					var dmp = new diff_match_patch();
 					var diffs = dmp.diff_main(left, right);
 					//dmp.Diff_EditCost = 4;
@@ -115,7 +119,7 @@ angular.module('diff-match-patch', [])
 			},
 
 			createSemanticDiffHtml: function(left, right) {
-				if (left && right) {
+				if (assertArgumentsIsStrings(left, right)) {
 					var dmp = new diff_match_patch();
 					var diffs = dmp.diff_main(left, right);
 					dmp.diff_cleanupSemantic(diffs);
@@ -126,7 +130,7 @@ angular.module('diff-match-patch', [])
 			},
 
 			createLineDiffHtml: function(left, right) {
-				if (left && right) {
+				if (assertArgumentsIsStrings(left, right)) {
 					var dmp = new diff_match_patch();
 					var a = dmp.diff_linesToChars_(left, right);
 					var diffs = dmp.diff_main(a.chars1, a.chars2, false);
