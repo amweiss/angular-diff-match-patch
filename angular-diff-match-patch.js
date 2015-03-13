@@ -67,6 +67,17 @@ angular.module('diff-match-patch', [])
 		}
 
 		function createHtmlFromDiffs(diffs, display) {
+			var pattern_amp = /&/g;
+			var pattern_lt = /</g;
+			var pattern_gt = />/g;
+			for (var x = 0; x < diffs.length; x++) {
+				var data = diffs[x][1];
+				var text = data.replace(pattern_amp, '&amp;')
+					.replace(pattern_lt, '&lt;')
+					.replace(pattern_gt, '&gt;');
+				diffs[x][1] = text;
+			}
+		
 			var html = [];
 			for (var x = 0; x < diffs.length; x++) {
 				var op = diffs[x][0];
@@ -168,7 +179,7 @@ angular.module('diff-match-patch', [])
 						right: '=rightObj'
 				},
 				link: function postLink(scope, iElement) {
-						var listener =  function() {
+						var listener = function() {
 							iElement.html(dmp.createSemanticDiffHtml(scope.left, scope.right));
 							$compile(iElement.contents())(scope);
 						};
@@ -185,7 +196,7 @@ angular.module('diff-match-patch', [])
 						right: '=rightObj'
 				},
 				link: function postLink(scope, iElement) {
-					var listener =  function() {
+					var listener = function() {
 						iElement.html(dmp.createLineDiffHtml(scope.left, scope.right));
 						$compile(iElement.contents())(scope);
 					};
