@@ -31,6 +31,14 @@ describe('diff-match-patch', function() {
 				expect(element.html()).toBe('');
 			});
 
+			it('left side is empty string', function() {
+				$scope.left = '';
+				$scope.right = oneLineBasicLeft;
+				var element = $compile('<div diff left-obj="left" right-obj="right"></div>')($scope);
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp('<ins.*?>hello world</ins>'));
+			});
+
 			it('single lines return total diff', function() {
 				$scope.left = oneLineBasicLeft;
 				$scope.right = oneLineBasicRight;
