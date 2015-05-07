@@ -17,10 +17,10 @@
   "main": "angular-diff-match-patch.js",
   "dependencies": {
     "angular": ">= 1.2.0 < 1.4.x",
-    "angular-mocks": ">= 1.2.0 < 1.4.x",
     "google-diff-match-patch": "0.1.0"
   },
   "devDependencies": {
-    "angular-material": "0.6.1"
+    "angular-material": "0.6.1",
+    "angular-mocks": ">= 1.2.0 < 1.4.x"
   }
 }
