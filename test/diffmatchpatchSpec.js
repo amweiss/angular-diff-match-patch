@@ -55,6 +55,28 @@ describe('diff-match-patch', function() {
 				$scope.$digest();
 				expect(element.html()).toMatch(new RegExp(regex));
 			});
+
+			it('two lines with options returns diff HTML', function() {
+				$scope.left = ['hello', 'world'].join('\n');
+				$scope.right = ['hello', 'friends!'].join('\n');
+				$scope.options = {
+					attrs: {
+						'insert': {
+							'data-attr': 'insert'
+						},
+						'delete': {
+							'data-attr': 'delete'
+						},
+						'equal': {
+							'data-attr': 'equal'
+						}
+					}
+				};
+				var element = $compile('<div diff left-obj="left" right-obj="right" options="options"></div>')($scope);
+				var regex = '<span data-attr="equal" .*?>hello[\\s\\S]*?</span><del data-attr="delete" .*?>wo</del><ins data-attr="insert" .*?>f</ins><span data-attr="equal" .*?>r</span><del data-attr="delete" .*?>l</del><ins data-attr="insert" .*?>ien</ins><span data-attr="equal" .*?>d</span><ins data-attr="insert" .*?>s!</ins>';
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp(regex));
+			});
 		});
 
 		describe('processingDiff', function() {
@@ -147,7 +169,48 @@ describe('diff-match-patch', function() {
 				$scope.left = ['hello', 'world'].join('\n');
 				$scope.right = ['hello', 'friends!'].join('\n');
 				var element = $compile('<div line-diff left-obj="left" right-obj="right"></div>')($scope);
-				var regex = '<div class="match.*?">.*?hello</div><div class="del.*?">.*?world</div><div class="ins.*?">.*?friends!</div>';
+				var regex = '<div class="match .*?"><span class="noselect"> </span>hello</div><div class="del .*?"><span class="noselect">-</span>world</div><div class="ins .*?"><span class="noselect">\\+</span>friends!</div>';
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp(regex));
+			});
+
+			it('two lines empty options returns diff HTML', function() {
+				$scope.left = ['hello', 'world'].join('\n');
+				$scope.right = ['hello', 'friends!'].join('\n');
+                $scope.options = {};
+				var element = $compile('<div line-diff left-obj="left" right-obj="right" options="options"></div>')($scope);
+				var regex = '<div class="match .*?"><span class="noselect"> </span>hello</div><div class="del .*?"><span class="noselect">-</span>world</div><div class="ins .*?"><span class="noselect">\\+</span>friends!</div>';
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp(regex));
+
+				$scope.left = ['hello', 'world'].join('\n');
+				$scope.right = ['hello', 'friends!'].join('\n');
+                $scope.options = {attrs: {}};
+				var element = $compile('<div line-diff left-obj="left" right-obj="right" options="options"></div>')($scope);
+				var regex = '<div class="match .*?"><span class="noselect"> </span>hello</div><div class="del .*?"><span class="noselect">-</span>world</div><div class="ins .*?"><span class="noselect">\\+</span>friends!</div>';
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp(regex));
+			});
+
+			it('two lines with options returns diff HTML', function() {
+				$scope.left = ['hello', 'world'].join('\n');
+				$scope.right = ['hello', 'friends!'].join('\n');
+				$scope.options = {
+					attrs: {
+						'insert': {
+							'data-attr': 'insert',
+							'class': 'insertion'
+						},
+						'delete': {
+							'data-attr': 'delete'
+						},
+						'equal': {
+							'data-attr': 'equal'
+						}
+					}
+				};
+				var element = $compile('<div line-diff left-obj="left" right-obj="right" options="options"></div>')($scope);
+				var regex = '<div class="match .*?"><span data-attr="equal" class="noselect"> </span>hello</div><div class="del .*?"><span data-attr="delete" class="noselect">-</span>world</div><div class="ins .*?"><span data-attr="insert" class="noselect insertion">\\+</span>friends!</div>';
 				$scope.$digest();
 				expect(element.html()).toMatch(new RegExp(regex));
 			});

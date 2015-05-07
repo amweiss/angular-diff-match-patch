@@ -31,14 +31,57 @@ angular.module('diff-match-patch', [])
 			}
 		}
 
-		function getHtmlPrefix(op, display) {
+		function diffAttrName(op) {
+			switch(op) {
+				case DIFF_EQUAL: return 'equal';
+				case DIFF_INSERT: return 'insert';
+				case DIFF_DELETE: return 'delete';
+			}
+		}
+
+		function isEmptyObject(o) {
+		    return Object.getOwnPropertyNames(o).length === 0;
+		}
+
+		function getTagAttrs(options, op, attrs) {
+			attrs = attrs || {};
+
+			var tagOptions = {};
+			if (angular.isDefined(options) && angular.isDefined(options.attrs)){
+				tagOptions = angular.copy(options.attrs[diffAttrName(op)] || {});
+			}
+
+			if (isEmptyObject(tagOptions) && isEmptyObject(attrs)) {
+				return "";
+			}
+
+			for (var k in attrs) {
+				if (angular.isDefined(tagOptions[k])) {
+					// The attribute defined in attrs should be first
+					tagOptions[k] = attrs[k] + ' ' + tagOptions[k];
+				}
+				else {
+					tagOptions[k] = attrs[k];
+				}
+			}
+
+			var lis = [];
+			for (var k in tagOptions) {
+				lis.push(k+'="'+tagOptions[k] + '"');
+			}
+			return ' ' + lis.join(' ');
+		}
+
+		function getHtmlPrefix(op, display, options) {
 			var retVal = '';
 				switch(display) {
 					case displayType.LINEDIFF:
-						retVal = '<div class="'+diffClass(op)+'"><span class="noselect">'+diffSymbol(op)+'</span>';
+						retVal = '<div class="'+diffClass(op)+'"><span' + getTagAttrs(options, op, {'class': 'noselect'}) + '>'+diffSymbol(op)+'</span>';
 						break;
 					case displayType.INSDEL:
-						retVal = '<'+diffTag(op)+'>';
+						var tag = diffTag(op);
+
+						retVal = '<' + tag + getTagAttrs(options, op) + '>';
 						break;
 				}
 			return retVal;
@@ -57,16 +100,16 @@ angular.module('diff-match-patch', [])
 			return retVal;
 		}
 
-		function createHtmlLines(text, op) {
+		function createHtmlLines(text, op, options) {
 			var lines = text.split('\n');
 			for (var y = 0; y < lines.length; y++) {
 				if (lines[y].length === 0) continue;
-				lines[y] = getHtmlPrefix(op, displayType.LINEDIFF) + lines[y] + getHtmlSuffix(op, displayType.LINEDIFF);
+				lines[y] = getHtmlPrefix(op, displayType.LINEDIFF, options) + lines[y] + getHtmlSuffix(op, displayType.LINEDIFF);
 			}
 			return lines.join('');
 		}
 
-		function createHtmlFromDiffs(diffs, display) {
+		function createHtmlFromDiffs(diffs, display, options) {
 			var pattern_amp = /&/g;
 			var pattern_lt = /</g;
 			var pattern_gt = />/g;
@@ -83,9 +126,9 @@ angular.module('diff-match-patch', [])
 				var op = diffs[x][0];
 				var text = diffs[x][1];
 				if (display === displayType.LINEDIFF) {
-					html[x] = createHtmlLines(text, op);
+					html[x] = createHtmlLines(text, op, options);
 				} else {
-					html[x] = getHtmlPrefix(op, display) + text + getHtmlSuffix(op, display);
+					html[x] = getHtmlPrefix(op, display, options) + text + getHtmlSuffix(op, display);
 				}
 			}
 			return html.join('');
@@ -96,46 +139,46 @@ angular.module('diff-match-patch', [])
 		}
 
 		return {
-			createDiffHtml: function(left, right) {
+			createDiffHtml: function(left, right, options) {
 				if (assertArgumentsIsStrings(left, right)) {
 					var dmp = new diff_match_patch();
 					var diffs = dmp.diff_main(left, right);
-					return createHtmlFromDiffs(diffs, displayType.INSDEL);
+					return createHtmlFromDiffs(diffs, displayType.INSDEL, options);
 				} else {
 					return '';
 				}
 			},
 
-			createProcessingDiffHtml: function(left, right) {
+			createProcessingDiffHtml: function(left, right, options) {
 				if (assertArgumentsIsStrings(left, right)) {
 					var dmp = new diff_match_patch();
 					var diffs = dmp.diff_main(left, right);
 					//dmp.Diff_EditCost = 4;
 					dmp.diff_cleanupEfficiency(diffs);
-					return createHtmlFromDiffs(diffs, displayType.INSDEL);
+					return createHtmlFromDiffs(diffs, displayType.INSDEL, options);
 				} else {
 					return '';
 				}
 			},
 
-			createSemanticDiffHtml: function(left, right) {
+			createSemanticDiffHtml: function(left, right, options) {
 				if (assertArgumentsIsStrings(left, right)) {
 					var dmp = new diff_match_patch();
 					var diffs = dmp.diff_main(left, right);
 					dmp.diff_cleanupSemantic(diffs);
-					return createHtmlFromDiffs(diffs, displayType.INSDEL);
+					return createHtmlFromDiffs(diffs, displayType.INSDEL, options);
 				} else {
 					return '';
 				}
 			},
 
-			createLineDiffHtml: function(left, right) {
+			createLineDiffHtml: function(left, right, options) {
 				if (assertArgumentsIsStrings(left, right)) {
 					var dmp = new diff_match_patch();
 					var a = dmp.diff_linesToChars_(left, right);
 					var diffs = dmp.diff_main(a.chars1, a.chars2, false);
 					dmp.diff_charsToLines_(diffs, a.lineArray);
-					return createHtmlFromDiffs(diffs, displayType.LINEDIFF);
+					return createHtmlFromDiffs(diffs, displayType.LINEDIFF, options);
 				} else {
 					return '';
 				}
@@ -146,11 +189,12 @@ angular.module('diff-match-patch', [])
 		var ddo = {
 				scope: {
 						left: '=leftObj',
-						right: '=rightObj'
+						right: '=rightObj',
+						options: '=options'
 				},
 				link: function postLink(scope, iElement) {
 						var listener = function() {
-							iElement.html(dmp.createDiffHtml(scope.left, scope.right));
+							iElement.html(dmp.createDiffHtml(scope.left, scope.right, scope.options));
 							$compile(iElement.contents())(scope);
 						};
 						scope.$watch('left', listener);
@@ -163,11 +207,12 @@ angular.module('diff-match-patch', [])
 		var ddo = {
 				scope: {
 						left: '=leftObj',
-						right: '=rightObj'
+						right: '=rightObj',
+						options: '=options'
 				},
 				link: function postLink(scope, iElement) {
 						var listener = function() {
-							iElement.html(dmp.createProcessingDiffHtml(scope.left, scope.right));
+							iElement.html(dmp.createProcessingDiffHtml(scope.left, scope.right, scope.options));
 							$compile(iElement.contents())(scope);
 						};
 						scope.$watch('left', listener);
@@ -180,11 +225,12 @@ angular.module('diff-match-patch', [])
 		var ddo = {
 				scope: {
 						left: '=leftObj',
-						right: '=rightObj'
+						right: '=rightObj',
+						options: '=options'
 				},
 				link: function postLink(scope, iElement) {
 						var listener = function() {
-							iElement.html(dmp.createSemanticDiffHtml(scope.left, scope.right));
+							iElement.html(dmp.createSemanticDiffHtml(scope.left, scope.right, scope.options));
 							$compile(iElement.contents())(scope);
 						};
 						scope.$watch('left', listener);
@@ -197,11 +243,12 @@ angular.module('diff-match-patch', [])
 		var ddo = {
 				scope: {
 						left: '=leftObj',
-						right: '=rightObj'
+						right: '=rightObj',
+						options: '=options'
 				},
 				link: function postLink(scope, iElement) {
 					var listener = function() {
-						iElement.html(dmp.createLineDiffHtml(scope.left, scope.right));
+						iElement.html(dmp.createLineDiffHtml(scope.left, scope.right, scope.options));
 						$compile(iElement.contents())(scope);
 					};
 					scope.$watch('left', listener);
