@@ -130,10 +130,10 @@ angular.module('diff-match-patch', [])
 			var html = [];
 			for (var x = 0; x < diffs.length; x++) {
 				var op = diffs[x][0];
+				var text = diffs[x][1];
 				if (display === displayType.LINEDIFF) {
 					html[x] = createHtmlLines(text, op, options);
 				} else {
-					var text = diffs[x][1];
 					html[x] = getHtmlPrefix(op, display, options) + text + getHtmlSuffix(op, display);
 				}
 			}
