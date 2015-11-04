@@ -1,3 +1,4 @@
+/// <reference path="../typings/tsd.d.ts" />
 describe('diff-match-patch', function() {
 
 	beforeEach(module('diff-match-patch'));

@@ -1,4 +1,5 @@
 /* global DIFF_INSERT, DIFF_DELETE, DIFF_EQUAL, diff_match_patch */
+/// <reference path="typings/tsd.d.ts" />
 angular.module('diff-match-patch', [])
 	.factory('dmp', function() {
 
