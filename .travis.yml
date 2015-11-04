@@ -8,3 +8,5 @@ before_script:
 
 script:
     - npm run-script test-single-run
+
+sudo: false
