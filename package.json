@@ -12,8 +12,8 @@
     "http-server": "^0.8",
     "jasmine-core": "*",
     "phantomjs": "^1.*",
-    "karma": "^0.12",
-    "karma-coverage": "^0.4",
+    "karma": "^0.13",
+    "karma-coverage": "^0.5",
     "karma-coveralls": "^1.*",
     "karma-jasmine": "^0.3",
     "karma-phantomjs-launcher": "^0.2"
