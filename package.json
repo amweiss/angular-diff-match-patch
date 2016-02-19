@@ -9,14 +9,14 @@
     "url": "https://github.com/amweiss/angular-diff-match-patch.git"
   },
   "devDependencies": {
-    "http-server": "^0.8",
+    "http-server": "^0.9",
     "jasmine-core": "*",
-    "phantomjs": "^1.*",
+    "phantomjs-prebuilt": "^2.*",
     "karma": "^0.13",
     "karma-coverage": "^0.5",
     "karma-coveralls": "^1.*",
     "karma-jasmine": "^0.3",
-    "karma-phantomjs-launcher": "^0.2"
+    "karma-phantomjs-launcher": "^1.0"
   },
   "scripts": {
     "prestart": "npm install",
