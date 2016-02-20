@@ -58,7 +58,7 @@ angular.module('diff-match-patch', [])
 			}
 
 			if (isEmptyObject(tagOptions) && isEmptyObject(attrs)) {
-				return "";
+				return '';
 			}
 
 			for (var k in attrs) {
