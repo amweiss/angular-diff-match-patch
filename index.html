@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" id="ng-app" ng-app="diffDemo">
 
 <head>
@@ -40,11 +40,11 @@
      * Most of this plunkr module is from the Angular documentation (https://docs.angularjs.org/js/docs.js)
      */
     var manifest = {
-    	"name": "angular-diff-match-patch",
-    	"files": [
-    		"index.html",
-    		"angular-diff-match-patch.js",
-    		"demo.css"
+    	'name': 'angular-diff-match-patch',
+    	'files': [
+    		'index.html',
+    		'angular-diff-match-patch.js',
+    		'demo.css'
     	]
     };
 
@@ -82,23 +82,23 @@
     						};
     					}));
     			});
-    			return $q.all(filePromises)
-    				.then(function(files) {
-    					var postData = {};
+		        return $q.all(filePromises)
+		            .then(function(files) {
+		                var postData = {};
 
-    					angular.forEach(files, function(file) {
-    						postData['files[' + file.name + ']'] = file.content;
-    					});
+		                angular.forEach(files, function(file) {
+		                    postData['files[' + file.name + ']'] = file.content;
+		                });
 
-    					postData['tags[0]'] = "angularjs";
-    					postData['tags[1]'] = "example";
-    					postData.private = true;
-    					postData.description = 'angular-diff-match-patch';
+		                postData['tags[0]'] = 'angularj';
+		                postData['tags[1]'] = 'example';
+		                postData.private = true;
+		                postData.description = 'angular-diff-match-patch';
 
-    					formPostData('http://plnkr.co/edit/?p=preview', postData);
-    				})
-    		};
-    	}])
+		                formPostData('http://plnkr.co/edit/?p=preview', postData);
+		            });
+		    };
+    	}]);
 
     /**
      * Actual demo app
