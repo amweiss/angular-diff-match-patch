@@ -6,7 +6,9 @@
 /* global DIFF_INSERT, DIFF_DELETE, DIFF_EQUAL, diff_match_patch */
 /// <reference path="typings/tsd.d.ts" />
 angular.module('diff-match-patch', [])
-	.factory('dmp', function() {
+	.factory('dmp', ['$window', function($window) {
+
+        var diff_match_patch = $window.diff_match_patch;
 
 		var displayType = {
 			INSDEL: 0,
@@ -190,7 +192,7 @@ angular.module('diff-match-patch', [])
 				}
 			}
 		};
-	})
+	}])
 	.directive('diff', ['$compile', 'dmp', function factory($compile, dmp) {
 		var ddo = {
 				scope: {
