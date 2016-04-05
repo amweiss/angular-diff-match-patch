@@ -10,10 +10,14 @@ This library is simply a wrapper around [google-diff-match-patch](https://code.g
 
 Setup
 -----
- 
+
 Install from [Bower](http://bower.io/)
 
 `bower install angular-diff-match-patch`
+
+Install from [NPM](http://npmjs.com)
+
+`npm install amweiss/angular-diff-match-patch`
 
 Usage
 -----
