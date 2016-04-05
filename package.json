@@ -20,9 +20,7 @@
     "phantomjs-prebuilt": "^2.*"
   },
   "scripts": {
-    "prestart": "npm install",
     "start": "http-server",
-    "pretest": "npm install",
     "test": "./node_modules/karma/bin/karma start test/karma.conf.js --single-run",
     "test-watch": "./node_modules/karma/bin/karma start test/karma.conf.js"
   },
