@@ -72,7 +72,7 @@ module.exports = function(config) {
 
     coverageReporter: {
       type: 'lcov',
-      dir: 'coverage/'
+      dir: process.env.CIRCLE_ARTIFACTS || 'coverage/'
     }
   })
 }
