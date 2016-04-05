@@ -1,6 +1,6 @@
 angular-diff-match-patch
 ========================
-[![Build Status](https://travis-ci.org/amweiss/angular-diff-match-patch.svg?branch=master)](https://travis-ci.org/amweiss/angular-diff-match-patch) [![Coverage Status](https://coveralls.io/repos/amweiss/angular-diff-match-patch/badge.png)](https://coveralls.io/r/amweiss/angular-diff-match-patch)
+[![Circle CI](https://circleci.com/gh/amweiss/angular-diff-match-patch.svg?style=svg)](https://circleci.com/gh/amweiss/angular-diff-match-patch) [![Coverage Status](https://coveralls.io/repos/amweiss/angular-diff-match-patch/badge.png)](https://coveralls.io/r/amweiss/angular-diff-match-patch)
 
 [![Dependencies](https://david-dm.org/amweiss/angular-diff-match-patch.svg)](https://david-dm.org/amweiss/angular-diff-match-patch/#info=dependencies&view=table) [![DevDependencies](https://david-dm.org/amweiss/angular-diff-match-patch/dev-status.svg)](https://david-dm.org/amweiss/angular-diff-match-patch/#info=devDependencies&view=table) [![PeerDependencies](https://david-dm.org/amweiss/angular-diff-match-patch/peer-status.svg)](https://david-dm.org/amweiss/angular-diff-match-patch/#info=peerDependencies&view=table)
 
@@ -35,10 +35,10 @@ Begin with:
 
 `npm install`
 
-`bower install`
-
 Then you can use:
 
 `npm start` To host the directory so you can see the demo
 
-`npm test` To run the Jasmine tests with change detection
+`npm test` To run the Jasmine tests once
+
+`npm test-watch` To run the Jasmine tests with change detection

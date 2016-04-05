@@ -18,9 +18,5 @@
   "dependencies": {
     "angular": "^1.5.0",
     "google-diff-match-patch": "0.1.0"
-  },
-  "devDependencies": {
-    "angular-material": "1.0.5",
-    "angular-mocks": "^1.5.0"
   }
 }
