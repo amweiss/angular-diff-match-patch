@@ -35,10 +35,10 @@ Begin with:
 
 `npm install`
 
-`bower install`
-
 Then you can use:
 
 `npm start` To host the directory so you can see the demo
 
-`npm test` To run the Jasmine tests with change detection
+`npm test` To run the Jasmine tests once
+
+`npm test-watch` To run the Jasmine tests with change detection
