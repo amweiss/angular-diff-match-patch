@@ -28,8 +28,8 @@
 <body layout="column" flex ng-controller="diffCtrl">
 
   <!--[if lte IE 7]>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
-	<![endif]-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/json3/3.3.2/json3.min.js"></script>
+  <![endif]-->
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-aria.js"></script>
@@ -41,65 +41,65 @@
      * Most of this plunkr module is from the Angular documentation (https://docs.angularjs.org/js/docs.js)
      */
     var manifest = {
-    	'name': 'angular-diff-match-patch',
-    	'files': [
-    		'index.html',
-    		'angular-diff-match-patch.js',
-    		'demo.css'
-    	]
+      'name': 'angular-diff-match-patch',
+      'files': [
+        'index.html',
+        'angular-diff-match-patch.js',
+        'demo.css'
+      ]
     };
 
     var plunkr = angular.module('plunkr', []);
     plunkr.factory('formPostData', ['$document', function($document) {
-    		return function(url, fields) {
-    			/**
-    			 * Form previously posted to target="_blank", but pop-up blockers were causing this to not work.
-    			 * If a user chose to bypass pop-up blocker one time and click the link, they would arrive at
-    			 * a new default plnkr, not a plnkr with the desired template.
-    			 */
-    			var form = angular.element('<form style="display: none;" method="post" action="' + url + '"></form>');
-    			angular.forEach(fields, function(value, name) {
-    				var input = angular.element('<input type="hidden" name="' + name + '">');
-    				input.attr('value', value);
-    				form.append(input);
-    			});
-    			$document.find('body').append(form);
-    			form[0].submit();
-    			form.remove();
-    		};
-    	}])
-    	.factory('openPlunkr', ['formPostData', '$http', '$q', function(formPostData, $http, $q) {
-    		return function() {
-    			var filePromises = [];
+        return function(url, fields) {
+          /**
+           * Form previously posted to target="_blank", but pop-up blockers were causing this to not work.
+           * If a user chose to bypass pop-up blocker one time and click the link, they would arrive at
+           * a new default plnkr, not a plnkr with the desired template.
+           */
+          var form = angular.element('<form style="display: none;" method="post" action="' + url + '"></form>');
+          angular.forEach(fields, function(value, name) {
+            var input = angular.element('<input type="hidden" name="' + name + '">');
+            input.attr('value', value);
+            form.append(input);
+          });
+          $document.find('body').append(form);
+          form[0].submit();
+          form.remove();
+        };
+      }])
+      .factory('openPlunkr', ['formPostData', '$http', '$q', function(formPostData, $http, $q) {
+        return function() {
+          var filePromises = [];
 
-    			angular.forEach(manifest.files, function(filename) {
-    				filePromises.push($http.get(filename, {
-    						transformResponse: []
-    					})
-    					.then(function(response) {
-    						return {
-    							name: filename,
-    							content: response.data
-    						};
-    					}));
-    			});
-		        return $q.all(filePromises)
-		            .then(function(files) {
-		                var postData = {};
+          angular.forEach(manifest.files, function(filename) {
+            filePromises.push($http.get(filename, {
+                transformResponse: []
+              })
+              .then(function(response) {
+                return {
+                  name: filename,
+                  content: response.data
+                };
+              }));
+          });
+            return $q.all(filePromises)
+                .then(function(files) {
+                    var postData = {};
 
-		                angular.forEach(files, function(file) {
-		                    postData['files[' + file.name + ']'] = file.content;
-		                });
+                    angular.forEach(files, function(file) {
+                        postData['files[' + file.name + ']'] = file.content;
+                    });
 
-		                postData['tags[0]'] = 'angularj';
-		                postData['tags[1]'] = 'example';
-		                postData.private = true;
-		                postData.description = 'angular-diff-match-patch';
+                    postData['tags[0]'] = 'angularj';
+                    postData['tags[1]'] = 'example';
+                    postData.private = true;
+                    postData.description = 'angular-diff-match-patch';
 
-		                formPostData('http://plnkr.co/edit/?p=preview', postData);
-		            });
-		    };
-    	}]);
+                    formPostData('http://plnkr.co/edit/?p=preview', postData);
+                });
+        };
+      }]);
 
     /**
      * Actual demo app
@@ -112,34 +112,34 @@
     });
 
     app.controller('diffCtrl', ['openPlunkr', '$scope', function(openPlunkr, $scope) {
-    	$scope.left = ["I am the very model of a modern Major-General,",
-    		"I've information vegetable, animal, and mineral,",
-    		"I know the kings of England, and I quote the fights historical,",
-    		"From Marathon to Waterloo, in order categorical."
-    	].join('\n');
+      $scope.left = ["I am the very model of a modern Major-General,",
+        "I've information vegetable, animal, and mineral,",
+        "I know the kings of England, and I quote the fights historical,",
+        "From Marathon to Waterloo, in order categorical."
+      ].join('\n');
 
-    	$scope.right = ["I am the very model of a cartoon individual,",
-    		"My animation's comical, unusual, and whimsical,",
-    		"I know the kings of England, and I quote the fights historical,",
-    		"From wicked puns and stupid jokes to anvils that drop on your head."
-    	].join('\n');
+      $scope.right = ["I am the very model of a cartoon individual,",
+        "My animation's comical, unusual, and whimsical,",
+        "I know the kings of England, and I quote the fights historical,",
+        "From wicked puns and stupid jokes to anvils that drop on your head."
+      ].join('\n');
 
-    	$scope.options = {
-    		attrs: {
-    			'insert': {
-    				'data-attr': 'insert',
-    				'class': 'insertion'
-    			},
-    			'delete': {
-    				'data-attr': 'delete'
-    			},
-    			'equal': {
-    				'data-attr': 'equal'
-    			}
-    		}
-    	};
+      $scope.options = {
+        attrs: {
+          'insert': {
+            'data-attr': 'insert',
+            'class': 'insertion'
+          },
+          'delete': {
+            'data-attr': 'delete'
+          },
+          'equal': {
+            'data-attr': 'equal'
+          }
+        }
+      };
 
-    	$scope.openPlunkr = openPlunkr;
+      $scope.openPlunkr = openPlunkr;
     }]);
   </script>
 
