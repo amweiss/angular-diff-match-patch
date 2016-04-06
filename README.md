@@ -30,6 +30,23 @@ Usage
 
 Where `left` and `right` are defined on your scope.
 
+With some style
+```css
+    .match{
+      color: gray;
+    }
+
+    .ins{
+      color: black;
+      background: #bbffbb;
+    }
+
+    .del{
+      color: black;
+      background: #ffbbbb;
+    }
+```
+
 See [the included demo](http://amweiss.github.io/angular-diff-match-patch/) for reference or view a sample on [Codepen](http://codepen.io/amweiss/pen/grXNPm).
 
 Development
