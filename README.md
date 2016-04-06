@@ -6,7 +6,9 @@ angular-diff-match-patch
 
 This library is simply a wrapper around [google-diff-match-patch](https://code.google.com/p/google-diff-match-patch/).
 
-![Simple](http://i.imgur.com/C0khxFO.png)
+![Simple](http://i.imgur.com/BFHwYtq.png)
+
+(Shown here with some custom styles)
 
 Setup
 -----
@@ -22,7 +24,13 @@ Install from [Bower](http://bower.io/)
 Usage
 -----
 
-See [this demo](http://amweiss.github.io/angular-diff-match-patch/) for reference, and click the button to view it in [Plunker](http://plnkr.co/)
+```html
+<pre line-diff left-obj="left" right-obj="right"></pre>
+```
+
+Where `left` and `right` are defined on your scope.
+
+See [the included demo](http://amweiss.github.io/angular-diff-match-patch/) for reference or view a sample on [Codepen](http://codepen.io/amweiss/pen/grXNPm).
 
 Development
 -----
