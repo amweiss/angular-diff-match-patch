@@ -27,5 +27,9 @@
   "dependencies": {
     "angular": "^1.5.3",
     "diff-match-patch": "^1.0.0"
-  }
+  },
+  "files": [
+    "index.js",
+    "angular-diff-match-patch.js"
+  ]
 }
