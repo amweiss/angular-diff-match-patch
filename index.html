@@ -6,13 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>angular-diff-match-patch</title>
-  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc1/angular-material.min.css">
+  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.1.0/octicons.min.css">
   <link rel="icon" type="image/x-icon" href="https://angularjs.org/favicon.ico">
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-aria.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc1/angular-material.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-animate.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-aria.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
   <script src="//neil.fraser.name/software/diff_match_patch/svn/trunk/javascript/diff_match_patch.js"></script>
   <script src="angular-diff-match-patch.js"></script>
   <style>
@@ -79,15 +79,16 @@
       ].join('\n');
 
       $scope.options = {
+        editCost: 4,
         attrs: {
-          'insert': {
+          insert: {
             'data-attr': 'insert',
             'class': 'insertion'
           },
-          'delete': {
+          delete: {
             'data-attr': 'delete'
           },
-          'equal': {
+          equal: {
             'data-attr': 'equal'
           }
         }
@@ -130,8 +131,14 @@
         </md-card>
         <md-card flex>
           <md-card-content>
-            <h2>processingDiff</h2>
-            <pre class="textdiff" processing-diff left-obj="left" right-obj="right"></pre>
+            <div layout="row">
+              <h2>processingDiff</h2>
+              <span flex></span>
+              <md-input-container>
+                <label>editCost</label><input type="number" step="1" name="editCost" ng-model="options.editCost" min="1" max="99999">
+              </md-input-container>
+            </div>
+            <pre class="textdiff" processing-diff left-obj="left" right-obj="right" options="options"></pre>
           </md-card-content>
         </md-card>
       </div>

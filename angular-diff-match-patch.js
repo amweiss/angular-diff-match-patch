@@ -18,45 +18,41 @@ angular.module('diff-match-patch', [])
 					return 'ins';
 				case DIFF_DELETE:
 					return 'del';
-				case DIFF_EQUAL:
+				default: // case DIFF_EQUAL:
 					return 'match';
-				// no default
 			}
 		}
 
 		function diffSymbol(op) {
 			switch (op) {
-				case DIFF_EQUAL:
-					return ' ';
 				case DIFF_INSERT:
 					return '+';
 				case DIFF_DELETE:
 					return '-';
-				// no default
+				default: // case DIFF_EQUAL:
+					return ' ';
 			}
 		}
 
 		function diffTag(op) {
 			switch (op) {
-				case DIFF_EQUAL:
-					return 'span';
 				case DIFF_INSERT:
 					return 'ins';
 				case DIFF_DELETE:
 					return 'del';
-				// no default
+				default: // case DIFF_EQUAL:
+					return 'span';
 			}
 		}
 
 		function diffAttrName(op) {
 			switch (op) {
-				case DIFF_EQUAL:
-					return 'equal';
 				case DIFF_INSERT:
 					return 'insert';
 				case DIFF_DELETE:
 					return 'delete';
-				// no default
+				default: // case DIFF_EQUAL:
+					return 'equal';
 			}
 		}
 
@@ -98,12 +94,9 @@ angular.module('diff-match-patch', [])
 		function getHtmlPrefix(op, display, options) {
 			switch (display) {
 				case displayType.LINEDIFF:
-					return '<div class="' + diffClass(op) + '"><span' + getTagAttrs(options, op, {
-						class: 'noselect'
-					}) + '>' + diffSymbol(op) + '</span>';
-				case displayType.INSDEL:
+					return '<div class="' + diffClass(op) + '"><span' + getTagAttrs(options, op, {class: 'noselect'}) + '>' + diffSymbol(op) + '</span>';
+				default: // case displayType.INSDEL:
 					return '<' + diffTag(op) + getTagAttrs(options, op) + '>';
-				// no default
 			}
 		}
 
@@ -111,9 +104,8 @@ angular.module('diff-match-patch', [])
 			switch (display) {
 				case displayType.LINEDIFF:
 					return '</div>';
-				case displayType.INSDEL:
+				default: // case displayType.INSDEL:
 					return '</' + diffTag(op) + '>';
-				// no default
 			}
 		}
 
@@ -124,9 +116,7 @@ angular.module('diff-match-patch', [])
 				if (lines[y].length === 0) {
 					continue;
 				}
-				lines[y] = getHtmlPrefix(op, displayType.LINEDIFF, options) +
-					lines[y] +
-					getHtmlSuffix(op, displayType.LINEDIFF);
+				lines[y] = getHtmlPrefix(op, displayType.LINEDIFF, options) + lines[y] + getHtmlSuffix(op, displayType.LINEDIFF);
 			}
 			return lines.join('');
 		}
@@ -184,7 +174,11 @@ angular.module('diff-match-patch', [])
 				if (assertArgumentsIsStrings(left, right)) {
 					dmp = new DiffMatchPatch();
 					diffs = dmp.diff_main(left, right);
-					// dmp.Diff_EditCost = 4;
+
+					if (angular.isDefined(options) && angular.isDefined(options.editCost) && isFinite(options.editCost)) {
+						dmp.Diff_EditCost = options.editCost; // eslint-disable-line camelcase
+					}
+
 					dmp.diff_cleanupEfficiency(diffs);
 					return createHtmlFromDiffs(diffs, displayType.INSDEL, options);
 				}
@@ -250,6 +244,7 @@ angular.module('diff-match-patch', [])
 				};
 				scope.$watch('left', listener);
 				scope.$watch('right', listener);
+				scope.$watch('options.editCost', listener, true);
 			}
 		};
 		return ddo;

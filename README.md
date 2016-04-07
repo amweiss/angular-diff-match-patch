@@ -24,30 +24,50 @@ Install from [Bower](http://bower.io/)
 Usage
 -----
 
+See [the included demo](http://amweiss.github.io/angular-diff-match-patch/) for reference or view a sample on [Codepen](http://codepen.io/amweiss/pen/grXNPm).
+
 ```html
 <pre line-diff left-obj="left" right-obj="right"></pre>
 ```
 
-Where `left` and `right` are defined on your scope.
+Where `left` and `right` are defined on your scope.  The `options` attribute can be used as well, but it's optional.
 
-With some style
-```css
-    .match{
-      color: gray;
+```javascript
+$scope.options = {
+  editCost: 4,
+  attrs: {
+    insert: {
+      'data-attr': 'insert',
+      'class': 'insertion'
+    },
+    delete: {
+      'data-attr': 'delete'
+    },
+    equal: {
+      'data-attr': 'equal'
     }
-
-    .ins{
-      color: black;
-      background: #bbffbb;
-    }
-
-    .del{
-      color: black;
-      background: #ffbbbb;
-    }
+  }
+};
 ```
 
-See [the included demo](http://amweiss.github.io/angular-diff-match-patch/) for reference or view a sample on [Codepen](http://codepen.io/amweiss/pen/grXNPm).
+`editCost` is specific to `processingDiff` and controls the tolerence for hunk separation.  `attrs` can contain any/all/none of the following: `insert`, `delete`, and `equal` where the properties in those objects represent attributes that get added to the tags.
+
+Add some style
+```css
+.match{
+  color: gray;
+}
+
+.ins{
+  color: black;
+  background: #bbffbb;
+}
+
+.del{
+  color: black;
+  background: #ffbbbb;
+}
+```
 
 Development
 -----
