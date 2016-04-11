@@ -2,7 +2,7 @@
   "name": "angular-diff-match-patch",
   "author": "Adam Weiss <cseadam@gmail.com>",
   "license": "MIT",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "main": "index.js",
   "description": "An Angular module to use when dealing with google-diff-match-patch.",
   "repository": {
@@ -36,9 +36,18 @@
     "xo": "^0.14.0"
   },
   "xo": {
-    "env": ["jasmine", "browser", "phantomjs"],
-    "rules": {"linebreak-style": ["error", "windows"]},
-    "globals" : [
+    "env": [
+      "jasmine",
+      "browser",
+      "phantomjs"
+    ],
+    "rules": {
+      "linebreak-style": [
+        "error",
+        "windows"
+      ]
+    },
+    "globals": [
       "angular",
       "DIFF_INSERT",
       "DIFF_DELETE",
