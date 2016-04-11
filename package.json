@@ -31,9 +31,9 @@
     "karma-coverage": "^0.5",
     "karma-coveralls": "^1.*",
     "karma-jasmine": "^0.3",
-    "karma-phantomjs-launcher": "^1.0",
+    "karma-phantomjs-launcher": "^1.*",
     "phantomjs-prebuilt": "^2.*",
-    "xo": "^0.13.0"
+    "xo": "^0.14.0"
   },
   "xo": {
     "env": ["jasmine", "browser", "phantomjs"],
