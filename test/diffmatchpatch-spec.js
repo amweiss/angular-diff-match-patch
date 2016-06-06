@@ -62,7 +62,7 @@ describe('diff-match-patch', function diffMatchPatchDescription() {
 			it('two lines with options returns diff HTML', function twoLineOptionDiff() {
 				var html = '<div diff left-obj="left" right-obj="right" options="options"></div>';
 				var element = $compile(html)($scope);
-				var regex = '<span .*?data-attr="equal".*?>hello[\\s\\S]*?<\/span><del .*?data-attr="delete".*?>wo<\/del><ins .*?data-attr="insert".*?>f<\/ins><span .*?data-attr="equal".*?>r<\/span><del .*?data-attr="delete".*?>l<\/del><ins .*?data-attr="insert".*?>ien<\/ins><span .*?data-attr="equal".*?>d<\/span><ins.*?data-attr="insert".*?>s!<\/ins>';
+				var regex = '<span .*?data-attr="equal".*?>hello[\\s\\S]*?</span><del .*?data-attr="delete".*?>wo</del><ins .*?data-attr="insert".*?>f</ins><span .*?data-attr="equal".*?>r</span><del .*?data-attr="delete".*?>l</del><ins .*?data-attr="insert".*?>ien</ins><span .*?data-attr="equal".*?>d</span><ins.*?data-attr="insert".*?>s!</ins>';
 				$scope.left = ['hello', 'world'].join('\n');
 				$scope.right = ['hello', 'friends!'].join('\n');
 				$scope.options = {
@@ -120,7 +120,7 @@ describe('diff-match-patch', function diffMatchPatchDescription() {
 
 			it('two lines with editCost option returns diff HTML', function twoLineEditCostOptionDiff() {
 				var element = $compile(processingDiffOptionsHtml)($scope);
-				var regex = '<span.*?>I<\/span><del.*?> know the kings of England, and I quote the fights historical,<\/del><ins.*?>\'m quite adept at funny gags, comedic theory I have read<\/ins><span.*?>[\\s\\S]*?From <\/span><del.*?>Marathon to Waterloo, in order categorical<\/del><ins.*?>wicked puns and stupid jokes to anvils that drop on your head<\/ins><span.*?>.<\/span>';
+				var regex = '<span.*?>I</span><del.*?> know the kings of England, and I quote the fights historical,</del><ins.*?>\'m quite adept at funny gags, comedic theory I have read</ins><span.*?>[\\s\\S]*?From </span><del.*?>Marathon to Waterloo, in order categorical</del><ins.*?>wicked puns and stupid jokes to anvils that drop on your head</ins><span.*?>.</span>';
 				$scope.left = multiLineLeft;
 				$scope.right = multiLineRight;
 				$scope.options = {
@@ -221,7 +221,7 @@ describe('diff-match-patch', function diffMatchPatchDescription() {
 
 			it('two lines with options returns diff HTML', function twoLineOptionDiff() {
 				var element = $compile(lineDiffOptionHtml)($scope);
-				var regex = '<div class="match .*?"><span (?=.*data-attr="equal")(?=.*class="noselect").*> <\/span>hello<\/div><div class="del .*?"><span (?=.*data-attr="delete")(?=.*class="noselect").*>-<\/span>world<\/div><div class="ins .*?"><span (?=.*data-attr="insert")(?=.*class="noselect insertion").*>\\+<\/span>friends!<\/div>';
+				var regex = '<div class="match .*?"><span (?=.*data-attr="equal")(?=.*class="noselect").*> </span>hello</div><div class="del .*?"><span (?=.*data-attr="delete")(?=.*class="noselect").*>-</span>world</div><div class="ins .*?"><span (?=.*data-attr="insert")(?=.*class="noselect insertion").*>\\+</span>friends!</div>';
 				$scope.left = ['hello', 'world'].join('\n');
 				$scope.right = ['hello', 'friends!'].join('\n');
 				$scope.options = {
