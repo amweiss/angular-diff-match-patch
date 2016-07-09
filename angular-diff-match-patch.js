@@ -115,7 +115,7 @@ angular.module('diff-match-patch', [])
 	        var lines = text.split('\n');
 	        var y;
 
-	        if (options.attrs.linesAround && op == 0 && lines.length > options.attrs.linesAround * 2) {
+	        if (options && options.attrs && options.attrs.linesAround && op == 0 && lines.length > options.attrs.linesAround * 2) {
 	            var begin = '';
 	            var skip = getHtmlPrefix(null, displayType.LINEDIFF, options) + "&middot;&middot;&middot;" + getHtmlSuffix(null, displayType.LINEDIFF);
 	            var end = '';
@@ -299,7 +299,7 @@ angular.module('diff-match-patch', [])
 	        },
 	        link: function postLink(scope, iElement) {
 	            var listener = function listener() {
-	                if (scope.options && scope.options.attrs.ignoreEmptyLines)
+	                if (scope.options && scope.options.attrs && scope.options.attrs.ignoreEmptyLines)
 	                    iElement.html(dmp.createLineDiffHtml(scope.left.replace(/\n\s+\n/g, "\n"), scope.right.replace(/\n\s+\n/g, "\n"), scope.options));
 	                else
 	                    iElement.html(dmp.createLineDiffHtml(scope.left, scope.right, scope.options));
