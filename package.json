@@ -20,7 +20,7 @@
     "start": "http-server",
     "pretest": "npm run lint",
     "test": "karma start test/karma.conf.js --single-run",
-    "lint": "xo ./angular-diff-match-patch.js ./test/diffmatchpatch-spec.js; exit 0",
+    "lint": "xo ./angular-diff-match-patch.js ./test/diffmatchpatch-spec.js",
     "test-watch": "karma start test/karma.conf.js"
   },
   "devDependencies": {
