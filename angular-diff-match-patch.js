@@ -121,7 +121,7 @@ angular.module('diff-match-patch', [])
 			return lines.join('');
 		}
 
-		function createHtmlFromDiffs(diffs, display, options, excludeOp = null) {
+		function createHtmlFromDiffs(diffs, display, options, excludeOp) {
 			// TODO: This is too long
 			var patternAmp = /&/g;
 			var patternLt = /</g;
@@ -160,7 +160,7 @@ angular.module('diff-match-patch', [])
 					} else {
 						html[y] = createHtmlLines(text, op, options);
 					}
-				} else if (excludeOp === null || op !== excludeOp) {
+				} else if (typeof excludeOp === 'undefined' || op !== excludeOp) {
 					html[y] = getHtmlPrefix(op, display, options) + text + getHtmlSuffix(op, display);
 				}
 			}
