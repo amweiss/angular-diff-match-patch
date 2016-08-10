@@ -2,15 +2,21 @@ var coverageReporters = [
 	{type: 'text-summary'}
 ];
 
+var junitReporterConfig = {
+	outputDir: 'test/results'
+}
+
 var reporters = [
 	'dots',
-	'coverage'
+	'coverage',
+	'junit'
 ];
 
 if (process.env.CIRCLECI) {
 	console.log('On CI sending coveralls');
 	coverageReporters.push({type: 'lcov', dir: process.env.CIRCLE_ARTIFACTS});
 	reporters.push('coveralls');
+	junitReporter.outputDir = process.env.CIRCLE_TEST_REPORTS;
 } else {
 	console.log('Not on CI so not sending coveralls');
 	coverageReporters.push({type: 'html', dir: 'coverage/'});
@@ -77,6 +83,8 @@ module.exports = function (config) {
 
 		coverageReporter: {
 			reporters: coverageReporters
-		}
+		},
+
+		junitReporter: junitReporterConfig
 	});
 };
