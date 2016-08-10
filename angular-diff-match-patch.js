@@ -121,7 +121,8 @@ angular.module('diff-match-patch', [])
 			return lines.join('');
 		}
 
-		function createHtmlFromDiffs(diffs, display, options) {
+		function createHtmlFromDiffs(diffs, display, options, excludeOp = null) {
+			// TODO: This is too long
 			var patternAmp = /&/g;
 			var patternLt = /</g;
 			var patternGt = />/g;
@@ -132,6 +133,10 @@ angular.module('diff-match-patch', [])
 			var op;
 			var text;
 			var diffData = diffs;
+			var dmp = (display === displayType.LINEDIFF) ? new DiffMatchPatch() : null;
+			var intraDiffs;
+			var intraHtml1;
+			var intraHtml2;
 
 			for (x = 0; x < diffData.length; x++) {
 				data = diffData[x][1];
@@ -144,8 +149,18 @@ angular.module('diff-match-patch', [])
 				op = diffData[y][0];
 				text = diffData[y][1];
 				if (display === displayType.LINEDIFF) {
-					html[y] = createHtmlLines(text, op, options);
-				} else {
+					if (diffs[y][0] === DIFF_DELETE && diffs[y + 1][0] === DIFF_INSERT && diffs[y][1].indexOf('\n') === -1) {
+						intraDiffs = dmp.diff_main(diffs[y][1], diffs[y + 1][1]);
+						dmp.diff_cleanupSemantic(intraDiffs);
+						intraHtml1 = createHtmlFromDiffs(intraDiffs, displayType.INSDEL, options, DIFF_INSERT);
+						intraHtml2 = createHtmlFromDiffs(intraDiffs, displayType.INSDEL, options, DIFF_DELETE);
+						html[y] = createHtmlLines(intraHtml1, DIFF_DELETE, options);
+						html[y + 1] = createHtmlLines(intraHtml2, DIFF_INSERT, options);
+						y++;
+					} else {
+						html[y] = createHtmlLines(text, op, options);
+					}
+				} else if (excludeOp === null || op !== excludeOp) {
 					html[y] = getHtmlPrefix(op, display, options) + text + getHtmlSuffix(op, display);
 				}
 			}
@@ -277,6 +292,24 @@ angular.module('diff-match-patch', [])
 			link: function postLink(scope, iElement) {
 				var listener = function listener() {
 					iElement.html(dmp.createLineDiffHtml(scope.left, scope.right, scope.options));
+					$compile(iElement.contents())(scope);
+				};
+				scope.$watch('left', listener);
+				scope.$watch('right', listener);
+			}
+		};
+		return ddo;
+	}])
+	.directive('lineByLineDiff', ['$compile', 'dmp', function factory($compile, dmp) {
+		var ddo = {
+			scope: {
+				left: '=leftObj',
+				right: '=rightObj',
+				options: '=options'
+			},
+			link: function postLink(scope, iElement) {
+				var listener = function listener() {
+					iElement.html(dmp.createLineByLineDiffHtml(scope.left, scope.right, scope.options));
 					$compile(iElement.contents())(scope);
 				};
 				scope.$watch('left', listener);
