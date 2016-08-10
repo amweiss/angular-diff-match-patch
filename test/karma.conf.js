@@ -4,7 +4,7 @@ var coverageReporters = [
 
 var junitReporterConfig = {
 	outputDir: 'test/results'
-}
+};
 
 var reporters = [
 	'dots',

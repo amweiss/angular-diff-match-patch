@@ -42,12 +42,6 @@
       "browser",
       "phantomjs"
     ],
-    "rules": {
-      "linebreak-style": [
-        "error",
-        "windows"
-      ]
-    },
     "globals": [
       "angular",
       "DIFF_INSERT",
