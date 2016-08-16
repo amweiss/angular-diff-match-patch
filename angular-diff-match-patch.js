@@ -122,7 +122,6 @@ angular.module('diff-match-patch', [])
 		}
 
 		function createHtmlFromDiffs(diffs, display, options, excludeOp) {
-			// TODO: This is too long
 			var patternAmp = /&/g;
 			var patternLt = /</g;
 			var patternGt = />/g;
@@ -149,7 +148,9 @@ angular.module('diff-match-patch', [])
 				op = diffData[y][0];
 				text = diffData[y][1];
 				if (display === displayType.LINEDIFF) {
-					if (diffs[y][0] === DIFF_DELETE && diffs[y + 1][0] === DIFF_INSERT && diffs[y][1].indexOf('\n') === -1) {
+					if (angular.isDefined(options) && angular.isDefined(options.intraLineDiff) && options.intraLineDiff
+						&& diffs[y][0] === DIFF_DELETE && diffs[y + 1][0] === DIFF_INSERT && diffs[y][1].indexOf('\n') === -1) {
+
 						intraDiffs = dmp.diff_main(diffs[y][1], diffs[y + 1][1]);
 						dmp.diff_cleanupSemantic(intraDiffs);
 						intraHtml1 = createHtmlFromDiffs(intraDiffs, displayType.INSDEL, options, DIFF_INSERT);
@@ -296,24 +297,7 @@ angular.module('diff-match-patch', [])
 				};
 				scope.$watch('left', listener);
 				scope.$watch('right', listener);
-			}
-		};
-		return ddo;
-	}])
-	.directive('lineByLineDiff', ['$compile', 'dmp', function factory($compile, dmp) {
-		var ddo = {
-			scope: {
-				left: '=leftObj',
-				right: '=rightObj',
-				options: '=options'
-			},
-			link: function postLink(scope, iElement) {
-				var listener = function listener() {
-					iElement.html(dmp.createLineByLineDiffHtml(scope.left, scope.right, scope.options));
-					$compile(iElement.contents())(scope);
-				};
-				scope.$watch('left', listener);
-				scope.$watch('right', listener);
+				scope.$watch('options.intraLineDiff', listener, true);
 			}
 		};
 		return ddo;

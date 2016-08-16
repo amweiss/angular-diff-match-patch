@@ -80,6 +80,7 @@
 
       $scope.options = {
         editCost: 4,
+        intraLineDiff: true,
         attrs: {
           insert: {
             'data-attr': 'insert',
@@ -151,8 +152,14 @@
         </md-card>
         <md-card flex>
           <md-card-content>
-            <h2>lineDiff</h2>
-            <pre class="textdiff" line-diff left-obj="left" right-obj="right"></pre>
+            <div layout="row">
+              <h2>lineDiff</h2>
+              <span flex></span>
+              <md-input-container>
+                <md-checkbox name="intraLineDiff" ng-model="options.intraLineDiff">intraLineDiff</md-checkbox>
+              </md-input-container>
+            </div>
+            <pre class="textdiff" line-diff left-obj="left" right-obj="right" options="options"></pre>
           </md-card-content>
         </md-card>
       </div>
