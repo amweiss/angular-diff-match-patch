@@ -242,6 +242,18 @@ describe('diff-match-patch', function diffMatchPatchDescription() {
 				$scope.$digest();
 				expect(element.html()).toMatch(new RegExp(regex));
 			});
+
+			it('two lines intraLineDiff options returns diff HTML', function twoLineEmptyOptionDiff() {
+				var element = $compile(lineDiffOptionHtml)($scope);
+				var regex = '<div class="match .*?"><span class="noselect"> </span>hello</div><div class="del .*?"><span class="noselect">-</span><del>world</del></div><div class="ins .*?"><span class="noselect">\\+</span><ins>friends!</ins></div>';
+				$scope.left = ['hello', 'world'].join('\n');
+				$scope.right = ['hello', 'friends!'].join('\n');
+				$scope.options = {
+					intraLineDiff: true
+				}
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp(regex));
+			});
 		});
 	});
 });
