@@ -56,27 +56,26 @@ angular.module('diff-match-patch', [])
 		}
 
 		function getTagAttrs(options, op, attrs) {
-			var tagOptions = new Map();
+			var tagOptions = {};
 			var retVal = [];
 			var opName = diffAttrName(op);
 
-			if (angular.isDefined(options) && angular.isDefined(options.attrs) && options.attrs instanceof Map && options.attrs.has(opName)) {
-				options.attrs.get(opName).forEach(function (value, key) {
-					tagOptions.set(key, value);
-				});
+			if (angular.isDefined(options) && angular.isDefined(options.attrs)) {
+				var attributesFromOptions = options.attrs[opName];
+				if (angular.isDefined(attributesFromOptions)) {
+					angular.merge(tagOptions, attributesFromOptions);
+				}
 			}
 
 			if (angular.isDefined(attrs)) {
-				attrs.forEach(function (value, key) {
-					tagOptions.set(key, value);
-				});
+				angular.merge(tagOptions, attrs);
 			}
 
-			if (tagOptions.size === 0) {
+			if (Object.keys(tagOptions).length === 0) {
 				return '';
 			}
 
-			tagOptions.forEach(function (value, key) {
+			angular.forEach(tagOptions, function (value, key) {
 				retVal.push(key + '="' + value + '"');
 			});
 
@@ -86,7 +85,7 @@ angular.module('diff-match-patch', [])
 		function getHtmlPrefix(op, display, options) {
 			switch (display) {
 				case displayType.LINEDIFF:
-					return '<div class="' + diffClass(op) + '"><span' + getTagAttrs(options, op, new Map().set('class', 'noselect')) + '>' + diffSymbol(op) + '</span>';
+					return '<div class="' + diffClass(op) + '"><span' + getTagAttrs(options, op, {class: 'noselect'}) + '>' + diffSymbol(op) + '</span>';
 				default: // case displayType.INSDEL:
 					return '<' + diffTag(op) + getTagAttrs(options, op) + '>';
 			}

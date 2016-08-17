@@ -81,9 +81,18 @@
       $scope.options = {
         editCost: 4,
         interLineDiff: true,
-        attrs: new Map().set('insert', new Map().set('data-attr','insert').set('class','insertion'))
-                        .set('delete', new Map().set('data-attr', 'delete'))
-                        .set('equal', new Map().set('data-attr', 'equal'))
+        attrs: {
+          insert: {
+            'data-attr': 'insert',
+            'class': 'insertion'
+          },
+          delete: {
+            'data-attr': 'delete'
+          },
+          equal: {
+            'data-attr': 'equal'
+          }
+        }
       };
     }]);
   </script>
@@ -127,7 +136,8 @@
               <h2>processingDiff</h2>
               <span flex></span>
               <md-input-container>
-                <label>editCost</label><input type="number" step="1" name="editCost" ng-model="options.editCost" min="1" max="99999">
+                <label>editCost</label><input type="number" step="1" name="editCost" ng-model="options.editCost" min="1"
+                  max="99999">
               </md-input-container>
             </div>
             <pre class="textdiff" processing-diff left-obj="left" right-obj="right" options="options"></pre>

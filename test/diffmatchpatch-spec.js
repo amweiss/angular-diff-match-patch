@@ -3,9 +3,9 @@ describe('diff-match-patch', function diffMatchPatchDescription() {
 	var oneLineBasicLeft = 'hello world';
 	var oneLineBasicRight = 'hello';
 	var multiLineLeft = ['I know the kings of England, and I quote the fights historical,',
-					'From Marathon to Waterloo, in order categorical.'].join('\n');
+		'From Marathon to Waterloo, in order categorical.'].join('\n');
 	var multiLineRight = ['I\'m quite adept at funny gags, comedic theory I have read',
-					'From wicked puns and stupid jokes to anvils that drop on your head.'].join('\n');
+		'From wicked puns and stupid jokes to anvils that drop on your head.'].join('\n');
 	var diffRegex = '<span.*?>hello</span><del.*?> world</del>';
 
 	beforeEach(module('diff-match-patch'));
@@ -66,9 +66,17 @@ describe('diff-match-patch', function diffMatchPatchDescription() {
 				$scope.left = ['hello', 'world'].join('\n');
 				$scope.right = ['hello', 'friends!'].join('\n');
 				$scope.options = {
-					attrs: new Map().set('insert', new Map().set('data-attr', 'insert'))
-                        .set('delete', new Map().set('data-attr', 'delete'))
-                        .set('equal', new Map().set('data-attr', 'equal'))
+					attrs: {
+						insert: {
+							'data-attr': 'insert'
+						},
+						delete: {
+							'data-attr': 'delete'
+						},
+						equal: {
+							'data-attr': 'equal'
+						}
+					}
 				};
 
 				$scope.$digest();
@@ -217,9 +225,18 @@ describe('diff-match-patch', function diffMatchPatchDescription() {
 				$scope.left = ['hello', 'world'].join('\n');
 				$scope.right = ['hello', 'friends!'].join('\n');
 				$scope.options = {
-					attrs: new Map().set('insert', new Map().set('data-attr', 'insert').set('class', 'insertion'))
-                        .set('delete', new Map().set('data-attr', 'delete'))
-                        .set('equal', new Map().set('data-attr', 'equal'))
+					attrs: {
+						insert: {
+							'data-attr': 'insert',
+							'class': 'insertion'
+						},
+						delete: {
+							'data-attr': 'delete'
+						},
+						equal: {
+							'data-attr': 'equal'
+						}
+					}
 				};
 
 				$scope.$digest();
