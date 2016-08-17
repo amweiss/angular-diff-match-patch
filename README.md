@@ -6,7 +6,8 @@ angular-diff-match-patch
 
 This library is simply a wrapper around [google-diff-match-patch](https://code.google.com/p/google-diff-match-patch/).
 
-![Simple](http://i.imgur.com/BFHwYtq.png)
+<iframe height='1493' scrolling='no' src='//codepen.io/amweiss/embed/grXNPm/?height=1493&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='http://codepen.io/amweiss/pen/grXNPm/'>angular-diff-match-patch</a> by Adam Weiss (<a href='http://codepen.io/amweiss'>@amweiss</a>) on <a href='http://codepen.io'>CodePen</a>.
+</iframe>
 
 (Shown here with some custom styles)
 
