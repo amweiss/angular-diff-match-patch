@@ -6,7 +6,6 @@
 angular.module('diff-match-patch', [])
 	.factory('dmp', ['$window', function dmpFactory($window) {
 		var DiffMatchPatch = $window.diff_match_patch;
-
 		var displayType = {
 			INSDEL: 0,
 			LINEDIFF: 1
@@ -56,45 +55,38 @@ angular.module('diff-match-patch', [])
 			}
 		}
 
-		function isEmptyObject(o) {
-			return Object.getOwnPropertyNames(o).length === 0;
-		}
-
 		function getTagAttrs(options, op, attrs) {
-			var attributes = attrs || {};
-			var tagOptions = {};
-			var attribute;
-			var tagOption;
+			var tagOptions = new Map();
 			var retVal = [];
+			var opName = diffAttrName(op);
 
-			if (angular.isDefined(options) && angular.isDefined(options.attrs)) {
-				tagOptions = angular.copy(options.attrs[diffAttrName(op)] || {});
+			if (angular.isDefined(options) && angular.isDefined(options.attrs) && options.attrs instanceof Map && options.attrs.has(opName)) {
+				options.attrs.get(opName).forEach(function (value, key) {
+					tagOptions.set(key, value);
+				});
 			}
 
-			if (isEmptyObject(tagOptions) && isEmptyObject(attributes)) {
+			if (angular.isDefined(attrs)) {
+				attrs.forEach(function (value, key) {
+					tagOptions.set(key, value);
+				});
+			}
+
+			if (tagOptions.size === 0) {
 				return '';
 			}
 
-			for (attribute in attributes) {
-				if (angular.isDefined(tagOptions[attribute])) {
-					// The attribute defined in attributes should be first
-					tagOptions[attribute] = attributes[attribute] + ' ' + tagOptions[attribute];
-				} else {
-					tagOptions[attribute] = attributes[attribute];
-				}
-			}
+			tagOptions.forEach(function (value, key) {
+				retVal.push(key + '="' + value + '"');
+			});
 
-			/* eslint guard-for-in: "off" */
-			for (tagOption in tagOptions) {
-				retVal.push(tagOption + '="' + tagOptions[tagOption] + '"');
-			}
 			return ' ' + retVal.join(' ');
 		}
 
 		function getHtmlPrefix(op, display, options) {
 			switch (display) {
 				case displayType.LINEDIFF:
-					return '<div class="' + diffClass(op) + '"><span' + getTagAttrs(options, op, {class: 'noselect'}) + '>' + diffSymbol(op) + '</span>';
+					return '<div class="' + diffClass(op) + '"><span' + getTagAttrs(options, op, new Map().set('class', 'noselect')) + '>' + diffSymbol(op) + '</span>';
 				default: // case displayType.INSDEL:
 					return '<' + diffTag(op) + getTagAttrs(options, op) + '>';
 			}
@@ -121,31 +113,38 @@ angular.module('diff-match-patch', [])
 			return lines.join('');
 		}
 
-		function createHtmlFromDiffs(diffs, display, options) {
-			var patternAmp = /&/g;
-			var patternLt = /</g;
-			var patternGt = />/g;
+		function createHtmlFromDiffs(diffs, display, options, excludeOp) {
 			var x;
 			var html = [];
 			var y;
-			var data;
 			var op;
 			var text;
 			var diffData = diffs;
+			var dmp = (display === displayType.LINEDIFF) ? new DiffMatchPatch() : null;
+			var intraDiffs;
+			var intraHtml1;
+			var intraHtml2;
 
 			for (x = 0; x < diffData.length; x++) {
-				data = diffData[x][1];
-				diffData[x][1] = data.replace(patternAmp, '&amp;')
-					.replace(patternLt, '&lt;')
-					.replace(patternGt, '&gt;');
+				diffData[x][1] = diffData[x][1].replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 			}
 
 			for (y = 0; y < diffData.length; y++) {
 				op = diffData[y][0];
 				text = diffData[y][1];
 				if (display === displayType.LINEDIFF) {
-					html[y] = createHtmlLines(text, op, options);
-				} else {
+					if (angular.isDefined(options) && angular.isDefined(options.interLineDiff) && options.interLineDiff && diffs[y][0] === DIFF_DELETE && diffs[y + 1][0] === DIFF_INSERT && diffs[y][1].indexOf('\n') === -1) {
+						intraDiffs = dmp.diff_main(diffs[y][1], diffs[y + 1][1]);
+						dmp.diff_cleanupSemantic(intraDiffs);
+						intraHtml1 = createHtmlFromDiffs(intraDiffs, displayType.INSDEL, options, DIFF_INSERT);
+						intraHtml2 = createHtmlFromDiffs(intraDiffs, displayType.INSDEL, options, DIFF_DELETE);
+						html[y] = createHtmlLines(intraHtml1, DIFF_DELETE, options);
+						html[y + 1] = createHtmlLines(intraHtml2, DIFF_INSERT, options);
+						y++;
+					} else {
+						html[y] = createHtmlLines(text, op, options);
+					}
+				} else if (typeof excludeOp === 'undefined' || op !== excludeOp) {
 					html[y] = getHtmlPrefix(op, display, options) + text + getHtmlSuffix(op, display);
 				}
 			}
@@ -158,11 +157,9 @@ angular.module('diff-match-patch', [])
 
 		return {
 			createDiffHtml: function createDiffHtml(left, right, options) {
-				var dmp;
 				var diffs;
 				if (assertArgumentsIsStrings(left, right)) {
-					dmp = new DiffMatchPatch();
-					diffs = dmp.diff_main(left, right);
+					diffs = new DiffMatchPatch().diff_main(left, right);
 					return createHtmlFromDiffs(diffs, displayType.INSDEL, options);
 				}
 				return '';
@@ -281,6 +278,7 @@ angular.module('diff-match-patch', [])
 				};
 				scope.$watch('left', listener);
 				scope.$watch('right', listener);
+				scope.$watch('options.interLineDiff', listener, true);
 			}
 		};
 		return ddo;
