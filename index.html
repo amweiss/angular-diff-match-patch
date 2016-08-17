@@ -66,33 +66,24 @@
     });
 
     app.controller('diffCtrl', ['$scope', function($scope) {
-      $scope.left = ["I am the very model of a modern Major-General,",
-        "I've information vegetable, animal, and mineral,",
-        "I know the kings of England, and I quote the fights historical,",
-        "From Marathon to Waterloo, in order categorical."
+      $scope.left = ['I am the very model of a modern Major-General,',
+        'I\'ve information vegetable, animal, and mineral,',
+        'I know the kings of England, and I quote the fights historical,',
+        'From Marathon to Waterloo, in order categorical.'
       ].join('\n');
 
-      $scope.right = ["I am the very model of a cartoon individual,",
-        "My animation's comical, unusual, and whimsical,",
-        "I know the kings of England, and I quote the fights historical,",
-        "From wicked puns and stupid jokes to anvils that drop on your head."
+      $scope.right = ['I am the very model of a cartoon individual,',
+        'My animation\'s comical, unusual, and whimsical,',
+        'I know the kings of England, and I quote the fights historical,',
+        'From wicked puns and stupid jokes to anvils that drop on your head.'
       ].join('\n');
 
       $scope.options = {
         editCost: 4,
-        intraLineDiff: true,
-        attrs: {
-          insert: {
-            'data-attr': 'insert',
-            'class': 'insertion'
-          },
-          delete: {
-            'data-attr': 'delete'
-          },
-          equal: {
-            'data-attr': 'equal'
-          }
-        }
+        interLineDiff: true,
+        attrs: new Map().set('insert', new Map().set('data-attr','insert').set('class','insertion'))
+                        .set('delete', new Map().set('data-attr', 'delete'))
+                        .set('equal', new Map().set('data-attr', 'equal'))
       };
     }]);
   </script>
@@ -156,7 +147,7 @@
               <h2>lineDiff</h2>
               <span flex></span>
               <md-input-container>
-                <md-checkbox name="intraLineDiff" ng-model="options.intraLineDiff">intraLineDiff</md-checkbox>
+                <md-checkbox name="interLineDiff" ng-model="options.interLineDiff">interLineDiff</md-checkbox>
               </md-input-container>
             </div>
             <pre class="textdiff" line-diff left-obj="left" right-obj="right" options="options"></pre>

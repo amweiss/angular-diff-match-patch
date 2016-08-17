@@ -66,17 +66,9 @@ describe('diff-match-patch', function diffMatchPatchDescription() {
 				$scope.left = ['hello', 'world'].join('\n');
 				$scope.right = ['hello', 'friends!'].join('\n');
 				$scope.options = {
-					attrs: {
-						insert: {
-							'data-attr': 'insert'
-						},
-						delete: {
-							'data-attr': 'delete'
-						},
-						equal: {
-							'data-attr': 'equal'
-						}
-					}
+					attrs: new Map().set('insert', new Map().set('data-attr', 'insert'))
+                        .set('delete', new Map().set('data-attr', 'delete'))
+                        .set('equal', new Map().set('data-attr', 'equal'))
 				};
 
 				$scope.$digest();
@@ -221,36 +213,27 @@ describe('diff-match-patch', function diffMatchPatchDescription() {
 
 			it('two lines with options returns diff HTML', function twoLineOptionDiff() {
 				var element = $compile(lineDiffOptionHtml)($scope);
-				var regex = '<div class="match .*?"><span (?=.*data-attr="equal")(?=.*class="noselect").*> </span>hello</div><div class="del .*?"><span (?=.*data-attr="delete")(?=.*class="noselect").*>-</span>world</div><div class="ins .*?"><span (?=.*data-attr="insert")(?=.*class="noselect insertion").*>\\+</span>friends!</div>';
+				var regex = '<div class="match .*?"><span (?=.*data-attr="equal")(?=.*class="noselect").*> </span>hello</div><div class="del .*?"><span (?=.*data-attr="delete")(?=.*class="noselect").*>-</span>world</div><div class="ins .*?"><span (?=.*data-attr="insert")(?=.*class="noselect").*>\\+</span>friends!</div>';
 				$scope.left = ['hello', 'world'].join('\n');
 				$scope.right = ['hello', 'friends!'].join('\n');
 				$scope.options = {
-					attrs: {
-						insert: {
-							'data-attr': 'insert',
-							'class': 'insertion'
-						},
-						delete: {
-							'data-attr': 'delete'
-						},
-						equal: {
-							'data-attr': 'equal'
-						}
-					}
+					attrs: new Map().set('insert', new Map().set('data-attr', 'insert').set('class', 'insertion'))
+                        .set('delete', new Map().set('data-attr', 'delete'))
+                        .set('equal', new Map().set('data-attr', 'equal'))
 				};
 
 				$scope.$digest();
 				expect(element.html()).toMatch(new RegExp(regex));
 			});
 
-			it('two lines intraLineDiff options returns diff HTML', function twoLineEmptyOptionDiff() {
+			it('two lines interLineDiff options returns diff HTML', function twoLineEmptyOptionDiff() {
 				var element = $compile(lineDiffOptionHtml)($scope);
 				var regex = '<div class="match .*?"><span class="noselect"> </span>hello</div><div class="del .*?"><span class="noselect">-</span><del>world</del></div><div class="ins .*?"><span class="noselect">\\+</span><ins>friends!</ins></div>';
 				$scope.left = ['hello', 'world'].join('\n');
 				$scope.right = ['hello', 'friends!'].join('\n');
 				$scope.options = {
-					intraLineDiff: true
-				}
+					interLineDiff: true
+				};
 				$scope.$digest();
 				expect(element.html()).toMatch(new RegExp(regex));
 			});
