@@ -29,7 +29,6 @@
     "jasmine-core": "^2.*",
     "karma": "^1.*",
     "karma-coverage": "^1.*",
-    "karma-coveralls": "^1.*",
     "karma-jasmine": "^1.*",
     "karma-junit-reporter": "^1.*",
     "karma-phantomjs-launcher": "^1.*",

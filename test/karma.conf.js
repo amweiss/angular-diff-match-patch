@@ -13,12 +13,11 @@ var reporters = [
 ];
 
 if (process.env.CIRCLECI) {
-	console.log('On CI sending coveralls');
-	coverageReporters.push({type: 'lcov', dir: process.env.CIRCLE_ARTIFACTS});
-	reporters.push('coveralls');
+	console.log('On CI, generating lcov');
+	coverageReporters.push({ type: 'lcov', dir: process.env.CIRCLE_ARTIFACTS });
 	junitReporterConfig.outputDir = process.env.CIRCLE_TEST_REPORTS;
 } else {
-	console.log('Not on CI so not sending coveralls');
+	console.log('Not on CI, generating html');
 	coverageReporters.push({type: 'html', dir: 'coverage/'});
 }
 
