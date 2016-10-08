@@ -1,9 +1,9 @@
 angular-diff-match-patch
 ========================
-[![Circle CI](https://circleci.com/gh/amweiss/angular-diff-match-patch.svg?style=svg)](https://circleci.com/gh/amweiss/angular-diff-match-patch) [![codecov](https://codecov.io/gh/amweiss/angular-diff-match-patch/branch/master/graph/badge.svg)](https://codecov.io/gh/amweiss/angular-diff-match-patch)
+[![CircleCI](https://img.shields.io/circleci/project/amweiss/angular-diff-match-patch.svg?maxAge=2592000)](https://circleci.com/gh/amweiss/angular-diff-match-patch) [![Codecov](https://img.shields.io/codecov/c/github/amweiss/angular-diff-match-patch.svg?maxAge=2592000)](https://codecov.io/gh/amweiss/angular-diff-match-patch)
 
 
-[![Dependencies](https://david-dm.org/amweiss/angular-diff-match-patch.svg)](https://david-dm.org/amweiss/angular-diff-match-patch/#info=dependencies&view=table) [![DevDependencies](https://david-dm.org/amweiss/angular-diff-match-patch/dev-status.svg)](https://david-dm.org/amweiss/angular-diff-match-patch/#info=devDependencies&view=table) [![PeerDependencies](https://david-dm.org/amweiss/angular-diff-match-patch/peer-status.svg)](https://david-dm.org/amweiss/angular-diff-match-patch/#info=peerDependencies&view=table)
+[![David](https://img.shields.io/david/amweiss/angular-diff-match-patch.svg?maxAge=2592000)](https://david-dm.org/amweiss/angular-diff-match-patch/#info=dependencies&view=table) [![David](https://img.shields.io/david/dev/amweiss/angular-diff-match-patch.svg?maxAge=2592000)](https://david-dm.org/amweiss/angular-diff-match-patch/#info=devDependencies&view=table)
 
 This library is simply a wrapper around [google-diff-match-patch](https://code.google.com/p/google-diff-match-patch/).
 
