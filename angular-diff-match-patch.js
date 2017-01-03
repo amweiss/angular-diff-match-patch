@@ -218,7 +218,11 @@ angular.module('diff-match-patch', [])
 			link: function postLink(scope, iElement) {
 				var listener = function listener() {
 					iElement.html(dmp.createDiffHtml(scope.left, scope.right, scope.options));
-					$compile(iElement.contents())(scope);
+					// If no options given, or, we have been given options and don't want to skip angular compiling
+					// Then compile angular in the diff.
+					if (!scope.options || (scope.options && !scope.options.skipAngularCompilingOnDiff)) {
+						$compile(iElement.contents())(scope);
+					}
 				};
 				scope.$watch('left', listener);
 				scope.$watch('right', listener);
@@ -236,7 +240,11 @@ angular.module('diff-match-patch', [])
 			link: function postLink(scope, iElement) {
 				var listener = function listener() {
 					iElement.html(dmp.createProcessingDiffHtml(scope.left, scope.right, scope.options));
-					$compile(iElement.contents())(scope);
+					// If no options given, or, we have been given options and don't want to skip angular compiling
+					// Then compile angular in the diff.
+					if (!scope.options || (scope.options && !scope.options.skipAngularCompilingOnDiff)) {
+						$compile(iElement.contents())(scope);
+					}
 				};
 				scope.$watch('left', listener);
 				scope.$watch('right', listener);
@@ -255,7 +263,11 @@ angular.module('diff-match-patch', [])
 			link: function postLink(scope, iElement) {
 				var listener = function listener() {
 					iElement.html(dmp.createSemanticDiffHtml(scope.left, scope.right, scope.options));
-					$compile(iElement.contents())(scope);
+					// If no options given, or, we have been given options and don't want to skip angular compiling
+					// Then compile angular in the diff.
+					if (!scope.options || (scope.options && !scope.options.skipAngularCompilingOnDiff)) {
+						$compile(iElement.contents())(scope);
+					}
 				};
 				scope.$watch('left', listener);
 				scope.$watch('right', listener);
@@ -273,7 +285,11 @@ angular.module('diff-match-patch', [])
 			link: function postLink(scope, iElement) {
 				var listener = function listener() {
 					iElement.html(dmp.createLineDiffHtml(scope.left, scope.right, scope.options));
-					$compile(iElement.contents())(scope);
+					// If no options given, or, we have been given options and don't want to skip angular compiling
+					// Then compile angular in the diff.
+					if (!scope.options || (scope.options && !scope.options.skipAngularCompilingOnDiff)) {
+						$compile(iElement.contents())(scope);
+					}
 				};
 				scope.$watch('left', listener);
 				scope.$watch('right', listener);
