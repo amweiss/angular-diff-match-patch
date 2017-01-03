@@ -53,6 +53,8 @@ $scope.options = {
 
 `editCost` is specific to `processingDiff` and controls the tolerence for hunk separation.  `attrs` can contain any/all/none of the following: `insert`, `delete`, and `equal` where the properties in those objects represent attributes that get added to the tags.
 
+Another option is to skip angular processing the diff, it's useful when you want to show a diff of a code pre-compiled by angular. The attribute you need to add is called: `skipAngularCompilingOnDiff`. If set to `true`, would skip compiling, otherwise it would compile the diff.
+
 Add some style
 ```css
 .match{
