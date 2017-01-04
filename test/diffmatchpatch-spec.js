@@ -7,6 +7,9 @@ describe('diff-match-patch', function diffMatchPatchDescription() {
 	var multiLineRight = ['I\'m quite adept at funny gags, comedic theory I have read',
 		'From wicked puns and stupid jokes to anvils that drop on your head.'].join('\n');
 	var diffRegex = '<span.*?>hello</span><del.*?> world</del>';
+	var oneLineAngularLeft = '{{1 + 2}} hello world';
+	var oneLineAngularRight = '{{1 + 2}} hello';
+	var angularProcessedDiffRegex = '<span.*?>3 hello</span><del.*?> world</del>';
 
 	beforeEach(module('diff-match-patch'));
 	describe('directive', function directiveDescription() {
@@ -20,6 +23,43 @@ describe('diff-match-patch', function diffMatchPatchDescription() {
 
 		describe('diff', function diffDescription() {
 			var diffHtmlNoOptions = '<div diff left-obj="left" right-obj="right"></div>';
+			var diffHtmlWithOptions = '<div diff left-obj="left" right-obj="right" options="options"></div>';
+
+			it('compile angular tokens in the diff', function makeSureAngularCompiles() {
+				var element = $compile(diffHtmlNoOptions)($scope);
+				$scope.left = '';
+				$scope.right = oneLineAngularRight;
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp('<ins.*?>3 hello</ins>'));
+			});
+
+			it('compile angular tokens in the total diff', function singleLineTotal() {
+				var element = $compile(diffHtmlNoOptions)($scope);
+				$scope.left = oneLineAngularLeft;
+				$scope.right = oneLineAngularRight;
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp(angularProcessedDiffRegex));
+			});
+
+			it('compile angular tokens in the diff if no flag has given in options', function makeSureAngularCompilesWithoutFlag() {
+				var element = $compile(diffHtmlWithOptions)($scope);
+				$scope.left = '';
+				$scope.right = oneLineAngularRight;
+				$scope.options = {};
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp('<ins.*?>3 hello</ins>'));
+			});
+
+			it('should not compile angular tokens in the diff if the flag has been set', function skipAngularComilingWithFlag() {
+				var element = $compile(diffHtmlWithOptions)($scope);
+				$scope.left = '';
+				$scope.right = oneLineAngularRight;
+				$scope.options = {
+					skipAngularCompilingOnDiff: true
+				};
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp('<ins.*?>{{1 \\+ 2}} hello</ins>'));
+			});
 
 			it('no sides returns empty string', function noSidesEmpty() {
 				var element = $compile(diffHtmlNoOptions)($scope);
@@ -60,8 +100,7 @@ describe('diff-match-patch', function diffMatchPatchDescription() {
 			});
 
 			it('two lines with options returns diff HTML', function twoLineOptionDiff() {
-				var html = '<div diff left-obj="left" right-obj="right" options="options"></div>';
-				var element = $compile(html)($scope);
+				var element = $compile(diffHtmlWithOptions)($scope);
 				var regex = '<span .*?data-attr="equal".*?>hello[\\s\\S]*?</span><del .*?data-attr="delete".*?>wo</del><ins .*?data-attr="insert".*?>f</ins><span .*?data-attr="equal".*?>r</span><del .*?data-attr="delete".*?>l</del><ins .*?data-attr="insert".*?>ien</ins><span .*?data-attr="equal".*?>d</span><ins.*?data-attr="insert".*?>s!</ins>';
 				$scope.left = ['hello', 'world'].join('\n');
 				$scope.right = ['hello', 'friends!'].join('\n');
@@ -88,6 +127,42 @@ describe('diff-match-patch', function diffMatchPatchDescription() {
 			var processingDiffHtml = '<div processing-diff left-obj="left" right-obj="right"></div>';
 			var processingDiffOptionsHtml = '<div processing-diff left-obj="left" right-obj="right" options="options"></div>';
 			var twoLineRegex = '<span.*?>I</span><del.*?> know the kings of England, and I quote</del><ins.*?>\'m quite adept at funny gags, comedic</ins><span.*?> the</span><del.*?> fights historical,</del><ins.*?>ory I have read</ins><span.*?>[\\s\\S]*?From </span><del.*?>Marathon</del><ins.*?>wicked puns and stupid jokes</ins><span.*?> to </span><del.*?>Waterloo, in order categorical</del><ins.*?>anvils that drop on your head</ins><span.*?>.</span>';
+
+			it('compile angular tokens in the diff', function makeSureAngularCompiles() {
+				var element = $compile(processingDiffHtml)($scope);
+				$scope.left = '';
+				$scope.right = oneLineAngularRight;
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp('<ins.*?>3 hello</ins>'));
+			});
+
+			it('compile angular tokens in the total diff', function singleLineTotal() {
+				var element = $compile(processingDiffHtml)($scope);
+				$scope.left = oneLineAngularLeft;
+				$scope.right = oneLineAngularRight;
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp(angularProcessedDiffRegex));
+			});
+
+			it('compile angular tokens in the diff if no flag has given in options', function makeSureAngularCompilesWithoutFlag() {
+				var element = $compile(processingDiffOptionsHtml)($scope);
+				$scope.left = '';
+				$scope.right = oneLineAngularRight;
+				$scope.options = {};
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp('<ins.*?>3 hello</ins>'));
+			});
+
+			it('should not compile angular tokens in the diff if the flag has been set', function skipAngularComilingWithFlag() {
+				var element = $compile(processingDiffOptionsHtml)($scope);
+				$scope.left = '';
+				$scope.right = oneLineAngularRight;
+				$scope.options = {
+					skipAngularCompilingOnDiff: true
+				};
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp('<ins.*?>{{1 \\+ 2}} hello</ins>'));
+			});
 
 			it('no sides returns empty string', function noSidesEmpty() {
 				var element = $compile(processingDiffHtml)($scope);
@@ -135,6 +210,44 @@ describe('diff-match-patch', function diffMatchPatchDescription() {
 
 		describe('semanticDiff', function semanticDiffDescription() {
 			var semanticDiffHtml = '<div semantic-diff left-obj="left" right-obj="right"></div>';
+			var semanticDiffHtmlWithOptions = '<div semantic-diff left-obj="left" right-obj="right" options="options"></div>';
+
+			it('compile angular tokens in the diff', function makeSureAngularCompiles() {
+				var element = $compile(semanticDiffHtml)($scope);
+				$scope.left = '';
+				$scope.right = oneLineAngularRight;
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp('<ins.*?>3 hello</ins>'));
+			});
+
+			it('compile angular tokens in the total diff', function singleLineTotal() {
+				var element = $compile(semanticDiffHtml)($scope);
+				$scope.left = oneLineAngularLeft;
+				$scope.right = oneLineAngularRight;
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp(angularProcessedDiffRegex));
+			});
+
+			it('compile angular tokens in the diff if no flag has given in options', function makeSureAngularCompilesWithoutFlag() {
+				var element = $compile(semanticDiffHtmlWithOptions)($scope);
+				$scope.left = '';
+				$scope.right = oneLineAngularRight;
+				$scope.options = {};
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp('<ins.*?>3 hello</ins>'));
+			});
+
+			it('should not compile angular tokens in the diff if the flag has been set', function skipAngularComilingWithFlag() {
+				var element = $compile(semanticDiffHtmlWithOptions)($scope);
+				$scope.left = '';
+				$scope.right = oneLineAngularRight;
+				$scope.options = {
+					skipAngularCompilingOnDiff: true
+				};
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp('<ins.*?>{{1 \\+ 2}} hello</ins>'));
+			});
+
 			it('no sides returns empty string', function noSidesEmpty() {
 				var element = $compile(semanticDiffHtml)($scope);
 				$scope.$digest();
@@ -170,6 +283,42 @@ describe('diff-match-patch', function diffMatchPatchDescription() {
 			var lineDiffHtml = '<div line-diff left-obj="left" right-obj="right"></div>';
 			var lineDiffOptionHtml = '<div line-diff left-obj="left" right-obj="right" options="options"></div>';
 			var twoLineRegex = '<div class="match .*?"><span class="noselect"> </span>hello</div><div class="del .*?"><span class="noselect">-</span>world</div><div class="ins .*?"><span class="noselect">\\+</span>friends!</div>';
+
+			it('compile angular tokens in the diff', function makeSureAngularCompiles() {
+				var element = $compile(lineDiffHtml)($scope);
+				$scope.left = '';
+				$scope.right = oneLineAngularRight;
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp('.*?ins.*?</span>3 hello</div>'));
+			});
+
+			it('compile angular tokens in the total diff', function singleLineTotal() {
+				var element = $compile(lineDiffHtml)($scope);
+				$scope.left = oneLineAngularLeft;
+				$scope.right = oneLineAngularRight;
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp('.*?-</span>3 hello world.*?\\+</span>3 hello.*?'));
+			});
+
+			it('compile angular tokens in the diff if no flag has given in options', function makeSureAngularCompilesWithoutFlag() {
+				var element = $compile(lineDiffOptionHtml)($scope);
+				$scope.left = oneLineAngularLeft;
+				$scope.right = oneLineAngularRight;
+				$scope.options = {};
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp('.*?-</span>3 hello world.*?\\+</span>3 hello.*?'));
+			});
+
+			it('should not compile angular tokens in the diff if the flag has been set', function skipAngularComilingWithFlag() {
+				var element = $compile(lineDiffOptionHtml)($scope);
+				$scope.left = oneLineAngularLeft;
+				$scope.right = oneLineAngularRight;
+				$scope.options = {
+					skipAngularCompilingOnDiff: true
+				};
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp('.*?-</span>{{1 \\+ 2}} hello world.*?\\+</span>{{1 \\+ 2}} hello.*?'));
+			});
 
 			it('no sides returns empty string', function noSidesEmpty() {
 				var element = $compile(lineDiffHtml)($scope);
