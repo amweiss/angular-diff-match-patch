@@ -4,7 +4,7 @@
  @license: MIT
 */
 angular.module('diff-match-patch', [])
-	.factory('dmp', ['$window', function dmpFactory($window) {
+	.factory('dmp', ['$window', function ($window) {
 		var DiffMatchPatch = $window.diff_match_patch;
 		var displayType = {
 			INSDEL: 0,
@@ -155,7 +155,7 @@ angular.module('diff-match-patch', [])
 		}
 
 		return {
-			createDiffHtml: function createDiffHtml(left, right, options) {
+			createDiffHtml: function (left, right, options) {
 				var diffs;
 				if (assertArgumentsIsStrings(left, right)) {
 					diffs = new DiffMatchPatch().diff_main(left, right);
@@ -164,7 +164,7 @@ angular.module('diff-match-patch', [])
 				return '';
 			},
 
-			createProcessingDiffHtml: function createProcessingDiffHtml(left, right, options) {
+			createProcessingDiffHtml: function (left, right, options) {
 				var dmp;
 				var diffs;
 				if (assertArgumentsIsStrings(left, right)) {
@@ -181,7 +181,7 @@ angular.module('diff-match-patch', [])
 				return '';
 			},
 
-			createSemanticDiffHtml: function createSemanticDiffHtml(left, right, options) {
+			createSemanticDiffHtml: function (left, right, options) {
 				var dmp;
 				var diffs;
 				if (assertArgumentsIsStrings(left, right)) {
@@ -193,7 +193,7 @@ angular.module('diff-match-patch', [])
 				return '';
 			},
 
-			createLineDiffHtml: function createLineDiffHtml(left, right, options) {
+			createLineDiffHtml: function (left, right, options) {
 				var dmp;
 				var chars;
 				var diffs;
@@ -208,15 +208,15 @@ angular.module('diff-match-patch', [])
 			}
 		};
 	}])
-	.directive('diff', ['$compile', 'dmp', function factory($compile, dmp) {
+	.directive('diff', ['$compile', 'dmp', function ($compile, dmp) {
 		var ddo = {
 			scope: {
 				left: '=leftObj',
 				right: '=rightObj',
 				options: '=options'
 			},
-			link: function postLink(scope, iElement) {
-				var listener = function listener() {
+			link: function (scope, iElement) {
+				var listener = function () {
 					iElement.html(dmp.createDiffHtml(scope.left, scope.right, scope.options));
 					// If no options given, or, we have been given options and don't want to skip angular compiling
 					// Then compile angular in the diff.
@@ -230,15 +230,15 @@ angular.module('diff-match-patch', [])
 		};
 		return ddo;
 	}])
-	.directive('processingDiff', ['$compile', 'dmp', function factory($compile, dmp) {
+	.directive('processingDiff', ['$compile', 'dmp', function ($compile, dmp) {
 		var ddo = {
 			scope: {
 				left: '=leftObj',
 				right: '=rightObj',
 				options: '=options'
 			},
-			link: function postLink(scope, iElement) {
-				var listener = function listener() {
+			link: function (scope, iElement) {
+				var listener = function () {
 					iElement.html(dmp.createProcessingDiffHtml(scope.left, scope.right, scope.options));
 					// If no options given, or, we have been given options and don't want to skip angular compiling
 					// Then compile angular in the diff.
@@ -253,15 +253,15 @@ angular.module('diff-match-patch', [])
 		};
 		return ddo;
 	}])
-	.directive('semanticDiff', ['$compile', 'dmp', function factory($compile, dmp) {
+	.directive('semanticDiff', ['$compile', 'dmp', function ($compile, dmp) {
 		var ddo = {
 			scope: {
 				left: '=leftObj',
 				right: '=rightObj',
 				options: '=options'
 			},
-			link: function postLink(scope, iElement) {
-				var listener = function listener() {
+			link: function (scope, iElement) {
+				var listener = function () {
 					iElement.html(dmp.createSemanticDiffHtml(scope.left, scope.right, scope.options));
 					// If no options given, or, we have been given options and don't want to skip angular compiling
 					// Then compile angular in the diff.
@@ -275,15 +275,15 @@ angular.module('diff-match-patch', [])
 		};
 		return ddo;
 	}])
-	.directive('lineDiff', ['$compile', 'dmp', function factory($compile, dmp) {
+	.directive('lineDiff', ['$compile', 'dmp', function ($compile, dmp) {
 		var ddo = {
 			scope: {
 				left: '=leftObj',
 				right: '=rightObj',
 				options: '=options'
 			},
-			link: function postLink(scope, iElement) {
-				var listener = function listener() {
+			link: function (scope, iElement) {
+				var listener = function () {
 					iElement.html(dmp.createLineDiffHtml(scope.left, scope.right, scope.options));
 					// If no options given, or, we have been given options and don't want to skip angular compiling
 					// Then compile angular in the diff.
