@@ -10,6 +10,11 @@ This library is simply a wrapper around [google-diff-match-patch](https://code.g
 
 (Shown here with some custom styles)
 
+Angular 2 Port
+---------------
+
+Should you wish to use this in an Angular 2+ project, take a look at this port: [elliotforbes/ng-diff-match-patch](https://github.com/elliotforbes/ng-diff-match-patch)
+
 Setup
 -----
 
