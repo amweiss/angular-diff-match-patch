@@ -354,8 +354,6 @@ describe('diff-match-patch', function () {
 				expect(element.html()).toMatch(new RegExp(regex));
 			});
 
-
-
 			it('two lines returns diff HTML', function () {
 				var element = $compile(lineDiffHtml)($scope);
 				$scope.left = ['hello', 'world'].join('\n');
