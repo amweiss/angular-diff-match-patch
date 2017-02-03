@@ -81,6 +81,7 @@
       $scope.options = {
         editCost: 4,
         interLineDiff: true,
+        ignoreTrailingNewLines: true,
         attrs: {
           insert: {
             'data-attr': 'insert',
@@ -158,6 +159,9 @@
               <span flex></span>
               <md-input-container>
                 <md-checkbox name="interLineDiff" ng-model="options.interLineDiff">interLineDiff</md-checkbox>
+              </md-input-container>
+              <md-input-container>
+                <md-checkbox name="ignoreTrailingNewLines" ng-model="options.ignoreTrailingNewLines">ignoreTrailingNewLines</md-checkbox>
               </md-input-container>
             </div>
             <pre class="textdiff" line-diff left-obj="left" right-obj="right" options="options"></pre>

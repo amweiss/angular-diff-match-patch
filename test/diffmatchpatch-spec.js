@@ -342,6 +342,20 @@ describe('diff-match-patch', function () {
 				expect(element.html()).toMatch(new RegExp(regex));
 			});
 
+			it('single lines ignoreTrailingNewLines', function () {
+				var element = $compile(lineDiffOptionHtml)($scope);
+				var regex = '<div class="match.*?">.*?hello</div><div class="ins.*?">.*?world</div>';
+				$scope.right = oneLineBasicLeft.split(' ').join('\n');
+				$scope.left = oneLineBasicRight;
+				$scope.options = {
+					ignoreTrailingNewLines: true
+				};
+				$scope.$digest();
+				expect(element.html()).toMatch(new RegExp(regex));
+			});
+
+
+
 			it('two lines returns diff HTML', function () {
 				var element = $compile(lineDiffHtml)($scope);
 				$scope.left = ['hello', 'world'].join('\n');
