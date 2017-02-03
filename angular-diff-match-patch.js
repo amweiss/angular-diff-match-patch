@@ -190,7 +190,7 @@ angular.module('diff-match-patch', [])
 
 			var chars1 = linesToCharsMunge(text1);
 			var chars2 = linesToCharsMunge(text2);
-			return {chars1, chars2, lineArray};
+			return {chars1: chars1, chars2: chars2, lineArray: lineArray};
 		}
 
 		// Taken from source https://code.google.com/p/google-diff-match-patch/
