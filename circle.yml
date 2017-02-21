@@ -1,0 +1,16 @@
+version: 2
+executorType: docker
+containerInfo:
+  - image: kkarczmarczyk/node-yarn:7.5.0
+workDir: ~/angular-diff-match-patch
+stages:
+  build:
+    parallel: 4
+	steps:
+	  - type: checkout
+	  - type: shell
+	  	shell: /bin/bash
+		command: |
+			yarn test
+	  - type: artifacts-store
+	  - type: test-results-store
