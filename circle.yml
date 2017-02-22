@@ -20,4 +20,4 @@ stages:
         destination: build
       - type: shell
         name: Submit coverage report
-        command: bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN
+        command: bash <(curl -s https://codecov.io/bash)
