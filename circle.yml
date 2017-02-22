@@ -5,6 +5,9 @@ containerInfo:
 stages:
   build:
     workDir: ~/angular-diff-match-patch
+    environment:
+      - CIRCLE_ARTIFACTS: /tmp/artifacts
+      - CIRCLE_TEST_REPORTS: /tmp/test-results
     parallel: 4
     steps:
       - type: checkout
@@ -13,8 +16,14 @@ stages:
         command: yarn install
       - type: shell
         shell: /bin/bash
+        command: |
+          mkdir ${CIRCLE_ARTIFACTS}
+          mkdir ${CIRCLE_TEST_REPORTS}
+      - type: shell
+        shell: /bin.bash
         command: yarn test
       - type: artifacts-store
-        path: /tmp/artifacts
+        path: ${CIRCLE_ARTIFACTS}
+        destination: build
       - type: test-results-store
-        path: /tmp/test-results
+        path: ${CIRCLE_TEST_REPORTS}
