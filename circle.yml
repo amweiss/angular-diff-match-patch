@@ -10,7 +10,6 @@ stages:
       - type: checkout
       - type: shell
         shell: /bin/bash
-      command: |
-        yarn test
+        command: yarn test
       - type: artifacts-store
       - type: test-results-store
