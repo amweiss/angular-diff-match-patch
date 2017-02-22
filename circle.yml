@@ -16,13 +16,13 @@ stages:
       - type: shell
         shell: /bin/bash
         command: |
-          mkdir -p $CIRCLE_ARTIFACTS/build
+          mkdir -p $CIRCLE_ARTIFACTS
           mkdir -p $CIRCLE_TEST_REPORTS
       - type: shell
         shell: /bin/bash
         command: yarn test
       - type: artifacts-store
-        path: $CIRCLE_ARTIFACTS
+        path: ${CIRCLE_ARTIFACTS}
         destination: build
       - type: test-results-store
-        path: $CIRCLE_TEST_REPORTS
+        path: ${CIRCLE_TEST_REPORTS}
