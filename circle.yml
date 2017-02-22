@@ -8,10 +8,10 @@ stages:
     steps:
       - type: checkout
       - type: shell
-        name: Install Packages
+        name: Install packages
         command: yarn install
       - type: shell
-        name: Run Tests
+        name: Run tests
         command: yarn test
       - type: test-results-store
         path: ./test/results
