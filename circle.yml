@@ -6,8 +6,8 @@ stages:
   build:
     workDir: ~/angular-diff-match-patch
     environment:
-      - CIRCLE_ARTIFACTS: /tmp/artifacts
-      - CIRCLE_TEST_REPORTS: /tmp/test-results
+      - CIRCLE_ARTIFACTS: "/tmp/artifacts"
+      - CIRCLE_TEST_REPORTS: "/tmp/test-results"
     steps:
       - type: checkout
       - type: shell
