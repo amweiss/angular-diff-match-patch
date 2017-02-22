@@ -6,11 +6,11 @@ workDir: ~/angular-diff-match-patch
 stages:
   build:
     parallel: 4
-	steps:
-	  - type: checkout
-	  - type: shell
-	  	shell: /bin/bash
-		command: |
-			yarn test
-	  - type: artifacts-store
-	  - type: test-results-store
+  steps:
+    - type: checkout
+    - type: shell
+      shell: /bin/bash
+    command: |
+      yarn test
+    - type: artifacts-store
+    - type: test-results-store
