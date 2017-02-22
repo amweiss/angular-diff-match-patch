@@ -6,9 +6,6 @@ stages:
   build:
     workDir: ~/angular-diff-match-patch
     steps:
-      - type: shell
-        name: Submit coverage report
-        command: bash <(curl -s https://codecov.io/bash) -r amweiss/angular-diff-match-patch
       - type: checkout
       - type: shell
         name: Install packages
@@ -21,3 +18,6 @@ stages:
       - type: artifacts-store
         path: ./coverage
         destination: build
+      - type: shell
+        name: Submit coverage report
+        command: bash <(curl -s https://codecov.io/bash) -r amweiss/angular-diff-match-patch
