@@ -16,20 +16,8 @@ stages:
       - type: shell
         shell: /bin/bash
         command: |
-          echo $CIRCLE_ARTIFACTS
-          echo $CIRCLE_TEST_REPORTS
-          mkdir $CIRCLE_ARTIFACTS
-          mkdir $CIRCLE_TEST_REPORTS
-        environment:
-        - CIRCLE_ARTIFACTS: /tmp/artifacts
-        - CIRCLE_TEST_REPORTS: /tmp/test-results
-      - type: shell
-        shell: /bin/bash
-        command: |
-          echo $CIRCLE_ARTIFACTS
-          echo $CIRCLE_TEST_REPORTS
-          mkdir $CIRCLE_ARTIFACTS
-          mkdir $CIRCLE_TEST_REPORTS
+          mkdir -p $CIRCLE_ARTIFACTS/build
+          mkdir -p $CIRCLE_TEST_REPORTS
       - type: shell
         shell: /bin.bash
         command: yarn test
