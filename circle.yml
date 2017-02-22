@@ -8,7 +8,6 @@ stages:
     environment:
       - CIRCLE_ARTIFACTS: /tmp/artifacts
       - CIRCLE_TEST_REPORTS: /tmp/test-results
-    parallel: 4
     steps:
       - type: checkout
       - type: shell
