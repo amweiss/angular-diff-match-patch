@@ -10,6 +10,9 @@ stages:
       - type: checkout
       - type: shell
         shell: /bin/bash
+        command: yarn install
+      - type: shell
+        shell: /bin/bash
         command: yarn test
       - type: artifacts-store
         path: /tmp/artifacts
