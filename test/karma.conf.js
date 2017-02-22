@@ -14,8 +14,7 @@ var reporters = [
 
 if (process.env.CIRCLECI) {
 	console.log('On CI, generating lcov');
-	coverageReporters.push({type: 'lcov', dir: process.env.CIRCLE_ARTIFACTS});
-	junitReporterConfig.outputDir = process.env.CIRCLE_TEST_REPORTS;
+	coverageReporters.push({type: 'lcov', dir: 'coverage/'});
 } else {
 	console.log('Not on CI, generating html');
 	coverageReporters.push({type: 'html', dir: 'coverage/'});
