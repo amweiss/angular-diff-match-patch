@@ -1,7 +1,7 @@
 version: 2
 executorType: docker
 containerInfo:
-  - image: kkarczmarczyk/node-yarn:7.5.0
+  - image: kkarczmarczyk/node-yarn:7.4
 workDir: ~/angular-diff-match-patch
 stages:
   build:
