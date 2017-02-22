@@ -19,7 +19,7 @@ stages:
           mkdir -p $CIRCLE_ARTIFACTS/build
           mkdir -p $CIRCLE_TEST_REPORTS
       - type: shell
-        shell: /bin.bash
+        shell: /bin/bash
         command: yarn test
       - type: artifacts-store
         path: $CIRCLE_ARTIFACTS
