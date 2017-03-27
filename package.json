@@ -33,9 +33,13 @@
     "karma-junit-reporter": "^1.*",
     "karma-phantomjs-launcher": "^1.*",
     "phantomjs-prebuilt": "^2.*",
-    "xo": "^0.17.1"
+    "xo": "^0.18.1"
   },
   "xo": {
+    "esnext": false,
+    "rules": {
+      "capitalized-comments": 0
+    },
     "env": [
       "jasmine",
       "browser",
