@@ -151,7 +151,11 @@ angular.module('diff-match-patch', [])
 		}
 
 		function assertArgumentsIsStrings(left, right) {
-			return angular.isString(left) && angular.isString(right);
+			return isValidData(left) && isValidData(right) && (angular.isString(left) || angular.isString(right));
+		}
+		
+		function isValidData(data) {
+			return data === null || data === undefined || angular.isString(data);
 		}
 
 		// Taken from source https://code.google.com/p/google-diff-match-patch/
@@ -210,7 +214,7 @@ angular.module('diff-match-patch', [])
 			createDiffHtml: function (left, right, options) {
 				var diffs;
 				if (assertArgumentsIsStrings(left, right)) {
-					diffs = new DiffMatchPatch().diff_main(left, right);
+					diffs = new DiffMatchPatch().diff_main(left||'', right||'');
 					return createHtmlFromDiffs(diffs, displayType.INSDEL, options);
 				}
 				return '';
@@ -221,7 +225,7 @@ angular.module('diff-match-patch', [])
 				var diffs;
 				if (assertArgumentsIsStrings(left, right)) {
 					dmp = new DiffMatchPatch();
-					diffs = dmp.diff_main(left, right);
+					diffs = dmp.diff_main(left||'', right||'');
 
 					if (angular.isDefined(options) && angular.isDefined(options.editCost) && isFinite(options.editCost)) {
 						dmp.Diff_EditCost = options.editCost; // eslint-disable-line camelcase
@@ -238,7 +242,7 @@ angular.module('diff-match-patch', [])
 				var diffs;
 				if (assertArgumentsIsStrings(left, right)) {
 					dmp = new DiffMatchPatch();
-					diffs = dmp.diff_main(left, right);
+					diffs = dmp.diff_main(left||'', right||'');
 					dmp.diff_cleanupSemantic(diffs);
 					return createHtmlFromDiffs(diffs, displayType.INSDEL, options);
 				}
@@ -252,7 +256,7 @@ angular.module('diff-match-patch', [])
 				if (assertArgumentsIsStrings(left, right)) {
 					dmp = new DiffMatchPatch();
 					var ignoreTrailingNewLines = angular.isDefined(options) && angular.isDefined(options.ignoreTrailingNewLines) && options.ignoreTrailingNewLines;
-					chars = linesToChars(left, right, ignoreTrailingNewLines);
+					chars = linesToChars(left||'', right||'', ignoreTrailingNewLines);
 					diffs = dmp.diff_main(chars.chars1, chars.chars2, false);
 					charsToLines(diffs, chars.lineArray, ignoreTrailingNewLines);
 					return createHtmlFromDiffs(diffs, displayType.LINEDIFF, options);
