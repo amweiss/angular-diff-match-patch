@@ -8,16 +8,16 @@ stages:
     steps:
       - checkout
       - run:
-        name: Install packages
-        command: yarn install
+          name: Install packages
+          command: yarn install
       - run:
-        name: Run tests
-        command: yarn test
+          name: Run tests
+          command: yarn test
       - run:
-        name: Submit coverage report
-        command: bash <(curl -s https://codecov.io/bash) -r amweiss/angular-diff-match-patch
+          name: Submit coverage report
+          command: bash <(curl -s https://codecov.io/bash) -r amweiss/angular-diff-match-patch
       - store_test_results:
-        path: ./test/results
+          path: ./test/results
       - store_artifacts:
-        path: ./coverage
-        destination: build
+          path: ./coverage
+          destination: build
