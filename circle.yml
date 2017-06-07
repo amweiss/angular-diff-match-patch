@@ -1,23 +1,23 @@
 version: 2
 executorType: docker
 containerInfo:
-  - image: kkarczmarczyk/node-yarn:7.4
+  - image: kkarczmarczyk/node-yarn:latest
 stages:
   build:
     workDir: ~/angular-diff-match-patch
     steps:
-      - type: checkout
-      - type: shell
+      - checkout
+      - run:
         name: Install packages
         command: yarn install
-      - type: shell
+      - run:
         name: Run tests
         command: yarn test
-      - type: test-results-store
-        path: ./test/results
-      - type: artifacts-store
-        path: ./coverage
-        destination: build
-      - type: shell
+      - run:
         name: Submit coverage report
         command: bash <(curl -s https://codecov.io/bash) -r amweiss/angular-diff-match-patch
+      - store_test_results:
+        path: ./test/results
+      - store_artifacts:
+        path: ./coverage
+        destination: build
