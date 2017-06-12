@@ -29,5 +29,5 @@ stages:
           command: |
             if [ -z ${CIRCLE_TAG+x} ] && [ '${CIRCLE_BRANCH}' == 'master' ]; then
               echo " CIRCLE_TAG is '$CIRCLE_TAG' and CIRCLE_BRANCH is '$CIRCLE_BRANCH' ";
-              else echo " Publish! ";
+              else echo " Publish! CIRCLE_TAG is '$CIRCLE_TAG' and CIRCLE_BRANCH is '$CIRCLE_BRANCH' ";
             fi
