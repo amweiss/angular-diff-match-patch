@@ -25,6 +25,7 @@ stages:
           path: ./coverage
           destination: build
       - deploy:
+          name: NPM Publish
           command: |
-            if [ -z ${CIRCLE_TAG+x} ]; then echo "CIRCLE_TAG is unset"; else echo "CIRCLE_TAG is set to '$CIRCLE_TAG'";
+            if [ -z ${CIRCLE_TAG+x} ] && [ "${CIRCLE_BRANCH}" == "master" ]; then echo "CIRCLE_TAG is '$CIRCLE_TAG' and CIRCLE_BRANCH is '$CIRCLE_BRANCH' "; else echo "Publish!";
             fi
