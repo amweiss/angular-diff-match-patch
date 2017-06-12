@@ -6,6 +6,9 @@ stages:
   build:
     workDir: ~/angular-diff-match-patch
     steps:
+      - run:
+          name: Set NPM token
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
       - checkout
       - run:
           name: Install packages
@@ -21,3 +24,7 @@ stages:
       - store_artifacts:
           path: ./coverage
           destination: build
+      - deploy:
+          command: |
+            if [ -z ${CIRCLE_TAG+x} ]; then echo "CIRCLE_TAG is unset"; else echo "CIRCLE_TAG is set to '$CIRCLE_TAG'";
+            fi
