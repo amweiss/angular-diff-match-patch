@@ -28,6 +28,6 @@ stages:
           name: NPM Publish
           command: |
             if [ ! -z "${CIRCLE_TAG}" ] && [ "${CIRCLE_BRANCH}" == "master" ];
-              then echo " Publish! CIRCLE_TAG is '$CIRCLE_TAG' and CIRCLE_BRANCH is '$CIRCLE_BRANCH' ";
+              then npm publish "${CIRCLE_TAG}";
               else echo " CIRCLE_TAG is '$CIRCLE_TAG' and CIRCLE_BRANCH is '$CIRCLE_BRANCH' ";
             fi
