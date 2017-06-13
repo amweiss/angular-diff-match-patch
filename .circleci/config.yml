@@ -9,7 +9,6 @@ jobs:
           name: Set NPM token
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
       - checkout
-      - run: echo $CIRCLE_TAG
       - run:
           name: Install packages
           command: yarn install
