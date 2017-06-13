@@ -1,12 +1,9 @@
 version: 2
-executorType: docker
-containerInfo:
-  - image: kkarczmarczyk/node-yarn:latest
-
-
 jobs:
   build:
-    workDir: ~/angular-diff-match-patch
+    working_directory: ~/angular-diff-match-patch
+    docker:
+      - image: kkarczmarczyk/node-yarn:latest
     steps:
       - run:
           name: Set NPM token
@@ -27,10 +24,16 @@ jobs:
       - store_artifacts:
           path: ./coverage
           destination: build
-
+      - deploy:
+          name: NPM Publish
+          command: |
+            if [ ! -z "$CIRCLE_TAG" ] && [ "${CIRCLE_BRANCH}" == "master" ];
+              then npm publish --tag "${CIRCLE_TAG}";
+              else echo " CIRCLE_TAG is '$CIRCLE_TAG' and CIRCLE_BRANCH is '$CIRCLE_BRANCH' ";
+            fi
 
 deployment:
   fake_deploy_for_cci2:
     tag: /v.*/
     commands:
-      - npm publish --tag "${CIRCLE_TAG}"
+      - echo "make tags run in 2.0"
