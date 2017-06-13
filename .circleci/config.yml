@@ -26,9 +26,9 @@ jobs:
       - deploy:
           name: NPM Publish
           command: |
-            if [ ! -z "$CIRCLE_TAG" ] && [ "${CIRCLE_BRANCH}" == "master" ];
+            if [ ! -z "$CIRCLE_TAG" ];
               then npm publish --tag "${CIRCLE_TAG}";
-              else echo " CIRCLE_TAG is '$CIRCLE_TAG' and CIRCLE_BRANCH is '$CIRCLE_BRANCH' ";
+              else echo " No tag found, no attempt to publish to npm. ";
             fi
 
 deployment:
