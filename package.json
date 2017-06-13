@@ -21,7 +21,8 @@
     "pretest": "npm run lint",
     "test": "karma start test/karma.conf.js --single-run",
     "lint": "xo ./angular-diff-match-patch.js ./test/diffmatchpatch-spec.js",
-    "test-watch": "karma start test/karma.conf.js"
+    "test-watch": "karma start test/karma.conf.js",
+    "release": "standard-version"
   },
   "devDependencies": {
     "angular-mocks": "^1.*",
@@ -33,6 +34,7 @@
     "karma-junit-reporter": "^1.*",
     "karma-phantomjs-launcher": "^1.*",
     "phantomjs-prebuilt": "^2.*",
+    "standard-version": "^4.*",
     "xo": "^0.18.2"
   },
   "xo": {
