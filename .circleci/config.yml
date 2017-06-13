@@ -27,7 +27,7 @@ jobs:
           name: NPM Publish
           command: |
             if [ ! -z "$CIRCLE_TAG" ];
-              then npm publish";
+              then npm publish;
               else echo " No tag found, no attempt to publish to npm. ";
             fi
 
