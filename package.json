@@ -10,8 +10,7 @@
   },
   "dependencies": {
     "angular": "^1.6.9",
-    "diff-match-patch": "^1.*",
-    "npm": "^5.7.1"
+    "diff-match-patch": "^1.*"
   },
   "files": [
     "index.js",
