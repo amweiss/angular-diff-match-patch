@@ -6,10 +6,6 @@
 angular.module('diff-match-patch', [])
 	.factory('dmp', ['$window', function ($window) {
 		var DiffMatchPatch = $window.diff_match_patch;
-
-		var DIFF_INSERT = DiffMatchPatch.DIFF_INSERT;
-		var DIFF_DELETE = DiffMatchPatch.DIFF_DELETE;
-
 		var displayType = {
 			INSDEL: 0,
 			LINEDIFF: 1
