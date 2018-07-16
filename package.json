@@ -9,7 +9,7 @@
     "url": "https://github.com/amweiss/angular-diff-match-patch.git"
   },
   "dependencies": {
-    "angular": "^1.7.0",
+    "angular": "^1.7.2",
     "diff-match-patch": "^1.*"
   },
   "files": [
@@ -31,7 +31,7 @@
     "karma": "2.0.4",
     "karma-coverage": "1.1.2",
     "karma-jasmine": "1.1.2",
-    "karma-junit-reporter": "1.2.0",
+    "karma-junit-reporter": "2.0.0",
     "karma-phantomjs-launcher": "1.0.4",
     "phantomjs-prebuilt": "2.1.16",
     "standard-version": "4.4.0",
