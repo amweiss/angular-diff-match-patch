@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/angular-diff-match-patch
     docker:
-      - image: kkarczmarczyk/node-yarn:latest
+      - image: circleci/node:latest-browsers
     steps:
       - run:
           name: Set NPM token
