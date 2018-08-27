@@ -1,5 +1,6 @@
 angular-diff-match-patch
 ========================
+
 [![npm](https://img.shields.io/npm/v/angular-diff-match-patch.svg)](https://www.npmjs.com/package/angular-diff-match-patch)
 [![CircleCI](https://img.shields.io/circleci/project/github/amweiss/angular-diff-match-patch.svg)](https://circleci.com/gh/amweiss/angular-diff-match-patch/tree/master) [![Codecov](https://img.shields.io/codecov/c/github/amweiss/angular-diff-match-patch.svg?maxAge=2592000)](https://codecov.io/gh/amweiss/angular-diff-match-patch)
 
@@ -71,6 +72,7 @@ $scope.options = {
 Another option is to skip angular processing the diff, it's useful when you want to show a diff of a code pre-compiled by angular. The attribute you need to add is called: `skipAngularCompilingOnDiff`. If set to `true`, would skip compiling, otherwise it would compile the diff.
 
 Add some style
+
 ```css
 .match{
   color: gray;
