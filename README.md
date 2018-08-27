@@ -27,6 +27,16 @@ Install from [Bower](http://bower.io/)
 
 `bower install angular-diff-match-patch`
 
+Usage with webpack
+
+```javascript
+  config.plugins = [
+    new webpack.ProvidePlugin({
+      diff_match_patch: 'diff-match-patch'
+    }),
+  ];
+```
+
 Usage
 -----
 
