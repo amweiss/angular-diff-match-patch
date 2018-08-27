@@ -4,8 +4,14 @@
  @license: MIT
 */
 angular.module('diff-match-patch', [])
-	.factory('dmp', ['$window', function ($window) {
-		var DiffMatchPatch = $window.diff_match_patch;
+	.constant('DiffMatchPatch', diff_match_patch)
+	.factory('DIFF_INSERT', ['DiffMatchPatch', function (DiffMatchPatch) {
+		return DiffMatchPatch.DIFF_INSERT === undefined ? DIFF_INSERT : DiffMatchPatch.DIFF_INSERT;
+	}])
+	.factory('DIFF_DELETE', ['DiffMatchPatch', function (DiffMatchPatch) {
+		return DiffMatchPatch.DIFF_DELETE === undefined ? DIFF_DELETE : DiffMatchPatch.DIFF_DELETE;
+	}])
+	.factory('dmp', ['DiffMatchPatch', 'DIFF_INSERT', 'DIFF_DELETE', function (DiffMatchPatch, DIFF_INSERT, DIFF_DELETE) {
 		var displayType = {
 			INSDEL: 0,
 			LINEDIFF: 1

@@ -12,6 +12,21 @@ describe('diff-match-patch', function () {
 	var angularProcessedDiffRegex = '<span.*?>3 hello</span><del.*?> world</del>';
 
 	beforeEach(module('diff-match-patch'));
+	describe('DIFF_INSERT and DIFF_DELETE factories', function () {
+		var DIFF_INSERT;
+		var DIFF_DELETE;
+
+		beforeEach(inject(function (_DIFF_INSERT_, _DIFF_DELETE_) {
+			DIFF_INSERT = _DIFF_INSERT_;
+			DIFF_DELETE = _DIFF_DELETE_;
+		}));
+
+		it('are defined', function () {
+			expect(DIFF_INSERT).toBeDefined();
+			expect(DIFF_DELETE).toBeDefined();
+		});
+	});
+
 	describe('directive', function () {
 		var $scope;
 		var $compile;
