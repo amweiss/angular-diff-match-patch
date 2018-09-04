@@ -8,7 +8,7 @@ angular-diff-match-patch
 
 This library is simply a wrapper around [google-diff-match-patch](https://code.google.com/p/google-diff-match-patch/).
 
-![Simple](https://amweiss.github.io/angular-diff-match-patch/simple.png)
+![Simple](https://i.imgur.com/C2B0pdK.png)
 
 (Shown here with some custom styles)
 
