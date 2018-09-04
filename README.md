@@ -8,7 +8,7 @@ angular-diff-match-patch
 
 This library is simply a wrapper around [google-diff-match-patch](https://code.google.com/p/google-diff-match-patch/).
 
-![Simple](http://amweiss.github.io/angular-diff-match-patch/simple.png)
+![Simple](https://amweiss.github.io/angular-diff-match-patch/simple.png)
 
 (Shown here with some custom styles)
 
@@ -20,11 +20,11 @@ Should you wish to use this in an Angular 2+ project, take a look at this port: 
 Setup
 -----
 
-Install from [NPM](http://npmjs.com)
+Install from [NPM](https://npmjs.com)
 
 `npm install amweiss/angular-diff-match-patch`
 
-Install from [Bower](http://bower.io/)
+Install from [Bower](https://bower.io/)
 
 `bower install angular-diff-match-patch`
 
@@ -41,7 +41,7 @@ Usage with webpack
 Usage
 -----
 
-See [the included demo](http://amweiss.github.io/angular-diff-match-patch/) for reference or view a sample on [Codepen](http://codepen.io/amweiss/pen/grXNPm).
+See [the included demo](https://amweiss.github.io/angular-diff-match-patch/) for reference or view a sample on [Codepen](https://codepen.io/amweiss/pen/grXNPm).
 
 ```html
 <pre line-diff left-obj="left" right-obj="right"></pre>
@@ -92,7 +92,7 @@ Add some style
 Development
 -----
 
-Development work requires npm from [Node.js](http://nodejs.org/)
+Development work requires npm from [Node.js](https://nodejs.org/)
 
 Begin with:
 
