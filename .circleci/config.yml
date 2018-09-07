@@ -37,10 +37,7 @@ jobs:
 
 workflows:
   version: 2
-  untagged-build:
-    jobs:
-      - test
-  tagged-build:
+  test-publish:
     jobs:
       - test
       - publish:
