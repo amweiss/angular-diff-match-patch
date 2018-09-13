@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  test:
     docker:
       - image: circleci/node:latest-browsers
     steps:
@@ -22,6 +22,11 @@ jobs:
       - store_artifacts:
           path: ./coverage
           destination: build
+
+  deploy:
+    docker:
+      - image: circleci/node:latest-browsers
+    steps:
       - deploy:
           name: NPM Publish
           command: |
@@ -30,8 +35,20 @@ jobs:
               else echo " No tag found, no attempt to publish to npm. ";
             fi
 
-deployment:
-  fake_deploy_for_cci2:
-    tag: /v.*/
-    commands:
-      - echo "make tags run in 2.0"
+workflows:
+  version: 2
+  test-and-deploy:
+    jobs:
+      - test:
+          filters:  # required since `deploy` has tag filters AND requires `build`
+            tags:
+              only: /.*/
+      - deploy:
+          requires:
+            - test
+          filters:
+            tags:
+                only: /^v.*/
+            branches:
+                ignore: /.*/
+
