@@ -4,9 +4,6 @@ jobs:
     docker:
       - image: circleci/node:latest-browsers
     steps:
-      - run:
-          name: Set NPM token
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
       - checkout
       - run:
           name: Install packages
@@ -21,12 +18,20 @@ jobs:
           path: ./test/results
       - store_artifacts:
           path: ./coverage
-          destination: build
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - ./*
 
   deploy:
     docker:
       - image: circleci/node:latest-browsers
     steps:
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Set NPM token
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
       - deploy:
           name: NPM Publish
           command: |
