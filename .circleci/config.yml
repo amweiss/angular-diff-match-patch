@@ -1,7 +1,6 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/angular-diff-match-patch
     docker:
       - image: circleci/node:latest-browsers
     steps:
