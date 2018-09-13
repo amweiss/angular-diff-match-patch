@@ -1,13 +1,9 @@
 version: 2
 jobs:
-  build:
-    working_directory: ~/angular-diff-match-patch
+  test:
     docker:
       - image: circleci/node:latest-browsers
     steps:
-      - run:
-          name: Set NPM token
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
       - checkout
       - run:
           name: Install packages
@@ -22,7 +18,21 @@ jobs:
           path: ./test/results
       - store_artifacts:
           path: ./coverage
-          destination: build
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - package.json
+            - ./*.js
+
+  deploy:
+    docker:
+      - image: circleci/node:latest-browsers
+    steps:
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Set NPM token
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
       - deploy:
           name: NPM Publish
           command: |
@@ -31,8 +41,20 @@ jobs:
               else echo " No tag found, no attempt to publish to npm. ";
             fi
 
-deployment:
-  fake_deploy_for_cci2:
-    tag: /v.*/
-    commands:
-      - echo "make tags run in 2.0"
+workflows:
+  version: 2
+  test-and-deploy:
+    jobs:
+      - test:
+          filters:  # required since `deploy` has tag filters AND requires `build`
+            tags:
+              only: /.*/
+      - deploy:
+          requires:
+            - test
+          filters:
+            tags:
+                only: /^v.*/
+            branches:
+                ignore: /.*/
+
