@@ -113,8 +113,10 @@ angular.module('diff-match-patch', [])
 				if (lines[y].length === 0) {
 					continue;
 				}
+
 				lines[y] = getHtmlPrefix(op, displayType.LINEDIFF, options) + lines[y] + getHtmlSuffix(op, displayType.LINEDIFF);
 			}
+
 			return lines.join('');
 		}
 
@@ -153,6 +155,7 @@ angular.module('diff-match-patch', [])
 					html[y] = getHtmlPrefix(op, display, options) + text + getHtmlSuffix(op, display);
 				}
 			}
+
 			return html.join('');
 		}
 
@@ -191,6 +194,7 @@ angular.module('diff-match-patch', [])
 						lineArray[lineArrayLength++] = line;
 					}
 				}
+
 				return chars;
 			}
 
@@ -208,6 +212,7 @@ angular.module('diff-match-patch', [])
 				for (var y = 0; y < chars.length; y++) {
 					text[y] = lineArray[chars.charCodeAt(y)];
 				}
+
 				diffs[x][1] = text.join((ignoreTrailingNewLines) ? '\n' : '');
 			}
 		}
@@ -219,6 +224,7 @@ angular.module('diff-match-patch', [])
 					diffs = new DiffMatchPatch().diff_main(left, right);
 					return createHtmlFromDiffs(diffs, displayType.INSDEL, options);
 				}
+
 				return '';
 			},
 
@@ -236,6 +242,7 @@ angular.module('diff-match-patch', [])
 					dmp.diff_cleanupEfficiency(diffs);
 					return createHtmlFromDiffs(diffs, displayType.INSDEL, options);
 				}
+
 				return '';
 			},
 
@@ -248,6 +255,7 @@ angular.module('diff-match-patch', [])
 					dmp.diff_cleanupSemantic(diffs);
 					return createHtmlFromDiffs(diffs, displayType.INSDEL, options);
 				}
+
 				return '';
 			},
 
@@ -263,6 +271,7 @@ angular.module('diff-match-patch', [])
 					charsToLines(diffs, chars.lineArray, ignoreTrailingNewLines);
 					return createHtmlFromDiffs(diffs, displayType.LINEDIFF, options);
 				}
+
 				return '';
 			}
 		};
@@ -283,6 +292,7 @@ angular.module('diff-match-patch', [])
 						$compile(iElement.contents())(scope);
 					}
 				};
+
 				scope.$watch('left', listener);
 				scope.$watch('right', listener);
 			}
@@ -305,6 +315,7 @@ angular.module('diff-match-patch', [])
 						$compile(iElement.contents())(scope);
 					}
 				};
+
 				scope.$watch('left', listener);
 				scope.$watch('right', listener);
 				scope.$watch('options.editCost', listener, true);
@@ -328,6 +339,7 @@ angular.module('diff-match-patch', [])
 						$compile(iElement.contents())(scope);
 					}
 				};
+
 				scope.$watch('left', listener);
 				scope.$watch('right', listener);
 			}
@@ -350,6 +362,7 @@ angular.module('diff-match-patch', [])
 						$compile(iElement.contents())(scope);
 					}
 				};
+
 				scope.$watch('left', listener);
 				scope.$watch('right', listener);
 				scope.$watch('options.interLineDiff', listener, true);
