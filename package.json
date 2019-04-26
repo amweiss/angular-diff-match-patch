@@ -2,7 +2,7 @@
   "name": "angular-diff-match-patch",
   "author": "Adam Weiss <cseadam@gmail.com>",
   "license": "MIT",
-  "version": "0.7.32",
+  "version": "0.7.33",
   "main": "index.js",
   "description": "An Angular module to use when dealing with google-diff-match-patch.",
   "repository": {
@@ -33,7 +33,7 @@
     "karma-coverage": "1.1.2",
     "karma-jasmine": "2.0.1",
     "karma-junit-reporter": "2.0.0",
-    "puppeteer": "1.14.0",
+    "puppeteer": "1.15.0",
     "standard-version": "5.0.2",
     "xo": "0.24.0"
   },
