@@ -140,7 +140,7 @@ angular.module('diff-match-patch', [])
 				op = diffData[y][0];
 				text = diffData[y][1];
 				if (display === displayType.LINEDIFF) {
-					if (angular.isDefined(options) && angular.isDefined(options.interLineDiff) && options.interLineDiff && diffs[y][0] === DIFF_DELETE && angular.isDefined(diffs[y + 1]) && diffs[y + 1][0] === DIFF_INSERT && diffs[y][1].indexOf('\n') === -1) {
+					if (angular.isDefined(options) && angular.isDefined(options.interLineDiff) && options.interLineDiff && diffs[y][0] === DIFF_DELETE && angular.isDefined(diffs[y + 1]) && diffs[y + 1][0] === DIFF_INSERT && !diffs[y][1].includes('\n')) {
 						intraDiffs = dmp.diff_main(diffs[y][1], diffs[y + 1][1]);
 						dmp.diff_cleanupSemantic(intraDiffs);
 						intraHtml1 = createHtmlFromDiffs(intraDiffs, displayType.INSDEL, options, DIFF_INSERT);
@@ -183,7 +183,7 @@ angular.module('diff-match-patch', [])
 						lineEnd = text.length - 1;
 					}
 
-					var line = text.substring(lineStart, lineEnd + ((ignoreTrailingNewLines && hasNewLine) ? 0 : 1));
+					var line = text.slice(lineStart, lineEnd + ((ignoreTrailingNewLines && hasNewLine) ? 0 : 1));
 					lineStart = lineEnd + 1;
 
 					if (Object.prototype.hasOwnProperty.call(lineHash, line)) {
@@ -206,14 +206,14 @@ angular.module('diff-match-patch', [])
 		// Taken from source https://code.google.com/p/google-diff-match-patch/
 		// and then modified for style and to strip newline
 		function charsToLines(diffs, lineArray, ignoreTrailingNewLines) {
-			for (var x = 0; x < diffs.length; x++) {
-				var chars = diffs[x][1];
+			for (const diff of diffs) {
+				var chars = diff[1];
 				var text = [];
 				for (var y = 0; y < chars.length; y++) {
 					text[y] = lineArray[chars.charCodeAt(y)];
 				}
 
-				diffs[x][1] = text.join((ignoreTrailingNewLines) ? '\n' : '');
+				diff[1] = text.join((ignoreTrailingNewLines) ? '\n' : '');
 			}
 		}
 

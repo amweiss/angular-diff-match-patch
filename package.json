@@ -21,7 +21,7 @@
     "pretest": "npm run lint",
     "test": "karma start test/karma.conf.js --single-run",
     "lint": "xo --no-esnext ./angular-diff-match-patch.js ./test/diffmatchpatch-spec.js",
-    "test-watch": "karma start test/karma.conf.js",
+    "test-watch": "karma start test/karma-watch.conf.js",
     "release": "standard-version"
   },
   "devDependencies": {
