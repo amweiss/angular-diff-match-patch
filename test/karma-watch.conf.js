@@ -1,24 +1,11 @@
-var coverageReporters = [
-	{type: 'text-summary'}
-];
-
 var junitReporterConfig = {
 	outputDir: 'test/results'
 };
 
 var reporters = [
 	'dots',
-	'coverage',
 	'junit'
 ];
-
-if (process.env.CIRCLECI) {
-	console.log('On CI, generating lcov');
-	coverageReporters.push({type: 'lcov', dir: 'coverage/'});
-} else {
-	console.log('Not on CI, generating html');
-	coverageReporters.push({type: 'html', dir: 'coverage/'});
-}
 
 process.env.CHROME_BIN = require('puppeteer').executablePath();
 
@@ -50,7 +37,6 @@ module.exports = function (config) {
 		// preprocess matching files before serving them to the browser
 		// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 		preprocessors: {
-			'angular-diff-match-patch.js': ['coverage']
 		},
 
 		// test results reporter to use
@@ -82,13 +68,6 @@ module.exports = function (config) {
 		// Concurrency level
 		// how many browser should be started simultaneous
 		concurrency: Infinity,
-
-		coverageReporter: {
-			reporters: coverageReporters,
-			instrumenterOptions: {
-				istanbul: {noCompact: true}
-			}
-		},
 
 		junitReporter: junitReporterConfig
 	});
