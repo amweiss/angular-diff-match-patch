@@ -141,7 +141,7 @@ describe('diff-match-patch', function () {
 		describe('processingDiff', function () {
 			var processingDiffHtml = '<div processing-diff left-obj="left" right-obj="right"></div>';
 			var processingDiffOptionsHtml = '<div processing-diff left-obj="left" right-obj="right" options="options"></div>';
-			var twoLineRegex = /<span.*?>I<\/span><del.*?> know the kings of England, and I quote<\/del><ins.*?>'m quite adept at funny gags, comedic<\/ins><span.*?> the<\/span><del.*?> fights historical,<\/del><ins.*?>ory I have read<\/ins><span.*?>[\s\S]*?From <\/span><del.*?>Marathon<\/del><ins.*?>wicked puns and stupid jokes<\/ins><span.*?> to <\/span><del.*?>Waterloo, in order categorical<\/del><ins.*?>anvils that drop on your head<\/ins><span.*?>.<\/span>/;
+			var twoLineRegex = /<span.*?>I<\/span><del.*?> know the kings of England, and I quote<\/del><ins.*?>’m quite adept at funny gags, comedic<\/ins><span.*?> the<\/span><del.*?> fights historical,<\/del><ins.*?>ory I have read<\/ins><span.*?>[\s\S]*?From <\/span><del.*?>Marathon<\/del><ins.*?>wicked puns and stupid jokes<\/ins><span.*?> to <\/span><del.*?>Waterloo, in order categorical<\/del><ins.*?>anvils that drop on your head<\/ins><span.*?>.<\/span>/;
 
 			it('compile angular tokens in the diff', function () {
 				var element = $compile(processingDiffHtml)($scope);
@@ -210,7 +210,7 @@ describe('diff-match-patch', function () {
 
 			it('two lines with editCost option returns diff HTML', function () {
 				var element = $compile(processingDiffOptionsHtml)($scope);
-				var regex = /<span.*?>I<\/span><del.*?> know the kings of England, and I quote the fights historical,<\/del><ins.*?>'m quite adept at funny gags, comedic theory I have read<\/ins><span.*?>[\s\S]*?From <\/span><del.*?>Marathon to Waterloo, in order categorical<\/del><ins.*?>wicked puns and stupid jokes to anvils that drop on your head<\/ins><span.*?>.<\/span>/;
+				var regex = /<span.*?>I<\/span><del.*?> know the kings of England, and I quote the fights historical,<\/del><ins.*?>’m quite adept at funny gags, comedic theory I have read<\/ins><span.*?>[\s\S]*?From <\/span><del.*?>Marathon to Waterloo, in order categorical<\/del><ins.*?>wicked puns and stupid jokes to anvils that drop on your head<\/ins><span.*?>.<\/span>/;
 				$scope.left = multiLineLeft;
 				$scope.right = multiLineRight;
 				$scope.options = {
@@ -286,7 +286,7 @@ describe('diff-match-patch', function () {
 
 			it('two lines returns diff HTML', function () {
 				var element = $compile(semanticDiffHtml)($scope);
-				var regex = /<span.*?>I<\/span><del.*?> know the kings of England, and I quote the fights historical,[\s\S]*?From Marathon to Waterloo, in order categorical<\/del><ins.*?>'m quite adept at funny gags, comedic theory I have read[\s\S]*?From wicked puns and stupid jokes to anvils that drop on your head<\/ins><span.*?>.<\/span>/;
+				var regex = /<span.*?>I<\/span><del.*?> know the kings of England, and I quote the fights historical,[\s\S]*?From Marathon to Waterloo, in order categorical<\/del><ins.*?>’m quite adept at funny gags, comedic theory I have read[\s\S]*?From wicked puns and stupid jokes to anvils that drop on your head<\/ins><span.*?>.<\/span>/;
 				$scope.left = multiLineLeft;
 				$scope.right = multiLineRight;
 				$scope.$digest();
