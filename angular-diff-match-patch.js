@@ -63,7 +63,7 @@ angular.module('diff-match-patch', [])
 
 		function getTagAttrs(options, op, attrs) {
 			var tagOptions = {};
-			var retVal = [];
+			var returnValue = [];
 			var opName = diffAttrName(op);
 
 			if (angular.isDefined(options) && angular.isDefined(options.attrs)) {
@@ -82,10 +82,10 @@ angular.module('diff-match-patch', [])
 			}
 
 			angular.forEach(tagOptions, function (value, key) {
-				retVal.push(key + '="' + value + '"');
+				returnValue.push(key + '="' + value + '"');
 			});
 
-			return ' ' + retVal.join(' ');
+			return ' ' + returnValue.join(' ');
 		}
 
 		function getHtmlPrefix(op, display, options) {
