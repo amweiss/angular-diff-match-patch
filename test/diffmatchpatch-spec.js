@@ -4,7 +4,7 @@ describe('diff-match-patch', function () {
 	var oneLineBasicRight = 'hello';
 	var multiLineLeft = ['I know the kings of England, and I quote the fights historical,',
 		'From Marathon to Waterloo, in order categorical.'].join('\n');
-	var multiLineRight = ['I\'m quite adept at funny gags, comedic theory I have read',
+	var multiLineRight = ['I’m quite adept at funny gags, comedic theory I have read',
 		'From wicked puns and stupid jokes to anvils that drop on your head.'].join('\n');
 	var diffRegex = /<span.*?>hello<\/span><del.*?> world<\/del>/;
 	var oneLineAngularLeft = '{{1 + 2}} hello world';
