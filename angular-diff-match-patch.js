@@ -235,7 +235,7 @@ angular.module('diff-match-patch', [])
 					dmp = new DiffMatchPatch();
 					diffs = dmp.diff_main(left, right);
 
-					if (angular.isDefined(options) && angular.isDefined(options.editCost) && isFinite(options.editCost)) {
+					if (angular.isDefined(options) && angular.isDefined(options.editCost) && Number.isFinite(options.editCost)) {
 						dmp.Diff_EditCost = options.editCost; // eslint-disable-line camelcase
 					}
 
