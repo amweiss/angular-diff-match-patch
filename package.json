@@ -18,7 +18,7 @@
   ],
   "scripts": {
     "start": "http-server",
-    "pretest": "npm run lint",
+    "pretest": "yarn run lint",
     "test": "karma start test/karma.conf.js --single-run",
     "lint": "xo --no-esnext ./angular-diff-match-patch.js ./test/diffmatchpatch-spec.js",
     "test-watch": "karma start test/karma-watch.conf.js",
