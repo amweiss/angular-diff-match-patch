@@ -20,12 +20,13 @@
     "start": "http-server",
     "pretest": "yarn run lint",
     "test": "karma start test/karma.conf.js --single-run",
-    "lint": "xo --no-esnext ./angular-diff-match-patch.js ./test/diffmatchpatch-spec.js",
+    "lint": "xo ./angular-diff-match-patch.js ./test/diffmatchpatch-spec.js",
     "test-watch": "karma start test/karma-watch.conf.js",
     "release": "standard-version"
   },
   "devDependencies": {
     "angular-mocks": "1.7.9",
+    "eslint-plugin-ie11": "1.0.0",
     "http-server": "0.12.1",
     "jasmine-core": "3.5.0",
     "karma": "5.0.2",
@@ -39,8 +40,15 @@
   },
   "xo": {
     "esnext": false,
+    "plugins": [
+      "ie11"
+    ],
     "rules": {
-      "capitalized-comments": 0
+      "capitalized-comments": [ "off" ],
+      "ie11/no-collection-args": [ "error" ],
+      "ie11/no-for-in-const": [ "error" ],
+      "ie11/no-loop-func": [ "warn" ],
+      "ie11/no-weak-collections": [ "error" ]
     },
     "env": [
       "jasmine",

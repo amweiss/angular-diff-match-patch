@@ -206,7 +206,7 @@ angular.module('diff-match-patch', [])
 		// Taken from source https://code.google.com/p/google-diff-match-patch/
 		// and then modified for style and to strip newline
 		function charsToLines(diffs, lineArray, ignoreTrailingNewLines) {
-			for (const diff of diffs) {
+			for (var diff of diffs) {
 				var chars = diff[1];
 				var text = [];
 				for (var y = 0; y < chars.length; y++) {
