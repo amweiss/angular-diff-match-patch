@@ -15,7 +15,7 @@ jobs:
           name: Submit coverage report
           command: bash <(curl -s https://codecov.io/bash) -r amweiss/angular-diff-match-patch
       - store_test_results:
-          path: ./test/results
+          path: ./test/results/junit
       - store_artifacts:
           path: ./coverage
       - persist_to_workspace:

@@ -3,7 +3,7 @@ var coverageReporters = [
 ];
 
 var junitReporterConfig = {
-	outputDir: 'test/results'
+	outputDir: 'test/results/junit'
 };
 
 var reporters = [
