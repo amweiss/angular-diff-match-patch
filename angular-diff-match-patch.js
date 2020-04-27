@@ -81,7 +81,7 @@ angular.module('diff-match-patch', [])
 				return '';
 			}
 
-			angular.forEach(tagOptions, function (value, key) {
+			angular.forEach(tagOptions, function (value, key) { // eslint-disable-line unicorn/no-fn-reference-in-iterator
 				returnValue.push(key + '="' + value + '"');
 			});
 
