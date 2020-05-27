@@ -32,7 +32,7 @@
     "karma": "5.0.9",
     "karma-chrome-launcher": "3.1.0",
     "karma-coverage": "2.0.2",
-    "karma-jasmine": "3.1.1",
+    "karma-jasmine": "3.2.0",
     "karma-junit-reporter": "2.0.1",
     "puppeteer": "3.1.0",
     "standard-version": "8.0.0",
