@@ -60,11 +60,6 @@
         "error"
       ]
     },
-    "env": [
-      "jasmine",
-      "browser",
-      "phantomjs"
-    ],
     "globals": [
       "angular",
       "DIFF_INSERT",
