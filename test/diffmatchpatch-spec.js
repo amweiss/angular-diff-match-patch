@@ -1,4 +1,5 @@
 /* global inject */
+/* eslint-env jasmine */
 describe('diff-match-patch', function () {
 	var oneLineBasicLeft = 'hello world';
 	var oneLineBasicRight = 'hello';
