@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.79](https://github.com/amweiss/angular-diff-match-patch/compare/v0.7.78...v0.7.79) (2020-11-20)
+
 ### [0.7.78](https://github.com/amweiss/angular-diff-match-patch/compare/v0.7.77...v0.7.78) (2020-08-06)
 
 ### [0.7.77](https://github.com/amweiss/angular-diff-match-patch/compare/v0.7.76...v0.7.77) (2020-05-08)
