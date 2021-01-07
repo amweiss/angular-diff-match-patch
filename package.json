@@ -2,7 +2,7 @@
   "name": "angular-diff-match-patch",
   "author": "Adam Weiss <cseadam@gmail.com>",
   "license": "MIT",
-  "version": "0.7.80",
+  "version": "0.7.81",
   "main": "index.js",
   "description": "An Angular module to use when dealing with google-diff-match-patch.",
   "repository": {
