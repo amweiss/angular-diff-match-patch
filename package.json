@@ -17,7 +17,7 @@
     "angular-diff-match-patch.js"
   ],
   "scripts": {
-    "start": "http-server",
+    "start": "browser-sync start -s",
     "pretest": "yarn run lint",
     "test": "karma start test/karma.conf.js --single-run",
     "lint": "xo ./angular-diff-match-patch.js ./test/diffmatchpatch-spec.js",
@@ -26,8 +26,8 @@
   },
   "devDependencies": {
     "angular-mocks": "1.8.2",
+    "browser-sync": "^2.26.14",
     "eslint-plugin-ie11": "1.0.0",
-    "http-server": "0.12.3",
     "jasmine-core": "3.6.0",
     "karma": "6.1.1",
     "karma-chrome-launcher": "3.1.0",
