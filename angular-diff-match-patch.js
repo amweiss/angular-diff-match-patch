@@ -81,9 +81,9 @@ angular.module('diff-match-patch', [])
 				return '';
 			}
 
-			angular.forEach(tagOptions, function (value, key) { // eslint-disable-line unicorn/no-array-callback-reference
+			for (const [key, value] of Object.entries(tagOptions)) {
 				returnValue.push(key + '="' + value + '"');
-			});
+			}
 
 			return ' ' + returnValue.join(' ');
 		}
