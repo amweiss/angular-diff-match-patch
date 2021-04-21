@@ -39,7 +39,6 @@
     "xo": "0.39.1"
   },
   "xo": {
-    "esnext": false,
     "plugins": [
       "ie11"
     ],
