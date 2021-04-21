@@ -36,7 +36,7 @@
     "karma-junit-reporter": "2.0.1",
     "puppeteer": "8.0.0",
     "standard-version": "9.2.0",
-    "xo": "0.38.2"
+    "xo": "0.39.1"
   },
   "xo": {
     "esnext": false,
