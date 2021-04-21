@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.8.0](https://github.com/amweiss/angular-diff-match-patch/compare/v0.7.83...v0.8.0) (2021-04-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* use ES2015 stuff
+* use ES2015 stuff
+
+* Merge pull request #231 from amweiss/dependabot/npm_and_yarn/xo-0.39.1 ([0615dcf](https://github.com/amweiss/angular-diff-match-patch/commit/0615dcf1bb8bff577efa17c64b0964568026d604)), closes [#231](https://github.com/amweiss/angular-diff-match-patch/issues/231)
+* Fix linting ([ff7a7ed](https://github.com/amweiss/angular-diff-match-patch/commit/ff7a7edb91a6a433bf95e75ad0d5be3357eede1c))
+
 ### [0.7.83](https://github.com/amweiss/angular-diff-match-patch/compare/v0.7.82...v0.7.83) (2021-03-01)
 
 ### [0.7.82](https://github.com/amweiss/angular-diff-match-patch/compare/v0.7.81...v0.7.82) (2021-03-01)
