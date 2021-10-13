@@ -12,7 +12,8 @@ describe('diff-match-patch', () => {
 	const oneLineAngularRight = '{{1 + 2}} hello';
 	const angularProcessedDiffRegex = /<span.*?>3 hello<\/span><del.*?> world<\/del>/;
 
-	beforeEach(module('diff-match-patch'));
+	beforeEach(angular.mock.module('diff-match-patch'));
+
 	describe('DIFF_INSERT and DIFF_DELETE factories', () => {
 		let DIFF_INSERT;
 		let DIFF_DELETE;
@@ -71,7 +72,7 @@ describe('diff-match-patch', () => {
 				$scope.left = '';
 				$scope.right = oneLineAngularRight;
 				$scope.options = {
-					skipAngularCompilingOnDiff: true
+					skipAngularCompilingOnDiff: true,
 				};
 				$scope.$digest();
 				expect(element.html()).toMatch(/<ins.*?>{{1 \+ 2}} hello<\/ins>/);
@@ -123,15 +124,15 @@ describe('diff-match-patch', () => {
 				$scope.options = {
 					attrs: {
 						insert: {
-							'data-attr': 'insert'
+							'data-attr': 'insert',
 						},
 						delete: {
-							'data-attr': 'delete'
+							'data-attr': 'delete',
 						},
 						equal: {
-							'data-attr': 'equal'
-						}
-					}
+							'data-attr': 'equal',
+						},
+					},
 				};
 
 				$scope.$digest();
@@ -174,7 +175,7 @@ describe('diff-match-patch', () => {
 				$scope.left = '';
 				$scope.right = oneLineAngularRight;
 				$scope.options = {
-					skipAngularCompilingOnDiff: true
+					skipAngularCompilingOnDiff: true,
 				};
 				$scope.$digest();
 				expect(element.html()).toMatch(/<ins.*?>{{1 \+ 2}} hello<\/ins>/);
@@ -215,7 +216,7 @@ describe('diff-match-patch', () => {
 				$scope.left = multiLineLeft;
 				$scope.right = multiLineRight;
 				$scope.options = {
-					editCost: 5
+					editCost: 5,
 				};
 
 				$scope.$digest();
@@ -258,7 +259,7 @@ describe('diff-match-patch', () => {
 				$scope.left = '';
 				$scope.right = oneLineAngularRight;
 				$scope.options = {
-					skipAngularCompilingOnDiff: true
+					skipAngularCompilingOnDiff: true,
 				};
 				$scope.$digest();
 				expect(element.html()).toMatch(/<ins.*?>{{1 \+ 2}} hello<\/ins>/);
@@ -330,7 +331,7 @@ describe('diff-match-patch', () => {
 				$scope.left = oneLineAngularLeft;
 				$scope.right = oneLineAngularRight;
 				$scope.options = {
-					skipAngularCompilingOnDiff: true
+					skipAngularCompilingOnDiff: true,
 				};
 				$scope.$digest();
 				expect(element.html()).toMatch(/.*?-<\/span>{{1 \+ 2}} hello world.*?\+<\/span>{{1 \+ 2}} hello.*?/);
@@ -364,7 +365,7 @@ describe('diff-match-patch', () => {
 				$scope.right = oneLineBasicLeft.split(' ').join('\n');
 				$scope.left = oneLineBasicRight;
 				$scope.options = {
-					ignoreTrailingNewLines: true
+					ignoreTrailingNewLines: true,
 				};
 				$scope.$digest();
 				expect(element.html()).toMatch(regex);
@@ -405,15 +406,15 @@ describe('diff-match-patch', () => {
 					attrs: {
 						insert: {
 							'data-attr': 'insert',
-							class: 'insertion'
+							class: 'insertion',
 						},
 						delete: {
-							'data-attr': 'delete'
+							'data-attr': 'delete',
 						},
 						equal: {
-							'data-attr': 'equal'
-						}
-					}
+							'data-attr': 'equal',
+						},
+					},
 				};
 
 				$scope.$digest();
@@ -426,7 +427,7 @@ describe('diff-match-patch', () => {
 				$scope.left = ['hello', 'world'].join('\n');
 				$scope.right = ['hello', 'friends!'].join('\n');
 				$scope.options = {
-					interLineDiff: true
+					interLineDiff: true,
 				};
 				$scope.$digest();
 				expect(element.html()).toMatch(regex);

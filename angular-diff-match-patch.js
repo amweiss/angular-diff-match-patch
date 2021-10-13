@@ -14,7 +14,7 @@ angular.module('diff-match-patch', [])
 	.factory('dmp', ['DiffMatchPatch', 'DIFF_INSERT', 'DIFF_DELETE', function (DiffMatchPatch, DIFF_INSERT, DIFF_DELETE) {
 		const displayType = {
 			INSDEL: 0,
-			LINEDIFF: 1
+			LINEDIFF: 1,
 		};
 
 		function diffClass(op) {
@@ -273,7 +273,7 @@ angular.module('diff-match-patch', [])
 				}
 
 				return '';
-			}
+			},
 		};
 	}])
 	.directive('diff', ['$compile', 'dmp', function ($compile, dmp) {
@@ -281,7 +281,7 @@ angular.module('diff-match-patch', [])
 			scope: {
 				left: '=leftObj',
 				right: '=rightObj',
-				options: '=options'
+				options: '=options',
 			},
 			link(scope, iElement) {
 				const listener = function () {
@@ -295,7 +295,7 @@ angular.module('diff-match-patch', [])
 
 				scope.$watch('left', listener);
 				scope.$watch('right', listener);
-			}
+			},
 		};
 		return ddo;
 	}])
@@ -304,7 +304,7 @@ angular.module('diff-match-patch', [])
 			scope: {
 				left: '=leftObj',
 				right: '=rightObj',
-				options: '=options'
+				options: '=options',
 			},
 			link(scope, iElement) {
 				const listener = function () {
@@ -319,7 +319,7 @@ angular.module('diff-match-patch', [])
 				scope.$watch('left', listener);
 				scope.$watch('right', listener);
 				scope.$watch('options.editCost', listener, true);
-			}
+			},
 		};
 		return ddo;
 	}])
@@ -328,7 +328,7 @@ angular.module('diff-match-patch', [])
 			scope: {
 				left: '=leftObj',
 				right: '=rightObj',
-				options: '=options'
+				options: '=options',
 			},
 			link(scope, iElement) {
 				const listener = function () {
@@ -342,7 +342,7 @@ angular.module('diff-match-patch', [])
 
 				scope.$watch('left', listener);
 				scope.$watch('right', listener);
-			}
+			},
 		};
 		return ddo;
 	}])
@@ -351,7 +351,7 @@ angular.module('diff-match-patch', [])
 			scope: {
 				left: '=leftObj',
 				right: '=rightObj',
-				options: '=options'
+				options: '=options',
 			},
 			link(scope, iElement) {
 				const listener = function () {
@@ -367,7 +367,7 @@ angular.module('diff-match-patch', [])
 				scope.$watch('right', listener);
 				scope.$watch('options.interLineDiff', listener, true);
 				scope.$watch('options.ignoreTrailingNewLines', listener, true);
-			}
+			},
 		};
 		return ddo;
 	}]);
