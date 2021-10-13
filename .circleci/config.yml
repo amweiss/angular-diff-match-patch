@@ -12,8 +12,14 @@ jobs:
           name: Run tests
           command: yarn test
       - run:
+          name: Download Codecov uploader
+          command: curl -Os https://uploader.codecov.io/latest/linux/codecov
+      - run:
+          name: chmod codecov
+          command: chmod +x codecov
+      - run:
           name: Submit coverage report
-          command: bash <(curl -s https://codecov.io/bash) -r amweiss/angular-diff-match-patch
+          command: ./codecov
       - store_test_results:
           path: ./test/results/junit
       - store_artifacts:
