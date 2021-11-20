@@ -4,8 +4,6 @@ angular-diff-match-patch
 [![npm](https://img.shields.io/npm/v/angular-diff-match-patch.svg)](https://www.npmjs.com/package/angular-diff-match-patch)
 [![CircleCI](https://img.shields.io/circleci/project/github/amweiss/angular-diff-match-patch/master.svg)](https://circleci.com/gh/amweiss/angular-diff-match-patch/tree/master) [![Codecov](https://img.shields.io/codecov/c/github/amweiss/angular-diff-match-patch.svg?maxAge=2592000)](https://codecov.io/gh/amweiss/angular-diff-match-patch)
 
-[![David](https://img.shields.io/david/amweiss/angular-diff-match-patch.svg?maxAge=2592000)](https://david-dm.org/amweiss/angular-diff-match-patch/#info=dependencies&view=table) [![David](https://img.shields.io/david/dev/amweiss/angular-diff-match-patch.svg?maxAge=2592000)](https://david-dm.org/amweiss/angular-diff-match-patch/#info=devDependencies&view=table)
-
 This library is simply a wrapper around [google-diff-match-patch](https://code.google.com/p/google-diff-match-patch/).
 
 ![Simple](https://i.imgur.com/C2B0pdK.png)
