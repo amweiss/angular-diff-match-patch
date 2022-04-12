@@ -25,7 +25,7 @@
     "release": "standard-version"
   },
   "devDependencies": {
-    "angular-mocks": "1.8.2",
+    "angular-mocks": "1.8.3",
     "browser-sync": "2.27.9",
     "eslint-plugin-ie11": "1.0.0",
     "jasmine-core": "4.0.1",
