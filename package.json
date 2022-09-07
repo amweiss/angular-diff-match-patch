@@ -9,7 +9,7 @@
     "url": "https://github.com/amweiss/angular-diff-match-patch.git"
   },
   "dependencies": {
-    "angular": "^1.8.2",
+    "angular": "^1.8.3",
     "diff-match-patch": "^1.0.5"
   },
   "files": [
@@ -28,15 +28,15 @@
     "angular-mocks": "1.8.3",
     "browser-sync": "2.27.10",
     "eslint-plugin-ie11": "1.0.0",
-    "jasmine-core": "4.3.0",
+    "jasmine-core": "4.4.0",
     "karma": "6.4.0",
     "karma-chrome-launcher": "3.1.1",
     "karma-coverage": "2.2.0",
     "karma-jasmine": "5.1.0",
     "karma-junit-reporter": "2.0.1",
-    "puppeteer": "17.0.0",
+    "puppeteer": "17.1.2",
     "standard-version": "9.5.0",
-    "xo": "0.46.4"
+    "xo": "0.52.3"
   },
   "xo": {
     "plugins": [

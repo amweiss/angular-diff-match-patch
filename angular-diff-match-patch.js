@@ -187,9 +187,9 @@ angular.module('diff-match-patch', [])
 					lineStart = lineEnd + 1;
 
 					if (Object.prototype.hasOwnProperty.call(lineHash, line)) {
-						chars += String.fromCharCode(lineHash[line]);
+						chars += String.fromCharCode(lineHash[line]); // eslint-disable-line unicorn/prefer-code-point
 					} else {
-						chars += String.fromCharCode(lineArrayLength);
+						chars += String.fromCharCode(lineArrayLength); // eslint-disable-line unicorn/prefer-code-point
 						lineHash[line] = lineArrayLength;
 						lineArray[lineArrayLength++] = line;
 					}
@@ -210,7 +210,7 @@ angular.module('diff-match-patch', [])
 				const chars = diffs[i][1];
 				const text = [];
 				for (let y = 0; y < chars.length; y++) {
-					text[y] = lineArray[chars.charCodeAt(y)];
+					text[y] = lineArray[chars.charCodeAt(y)]; // eslint-disable-line unicorn/prefer-code-point
 				}
 
 				diffs[i][1] = text.join((ignoreTrailingNewLines) ? '\n' : '');
