@@ -2561,9 +2561,9 @@ karma-junit-reporter@2.0.1:
     path-is-absolute "^1.0.0"
     xmlbuilder "12.0.0"
 
-karma@6.4.0:
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/karma/-/karma-6.4.0.tgz#82652dfecdd853ec227b74ed718a997028a99508"
+karma@6.4.1:
+  version "6.4.1"
+  resolved "https://registry.yarnpkg.com/karma/-/karma-6.4.1.tgz#f2253716dd3a41aaa813fa9f54b6ee047e1127d9"
   dependencies:
     "@colors/colors" "1.5.0"
     body-parser "^1.19.0"
