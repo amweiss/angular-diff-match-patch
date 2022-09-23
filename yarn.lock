@@ -3217,9 +3217,9 @@ punycode@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
 
-puppeteer@18.0.4:
-  version "18.0.4"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-18.0.4.tgz#0fd8840840dde9147e7db4b2a796aa27f3ecf0ee"
+puppeteer@18.0.5:
+  version "18.0.5"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-18.0.5.tgz#873223b17b92345182c5b5e8cfbd6f3117f1547d"
   dependencies:
     cross-fetch "3.1.5"
     debug "4.3.4"
