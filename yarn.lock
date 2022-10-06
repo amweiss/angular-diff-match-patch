@@ -1168,9 +1168,9 @@ dev-ip@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/dev-ip/-/dev-ip-1.0.1.tgz#a76a3ed1855be7a012bb8ac16cb80f3c00dc28f0"
 
-devtools-protocol@0.0.1036444:
-  version "0.0.1036444"
-  resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.1036444.tgz#a570d3cdde61527c82f9b03919847b8ac7b1c2b9"
+devtools-protocol@0.0.1045489:
+  version "0.0.1045489"
+  resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.1045489.tgz#f959ad560b05acd72d55644bc3fb8168a83abf28"
 
 di@^0.0.1:
   version "0.0.1"
@@ -3217,21 +3217,29 @@ punycode@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
 
-puppeteer@18.0.5:
-  version "18.0.5"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-18.0.5.tgz#873223b17b92345182c5b5e8cfbd6f3117f1547d"
+puppeteer-core@18.2.0:
+  version "18.2.0"
+  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-18.2.0.tgz#dc9ccd770a97d473b9a3da59fdae68c6842e8f76"
   dependencies:
     cross-fetch "3.1.5"
     debug "4.3.4"
-    devtools-protocol "0.0.1036444"
+    devtools-protocol "0.0.1045489"
     extract-zip "2.0.1"
     https-proxy-agent "5.0.1"
-    progress "2.0.3"
     proxy-from-env "1.1.0"
     rimraf "3.0.2"
     tar-fs "2.1.1"
     unbzip2-stream "1.4.3"
-    ws "8.8.1"
+    ws "8.9.0"
+
+puppeteer@18.2.0:
+  version "18.2.0"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-18.2.0.tgz#11804d1ae2c83216089c0aaa5166b7ccef26dd0e"
+  dependencies:
+    https-proxy-agent "5.0.1"
+    progress "2.0.3"
+    proxy-from-env "1.1.0"
+    puppeteer-core "18.2.0"
 
 q@^1.5.1:
   version "1.5.1"
@@ -4080,9 +4088,9 @@ wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
 
-ws@8.8.1:
-  version "8.8.1"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-8.8.1.tgz#5dbad0feb7ade8ecc99b830c1d77c913d4955ff0"
+ws@8.9.0:
+  version "8.9.0"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.9.0.tgz#2a994bb67144be1b53fe2d23c53c028adeb7f45e"
 
 ws@~8.2.3:
   version "8.2.3"
