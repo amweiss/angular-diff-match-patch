@@ -1172,6 +1172,10 @@ devtools-protocol@0.0.1045489:
   version "0.0.1045489"
   resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.1045489.tgz#f959ad560b05acd72d55644bc3fb8168a83abf28"
 
+devtools-protocol@0.0.1056733:
+  version "0.0.1056733"
+  resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.1056733.tgz#55bb1d56761014cc221131cca5e6bad94eefb2b9"
+
 di@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/di/-/di-0.0.1.tgz#806649326ceaa7caa3306d75d985ea2748ba913c"
@@ -3232,11 +3236,12 @@ puppeteer-core@19.1.1:
     unbzip2-stream "1.4.3"
     ws "8.9.0"
 
-puppeteer@19.1.1:
-  version "19.1.1"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-19.1.1.tgz#1b1092babb58b484d1d4488cad2b549060fc5af4"
+puppeteer@19.1.2:
+  version "19.1.2"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-19.1.2.tgz#47b5fff531719fec77c20287754e4e897ab9e5c0"
   dependencies:
     cosmiconfig "7.0.1"
+    devtools-protocol "0.0.1056733"
     https-proxy-agent "5.0.1"
     progress "2.0.3"
     proxy-from-env "1.1.0"
