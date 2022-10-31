@@ -28,7 +28,7 @@
     "angular-mocks": "1.8.3",
     "browser-sync": "2.27.10",
     "eslint-plugin-ie11": "1.0.0",
-    "jasmine-core": "4.4.0",
+    "jasmine-core": "4.5.0",
     "karma": "6.4.1",
     "karma-chrome-launcher": "3.1.1",
     "karma-coverage": "2.2.0",
