@@ -29,6 +29,7 @@ jobs:
           paths:
             - package.json
             - ./*.js
+            - README.md
 
   deploy:
     docker:
