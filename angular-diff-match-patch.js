@@ -19,45 +19,65 @@ angular.module('diff-match-patch', [])
 
 		function diffClass(op) {
 			switch (op) {
-				case DIFF_INSERT:
+				case DIFF_INSERT: {
 					return 'ins';
-				case DIFF_DELETE:
+				}
+
+				case DIFF_DELETE: {
 					return 'del';
-				default: // case DIFF_EQUAL:
+				}
+
+				default: { // case DIFF_EQUAL:
 					return 'match';
+				}
 			}
 		}
 
 		function diffSymbol(op) {
 			switch (op) {
-				case DIFF_INSERT:
+				case DIFF_INSERT: {
 					return '+';
-				case DIFF_DELETE:
+				}
+
+				case DIFF_DELETE: {
 					return '-';
-				default: // case DIFF_EQUAL:
+				}
+
+				default: { // case DIFF_EQUAL:
 					return ' ';
+				}
 			}
 		}
 
 		function diffTag(op) {
 			switch (op) {
-				case DIFF_INSERT:
+				case DIFF_INSERT: {
 					return 'ins';
-				case DIFF_DELETE:
+				}
+
+				case DIFF_DELETE: {
 					return 'del';
-				default: // case DIFF_EQUAL:
+				}
+
+				default: { // case DIFF_EQUAL:
 					return 'span';
+				}
 			}
 		}
 
 		function diffAttrName(op) {
 			switch (op) {
-				case DIFF_INSERT:
+				case DIFF_INSERT: {
 					return 'insert';
-				case DIFF_DELETE:
+				}
+
+				case DIFF_DELETE: {
 					return 'delete';
-				default: // case DIFF_EQUAL:
+				}
+
+				default: { // case DIFF_EQUAL:
 					return 'equal';
+				}
 			}
 		}
 
@@ -90,19 +110,25 @@ angular.module('diff-match-patch', [])
 
 		function getHtmlPrefix(op, display, options) {
 			switch (display) {
-				case displayType.LINEDIFF:
+				case displayType.LINEDIFF: {
 					return '<div class="' + diffClass(op) + '"><span' + getTagAttrs(options, op, {class: 'noselect'}) + '>' + diffSymbol(op) + '</span>';
-				default: // case displayType.INSDEL:
+				}
+
+				default: { // case displayType.INSDEL:
 					return '<' + diffTag(op) + getTagAttrs(options, op) + '>';
+				}
 			}
 		}
 
 		function getHtmlSuffix(op, display) {
 			switch (display) {
-				case displayType.LINEDIFF:
+				case displayType.LINEDIFF: {
 					return '</div>';
-				default: // case displayType.INSDEL:
+				}
+
+				default: { // case displayType.INSDEL:
 					return '</' + diffTag(op) + '>';
+				}
 			}
 		}
 
