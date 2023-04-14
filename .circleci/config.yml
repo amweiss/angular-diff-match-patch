@@ -1,4 +1,6 @@
-version: 2
+version: '2.1'
+orbs:
+  codecov: codecov/codecov@3.2.3
 jobs:
   test:
     docker:
@@ -11,15 +13,7 @@ jobs:
       - run:
           name: Run tests
           command: yarn test
-      - run:
-          name: Download Codecov uploader
-          command: curl -Os https://uploader.codecov.io/latest/linux/codecov
-      - run:
-          name: chmod codecov
-          command: chmod +x codecov
-      - run:
-          name: Submit coverage report
-          command: ./codecov
+      - codecov/upload
       - store_test_results:
           path: ./test/results/junit
       - store_artifacts:
