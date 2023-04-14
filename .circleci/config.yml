@@ -6,7 +6,7 @@ orbs:
 jobs:
   test:
     docker:
-      - image: cimg/node:lts-browsers
+      - image: cimg/node:latest-browsers
     steps:
       - checkout
       - run:
@@ -26,10 +26,12 @@ jobs:
             - package.json
             - ./*.js
             - README.md
+    # The resource_class feature allows configuring CPU and RAM resources for each job. Different resource classes are available for different executors. https://circleci.com/docs/2.0/configuration-reference/#resourceclass
+    resource_class: large
 
   deploy:
     docker:
-      - image: cimg/node:lts-browsers
+      - image: cimg/node:latest-browsers
     steps:
       - attach_workspace:
           at: ./
@@ -49,7 +51,7 @@ workflows:
   test-and-deploy:
     jobs:
       - test:
-          filters:  # required since `deploy` has tag filters AND requires `build`
+          filters: # required since `deploy` has tag filters AND requires `build`
             tags:
               only: /.*/
       - deploy:
@@ -57,7 +59,6 @@ workflows:
             - test
           filters:
             tags:
-                only: /^v.*/
+              only: /^v.*/
             branches:
-                ignore: /.*/
-
+              ignore: /.*/
