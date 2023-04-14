@@ -6,7 +6,7 @@ orbs:
 jobs:
   test:
     docker:
-      - image: cimg/node:latest-browsers
+      - image: cimg/node:lts-browsers
     steps:
       - checkout
       - run:
@@ -29,7 +29,7 @@ jobs:
 
   deploy:
     docker:
-      - image: cimg/node:latest-browsers
+      - image: cimg/node:lts-browsers
     steps:
       - attach_workspace:
           at: ./
