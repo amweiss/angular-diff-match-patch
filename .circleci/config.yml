@@ -26,6 +26,7 @@ jobs:
             - package.json
             - ./*.js
             - README.md
+    resource_class: large
 
   deploy:
     docker:
@@ -49,7 +50,7 @@ workflows:
   test-and-deploy:
     jobs:
       - test:
-          filters:  # required since `deploy` has tag filters AND requires `build`
+          filters: # required since `deploy` has tag filters AND requires `build`
             tags:
               only: /.*/
       - deploy:
@@ -57,7 +58,6 @@ workflows:
             - test
           filters:
             tags:
-                only: /^v.*/
+              only: /^v.*/
             branches:
-                ignore: /.*/
-
+              ignore: /.*/
