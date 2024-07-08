@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  codecov: codecov/codecov@4.1.0
+  codecov: codecov/codecov@3.3.0
 jobs:
   test:
     docker:
@@ -16,8 +16,7 @@ jobs:
       - run:
           name: Run tests
           command: yarn test
-      - codecov/upload:
-          cli_args: -v
+      - codecov/upload
       - store_test_results:
           path: ./test/results/junit
       - store_artifacts:
