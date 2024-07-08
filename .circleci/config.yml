@@ -1,14 +1,15 @@
-version: '2.1'
+version: 2.1
 orbs:
-  codecov: codecov/codecov@3.2.3
-  browser-tools: circleci/browser-tools@1.4.1
-
+  codecov: codecov/codecov@4.1.0
 jobs:
   test:
     docker:
       - image: cimg/node:lts-browsers
     steps:
       - checkout
+      - run:
+          name: Enable corepack
+          command: sudo corepack enable
       - run:
           name: Install packages
           command: yarn install
@@ -37,7 +38,7 @@ jobs:
       - run:
           name: Set NPM token
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-      - deploy:
+      - run:
           name: NPM Publish
           command: |
             if [ ! -z "$CIRCLE_TAG" ];
@@ -46,7 +47,6 @@ jobs:
             fi
 
 workflows:
-  version: 2
   test-and-deploy:
     jobs:
       - test:
