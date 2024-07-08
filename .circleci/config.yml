@@ -16,7 +16,8 @@ jobs:
       - run:
           name: Run tests
           command: yarn test
-      - codecov/upload
+      - codecov/upload:
+          cli_args: -v
       - store_test_results:
           path: ./test/results/junit
       - store_artifacts:
