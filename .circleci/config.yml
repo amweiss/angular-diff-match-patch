@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run:
           name: Enable corepack
-          command: corepack enable
+          command: sudo corepack enable
       - run:
           name: Install packages
           command: yarn install
