@@ -977,7 +977,7 @@ __metadata:
     karma-coverage: "npm:2.2.1"
     karma-jasmine: "npm:5.1.0"
     karma-junit-reporter: "npm:2.0.1"
-    puppeteer: "npm:23.0.1"
+    puppeteer: "npm:23.0.2"
     standard-version: "npm:9.5.0"
     xo: "npm:0.58.0"
   languageName: unknown
@@ -6371,31 +6371,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"puppeteer-core@npm:23.0.1":
-  version: 23.0.1
-  resolution: "puppeteer-core@npm:23.0.1"
+"puppeteer-core@npm:23.0.2":
+  version: 23.0.2
+  resolution: "puppeteer-core@npm:23.0.2"
   dependencies:
     "@puppeteer/browsers": "npm:2.3.0"
     chromium-bidi: "npm:0.6.4"
     debug: "npm:^4.3.6"
     devtools-protocol: "npm:0.0.1312386"
     ws: "npm:^8.18.0"
-  checksum: 10c0/97e57ae0438fb76c709a2111774349d4d5e7fcdf75da395237a0eb8079a226c138dc1a0ce4a70a21d352ed4804821fc4418744071a3996715a05a9aa12f03e25
+  checksum: 10c0/c65099c92772103bed3568ba5d0fc6260069ef7941ba3db8b284350495ebdeb54cd51723e72d4d531502bfcbd9cd3776a00e7923927010234662c77cdec1da00
   languageName: node
   linkType: hard
 
-"puppeteer@npm:23.0.1":
-  version: 23.0.1
-  resolution: "puppeteer@npm:23.0.1"
+"puppeteer@npm:23.0.2":
+  version: 23.0.2
+  resolution: "puppeteer@npm:23.0.2"
   dependencies:
     "@puppeteer/browsers": "npm:2.3.0"
     chromium-bidi: "npm:0.6.4"
     cosmiconfig: "npm:^9.0.0"
     devtools-protocol: "npm:0.0.1312386"
-    puppeteer-core: "npm:23.0.1"
+    puppeteer-core: "npm:23.0.2"
   bin:
-    puppeteer: lib/esm/puppeteer/node/cli.js
-  checksum: 10c0/b4a768ed41e85d3606c3988c7eab519caecc818ede8d3c5d7e72c5136c2b511842980520c383c4ac01b2621ae7d9e22ce5d9c1f19e1d6515ccdeebb07d853bfa
+    puppeteer: lib/cjs/puppeteer/node/cli.js
+  checksum: 10c0/fa0d2a728a1cca1fd56127603dc5810cb5e42a7dc68ac675c972ebac846a6a482554d4168eaed486b5589ac2307870b5dbfea944da6b704a70a05de36a56d46e
   languageName: node
   linkType: hard
 
