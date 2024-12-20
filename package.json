@@ -34,7 +34,7 @@
     "karma-coverage": "2.2.1",
     "karma-jasmine": "5.1.0",
     "karma-junit-reporter": "2.0.1",
-    "puppeteer": "23.11.0",
+    "puppeteer": "23.11.1",
     "standard-version": "9.5.0",
     "xo": "0.58.0"
   },
