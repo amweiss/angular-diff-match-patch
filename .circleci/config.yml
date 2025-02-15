@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  codecov: codecov/codecov@3.3.0
+  codecov: codecov/codecov@5.2.1
 jobs:
   test:
     docker:

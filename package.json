@@ -34,9 +34,9 @@
     "karma-coverage": "2.2.1",
     "karma-jasmine": "5.1.0",
     "karma-junit-reporter": "2.0.1",
-    "puppeteer": "24.2.0",
+    "puppeteer": "24.2.1",
     "standard-version": "9.5.0",
-    "xo": "0.58.0"
+    "xo": "0.60.0"
   },
   "xo": {
     "plugins": [
@@ -67,5 +67,5 @@
       "diff_match_patch"
     ]
   },
-  "packageManager": "yarn@4.3.1+sha512.af78262d7d125afbfeed740602ace8c5e4405cd7f4735c08feb327286b2fdb2390fbca01589bfd1f50b1240548b74806767f5a063c94b67e431aabd0d86f7774"
+  "packageManager": "yarn@4.6.0+sha512.5383cc12567a95f1d668fbe762dfe0075c595b4bfff433be478dbbe24e05251a8e8c3eb992a986667c1d53b6c3a9c85b8398c35a960587fbd9fa3a0915406728"
 }

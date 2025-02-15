@@ -65,7 +65,7 @@ angular.module('diff-match-patch', [])
 			}
 		}
 
-		function diffAttrName(op) {
+		function diffAttributeName(op) {
 			switch (op) {
 				case DIFF_INSERT: {
 					return 'insert';
@@ -81,10 +81,10 @@ angular.module('diff-match-patch', [])
 			}
 		}
 
-		function getTagAttrs(options, op, attrs) {
+		function getTagAttributes(options, op, attributes) {
 			const tagOptions = {};
 			const returnValue = [];
-			const opName = diffAttrName(op);
+			const opName = diffAttributeName(op);
 
 			if (angular.isDefined(options) && angular.isDefined(options.attrs)) {
 				const attributesFromOptions = options.attrs[opName];
@@ -93,8 +93,8 @@ angular.module('diff-match-patch', [])
 				}
 			}
 
-			if (angular.isDefined(attrs)) {
-				angular.merge(tagOptions, attrs);
+			if (angular.isDefined(attributes)) {
+				angular.merge(tagOptions, attributes);
 			}
 
 			if (Object.keys(tagOptions).length === 0) {
@@ -111,11 +111,11 @@ angular.module('diff-match-patch', [])
 		function getHtmlPrefix(op, display, options) {
 			switch (display) {
 				case displayType.LINEDIFF: {
-					return '<div class="' + diffClass(op) + '"><span' + getTagAttrs(options, op, {class: 'noselect'}) + '>' + diffSymbol(op) + '</span>';
+					return '<div class="' + diffClass(op) + '"><span' + getTagAttributes(options, op, {class: 'noselect'}) + '>' + diffSymbol(op) + '</span>';
 				}
 
 				default: { // case displayType.INSDEL:
-					return '<' + diffTag(op) + getTagAttrs(options, op) + '>';
+					return '<' + diffTag(op) + getTagAttributes(options, op) + '>';
 				}
 			}
 		}
@@ -159,7 +159,7 @@ angular.module('diff-match-patch', [])
 			let intraHtml2;
 
 			for (x = 0; x < diffData.length; x++) {
-				diffData[x][1] = diffData[x][1].replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+				diffData[x][1] = diffData[x][1].replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 			}
 
 			for (y = 0; y < diffData.length; y++) {
@@ -177,7 +177,7 @@ angular.module('diff-match-patch', [])
 					} else {
 						html[y] = createHtmlLines(text, op, options);
 					}
-				} else if (typeof excludeOp === 'undefined' || op !== excludeOp) {
+				} else if (excludeOp === undefined || op !== excludeOp) {
 					html[y] = getHtmlPrefix(op, display, options) + text + getHtmlSuffix(op, display);
 				}
 			}
@@ -212,7 +212,7 @@ angular.module('diff-match-patch', [])
 					const line = text.slice(lineStart, lineEnd + ((ignoreTrailingNewLines && hasNewLine) ? 0 : 1));
 					lineStart = lineEnd + 1;
 
-					if (Object.prototype.hasOwnProperty.call(lineHash, line)) {
+					if (Object.hasOwn(lineHash, line)) {
 						chars += String.fromCharCode(lineHash[line]); // eslint-disable-line unicorn/prefer-code-point
 					} else {
 						chars += String.fromCharCode(lineArrayLength); // eslint-disable-line unicorn/prefer-code-point
