@@ -1191,7 +1191,7 @@ __metadata:
     browser-sync: "npm:3.0.4"
     diff-match-patch: "npm:^1.0.5"
     eslint-plugin-ie11: "npm:1.0.0"
-    jasmine-core: "npm:5.8.0"
+    jasmine-core: "npm:5.9.0"
     karma: "npm:6.4.4"
     karma-chrome-launcher: "npm:3.2.0"
     karma-coverage: "npm:2.2.1"
@@ -5092,10 +5092,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jasmine-core@npm:5.8.0":
-  version: 5.8.0
-  resolution: "jasmine-core@npm:5.8.0"
-  checksum: 10c0/9b1b7937b97ccc01468ba90953658e990d813d7cb275ea15c229b02ac2a42ca6b6469fc2342e0673917859f715213dc05a50419f56a0f603e31904b8b5aa83aa
+"jasmine-core@npm:5.9.0":
+  version: 5.9.0
+  resolution: "jasmine-core@npm:5.9.0"
+  checksum: 10c0/124bd0d063b20eb4a5a1ec67ff8657ee68c78dd9e93cf834b0d1221aa1e0e5d03ca1421c43bf3fe69721a1e03cc401cf4883bf7e7557daed40c652d304a00951
   languageName: node
   linkType: hard
 
