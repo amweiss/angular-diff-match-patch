@@ -1199,7 +1199,7 @@ __metadata:
     karma-junit-reporter: "npm:2.0.1"
     puppeteer: "npm:24.23.0"
     standard-version: "npm:9.5.0"
-    xo: "npm:1.2.2"
+    xo: "npm:1.2.3"
   languageName: unknown
   linkType: soft
 
@@ -8505,9 +8505,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"xo@npm:1.2.2":
-  version: 1.2.2
-  resolution: "xo@npm:1.2.2"
+"xo@npm:1.2.3":
+  version: 1.2.3
+  resolution: "xo@npm:1.2.3"
   dependencies:
     "@eslint-community/eslint-plugin-eslint-comments": "npm:^4.5.0"
     "@sindresorhus/tsconfig": "npm:^7.0.0"
@@ -8542,7 +8542,7 @@ __metadata:
     typescript-eslint: "npm:^8.37.0"
   bin:
     xo: dist/cli.js
-  checksum: 10c0/acab23bacb797692a791a3190186b89d2691e5afc569dd409222bf39699b102cc880db83aacfa8c86d13185bd3c970b7c3c0130247b326473d135d50665c82fa
+  checksum: 10c0/a063561c901492e74fd94e9758ae95eb0c26247df001f5d9b8daad1019405431c38ee07560ec0a1afee4a442b82d5267c59b9b9d138d2ccfe23f015f6cf3eb31
   languageName: node
   linkType: hard
 
