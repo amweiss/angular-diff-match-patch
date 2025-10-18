@@ -1,6 +1,11 @@
 angular-diff-match-patch
 ========================
 
+NO LONGER ACTIVE
+----------------
+
+Thanks to everyone who has participated or used this over the years, with the npm token changes I no longer will be keeping this updated and will push one last version before archiving the repo.
+
 [![npm](https://img.shields.io/npm/v/angular-diff-match-patch.svg)](https://www.npmjs.com/package/angular-diff-match-patch)
 [![CircleCI](https://img.shields.io/circleci/project/github/amweiss/angular-diff-match-patch/master.svg)](https://circleci.com/gh/amweiss/angular-diff-match-patch/tree/master) [![Codecov](https://img.shields.io/codecov/c/github/amweiss/angular-diff-match-patch.svg?maxAge=2592000)](https://codecov.io/gh/amweiss/angular-diff-match-patch)
 
